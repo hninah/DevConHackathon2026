@@ -3,11 +3,12 @@ function ListenMode() {
     <section className="mode-panel">
       <div className="primary-card">
         <p className="eyebrow">Listen mode</p>
-        <h2>Polly audio reader</h2>
+        <h2>Adaptive delivery, audio and visual support</h2>
         <p>
-          Person D will wire `/tts` here for answer playback first, then the F9
-          module reader when Tier 1 is safe.
+          Use audio playback for difficult sections, then pair it with visual
+          diagrams from roleplay scenarios for reinforcement.
         </p>
+        <p className="field-hint">Audio is intended for recap after simplified-English tutoring.</p>
         <audio controls />
       </div>
     </section>

@@ -21,37 +21,7 @@ export type LanguageOption = {
   nativeName: string;
 };
 
-export type Mode = 'ask' | 'practice' | 'listen';
-
-export type QuestionType = 'mcq' | 'select-all';
-
-export type Question = {
-  id: string;
-  module: string;
-  type: QuestionType;
-  question: string;
-  simplified?: string;
-  options: string[];
-  correctAnswers: number[];
-  explanation: string;
-  wrongAnswerExplanations?: Array<string | null>;
-  citation: Citation;
-  image?: string | null;
-};
-
-export type MistakeEntry = {
-  questionId: string;
-  module: string;
-  selectedAnswers: number[];
-  correctAnswers: number[];
-  timestamp: number;
-};
-
-export type ExamResult = {
-  score: number;
-  total: number;
-  passed: boolean;
-  mistakes: MistakeEntry[];
-  completedAt: number;
-  secondsTaken?: number;
-};
+export type Mode =
+  | 'text-tutor'
+  | 'practice'
+  | 'roleplay';

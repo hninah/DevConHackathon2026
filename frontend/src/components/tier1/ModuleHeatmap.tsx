@@ -17,6 +17,7 @@ function ModuleHeatmap() {
     <section className="feature-card">
       <p className="feature-id">F2</p>
       <h3>Module Mastery Map</h3>
+      <p className="field-hint">Lower scores become top items in your review to-do list.</p>
       <div className="heatmap">
         {MODULES.map((module) => {
           const attempts = attemptsByModule[module] ?? [];

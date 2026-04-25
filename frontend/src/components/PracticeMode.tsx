@@ -84,8 +84,8 @@ function PracticeMode() {
         <p className="eyebrow">Practice mode</p>
         <h2>Exam-format practice</h2>
         <p>
-          Knowledge Checks let you toggle Simplified English for the question text.
-          Explanations are always simplified English with manual citations.
+          Person B will wire `/diagnostic`, `/scenario`, and `/mock-exam` here.
+          The Tier 1 containers are ready for data.
         </p>
       </div>
       <div className="feature-grid">
