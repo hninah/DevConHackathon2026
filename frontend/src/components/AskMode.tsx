@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { askTutor } from '../api/tutorClient';
 import type { TutorResponse } from '../lib/types';
-import LanguagePicker from './LanguagePicker';
 import CameraCapture from './tier1/CameraCapture';
 import CitationPopover from './tier1/CitationPopover';
 import PriorityTooltip from './tier1/PriorityTooltip';
@@ -11,7 +10,6 @@ function AskMode() {
   const [question, setQuestion] = useState(
     'When am I allowed to physically restrain someone?',
   );
-  const [language, setLanguage] = useState('Punjabi');
   const [response, setResponse] = useState<TutorResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +21,6 @@ function AskMode() {
     try {
       setResponse(
         await askTutor(question, {
-          input_language_hint: language,
           image_b64: imageB64,
         }),
       );
@@ -45,10 +42,9 @@ function AskMode() {
         <p className="eyebrow">Ask mode</p>
         <h2>Text tutor, RAG, vectorized chunks, map context</h2>
         <p className="mode-note">
-          Ask in your language. Tutor returns cited answer and priority, then
-          breaks legal terms into plain English.
+          Ask a security-guard exam question. Tutor returns cited answer and priority, then breaks
+          legal terms into plain English.
         </p>
-        <LanguagePicker value={language} onChange={setLanguage} />
         <div className="chip-row">
           <span className="priority-chip">Cited pages with exam priority</span>
           <span className="priority-chip">Simplified English legal breakdown</span>
@@ -59,9 +55,7 @@ function AskMode() {
           rows={4}
         />
         <button disabled={isLoading} onClick={handleSubmit} type="button">
-          {isLoading
-            ? 'Asking...'
-            : `Ask in ${language}, explain in simple English`}
+          {isLoading ? 'Asking...' : 'Ask and explain in simple English'}
         </button>
         {error && <p className="error">{error}</p>}
         {response && (
