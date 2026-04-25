@@ -161,43 +161,43 @@ def _situation_pool() -> list[dict]:
             "name": "Mall Food Court Altercation",
             "scenarioDescription": (
                 "You are a security guard at Southgate Centre mall. Two customers near the food court "
-                "are shouting and shoving each other. Bystanders are filming on their phones and the area "
-                "is getting crowded. You are the first guard on scene."
+                "are shouting and shoving each other. The crowd is growing and bystanders are filming. "
+                "You are the first guard on scene."
             ),
-            "title": "Altercation: de-escalation and control",
-            "part1_prompt": "The two customers are now chest-to-chest. What should you do first?",
+            "title": "Altercation: crowd control and backup",
+            "part1_prompt": "The crowd around the fight is growing fast. The manual identifies a specific first action when an incident involves a crowd. What is it?",
             "part1_choices": [
-                ("Use a calm, commanding voice to separate them and give clear instructions to step back.", True, "Correct. Verbal de-escalation and creating space reduces immediate danger without unnecessary force."),
-                ("Physically grab both individuals immediately to stop the fight.", False, "Incorrect. Physical force should only be used when verbal control fails and it is necessary and proportionate."),
-                ("Wait at a distance and call police without engaging.", False, "Incorrect. You should attempt verbal de-escalation first while waiting for backup — standing by can let the situation worsen."),
+                ("Call for backup at the first sign of a crowd incident — do not wait for it to escalate before asking for help.", True, "Correct. The manual states: 'Call for back-up at the first sign of an incident as it can turn from something minor into something quite large.' Backup must be called immediately, not after things worsen."),
+                ("Handle the crowd yourself first and call backup only if you cannot get the situation under control.", False, "Incorrect. The manual says to call backup at the first sign of trouble — waiting until you are overwhelmed is too late and unsafe."),
+                ("Announce loudly that police are on their way and that everyone must leave immediately.", False, "Incorrect. A loud announcement can escalate crowd panic. The manual recommends de-escalation and calling backup, not triggering a stampede."),
             ],
-            "part2_prompt": "One person complies and steps back. The other is still aggressive and yelling. What is the best next step?",
+            "part2_prompt": "The crowd is still growing. The manual describes a strategy for breaking down a crowd. What is the recommended approach?",
             "part2_choices": [
-                ("Continue verbal commands, position yourself between them, and call for backup.", True, "Correct. Positioning and communication reduce risk while you wait for support."),
-                ("Physically restrain the aggressive person immediately.", False, "Incorrect. Exhaust verbal control options and call backup before moving to physical restraint."),
-                ("Let the aggressive person leave without documenting the incident.", False, "Incorrect. You must document all security incidents regardless of outcome."),
+                ("Try to remove the most vocal leaders of the crowd — de-escalating the leaders can calm the group as a whole.", True, "Correct. The manual's strategy is: 'Remove the Leaders. One strategy you should keep in mind is to always try to de-escalate a crowd by removing its leaders.' Isolating the instigators drains the crowd's energy."),
+                ("Position yourself in the centre of the crowd to show authority and take control physically.", False, "Incorrect. The manual warns that lone officers cannot contain an out-of-control crowd. Placing yourself in the middle is dangerous and ineffective."),
+                ("Tell bystanders they are legally required to leave and will be detained if they stay.", False, "Incorrect. Bystanders have no legal obligation to leave a public area, and making false threats about detention can escalate the situation and expose you to liability."),
             ],
         },
         {
             "module": "Use of Force and De-escalation",
             "name": "Impaired Person Refusing to Leave a Venue",
             "scenarioDescription": (
-                "You are working security at a large concert venue. A visibly intoxicated man is standing "
-                "near the stage shouting and spilling drinks on other guests. Staff have asked him to leave "
-                "twice and he refuses. Your supervisor directs you to remove him."
+                "You are working security at a large concert venue. A man near the stage is acting "
+                "erratically — swaying, slurring his words, bumping into guests, and shouting. Staff "
+                "have asked him to leave twice and he refuses. Your supervisor directs you to deal with it."
             ),
-            "title": "Removal: impaired and non-compliant person",
-            "part1_prompt": "The man is swaying and verbally abusive. What should you do first?",
+            "title": "Impairment: recognizing signs and responding",
+            "part1_prompt": "Before approaching, you want to confirm the man is actually impaired and not experiencing a medical episode. Which combination of signs does the manual specifically list as indicators of substance impairment?",
             "part1_choices": [
-                ("Calmly identify yourself, explain why he must leave, and give him a clear direction toward the exit.", True, "Correct. Lawful verbal instruction gives the person a chance to comply before you escalate."),
-                ("Immediately grab his arm and pull him toward the door.", False, "Incorrect. Physical removal without verbal instruction can escalate and cause injury."),
-                ("Ignore him and wait for police to arrive on their own.", False, "Incorrect. You have a duty to act within your authority while maintaining safety."),
+                ("Bloodshot eyes, slurred speech, poor coordination, and tremors — all listed as physical signs of impairment.", True, "Correct. The manual lists bloodshot eyes, slurred speech, poor coordination, and tremors (shaking) as physical signs of substance abuse. Seeing these helps distinguish impairment from a medical condition like a stroke."),
+                ("Wearing sunglasses indoors and carrying an unusually large bag — signs the person is hiding something.", False, "Incorrect. These are loss-prevention indicators, not impairment signs. The manual's list of substance abuse indicators includes slurred speech, poor coordination, tremors, and bloodshot eyes."),
+                ("Refusing to answer questions and walking quickly away from security — signs of guilt and impairment.", False, "Incorrect. These behaviours may indicate awareness of security but are not on the manual's list of physical impairment signs. Behavioural signs include secretive behaviour, but the physical signs are different."),
             ],
-            "part2_prompt": "He refuses to comply a third time and plants his feet. What is the best next step?",
+            "part2_prompt": "You have confirmed he is impaired. He refuses to leave a third time and plants his feet. What is the appropriate next step according to the manual?",
             "part2_choices": [
-                ("Request police assistance and continue monitoring without escalating force unnecessarily.", True, "Correct. Police involvement is the appropriate escalation when voluntary compliance fails."),
-                ("Use a chokehold to force him toward the exit.", False, "Incorrect. This level of force is not appropriate and could be unlawful."),
-                ("Leave him alone and return to your post.", False, "Incorrect. Abandoning an active situation creates safety and liability risk."),
+                ("Request police assistance and continue monitoring — do not escalate to physical force when verbal compliance has failed.", True, "Correct. The manual says most situations can be handled through skilled communication, and escalating to force is risky. When verbal means are exhausted, police involvement is the correct next escalation."),
+                ("Use a restraint hold to guide him toward the exit since he has been given three chances to leave.", False, "Incorrect. Section 26 of the Criminal Code makes every person criminally responsible for excessive force. A restraint on a non-violent impaired person who is only refusing to walk creates serious legal exposure."),
+                ("Leave him alone and return to your post since you cannot physically force him to move.", False, "Incorrect. Abandoning an active situation without completing your duty is a conduct failure. Call police to assist — do not simply walk away."),
             ],
         },
         {
@@ -254,17 +254,17 @@ def _situation_pool() -> list[dict]:
                 "moving inside one of the unfinished structures."
             ),
             "title": "Trespasser: after-hours forced entry response",
-            "part1_prompt": "You are at the forced gate. The site is dark and you do not know how many people are inside. What should you do first?",
+            "part1_prompt": "You are at the forced gate and can see evidence of a break-in. What does the manual say you must do first upon finding a scene like this?",
             "part1_choices": [
-                ("Stay outside the gate, radio dispatch with your location and the situation, and wait for backup.", True, "Correct. Entering alone into an unknown situation is high-risk. Secure your position and report first."),
-                ("Enter the site immediately and confront whoever is inside.", False, "Incorrect. Entering alone without backup creates serious personal safety risk."),
-                ("Leave the site and file a report in the morning.", False, "Incorrect. An active intrusion requires immediate reporting and monitoring, not deferral."),
+                ("Stay outside, radio dispatch with your location, and notify police immediately — do not enter alone or disturb anything.", True, "Correct. The manual states: if you see evidence of a break-in or criminal activity, notify the police immediately and take care not to displace or destroy evidence. Do not enter alone."),
+                ("Enter the site immediately to locate and confront whoever is inside before they escape.", False, "Incorrect. The manual requires you to notify police and secure your position first. Entering alone into an unknown situation without backup is unsafe and can destroy evidence."),
+                ("Inspect every entrance to determine exactly how many people entered before calling anyone.", False, "Incorrect. The manual says to notify police immediately and avoid disturbing the scene. A full solo perimeter check before calling in delays the response unnecessarily."),
             ],
-            "part2_prompt": "Backup arrives. You find a teenager inside who got in on a dare and is cooperative. What is the correct next step?",
+            "part2_prompt": "Police and backup arrive. They find a teenager inside who got in on a dare and cooperates fully. What is the correct next step for you?",
             "part2_choices": [
-                ("Identify yourself, advise them they are trespassing, escort them out safely, and document the incident.", True, "Correct. Lawful trespass notice, safe escort, and documentation are all required steps."),
-                ("Physically detain the teenager until police arrive regardless of their cooperation.", False, "Incorrect. Unnecessary detention of a cooperative person may be unlawful and excessive."),
-                ("Let them go without documenting since no damage was done.", False, "Incorrect. All security incidents must be documented even when minor."),
+                ("Identify yourself, advise them they are trespassing, escort them out safely, and document the full incident in your notebook.", True, "Correct. Lawful trespass notice, safe escort, and thorough documentation are all required steps — even for a cooperative minor."),
+                ("Physically detain the teenager until police decide what to do, regardless of their cooperation.", False, "Incorrect. Unnecessary physical detention of a cooperative person who is being escorted out can be unlawful and is disproportionate."),
+                ("Let them go without documenting since police are already on scene and no damage was done.", False, "Incorrect. You must document all security incidents, including trespass. Your report is your record regardless of what police do."),
             ],
         },
         {
@@ -361,22 +361,23 @@ def _situation_pool() -> list[dict]:
             "module": "Notebook and Evidence",
             "name": "Shoplifting Stop at a Retail Store",
             "scenarioDescription": (
-                "You are a loss prevention officer at a large clothing retailer. You observed a woman "
-                "on camera conceal two items in her bag and walk past all points of sale without paying. "
-                "You approach her at the exit and she admits to having the items."
+                "You are a loss prevention officer at a large clothing retailer. You have been watching "
+                "a man on CCTV who appears furtive — glancing at cameras, wearing an unusually bulky coat "
+                "on a warm day, and carrying a large backpack. He conceals two items inside the backpack "
+                "and is now walking toward the exit."
             ),
-            "title": "Loss prevention: documentation after a stop",
-            "part1_prompt": "The person has admitted to having the items. What should you do first?",
+            "title": "Loss prevention: detention timing and documentation",
+            "part1_prompt": "The man has concealed the items but is still inside the store near the last cashier. Should you stop him now?",
             "part1_choices": [
-                ("Identify yourself, ask her to accompany you to the security office, and contact your supervisor.", True, "Correct. Proper identification and supervisor notification are your first required steps."),
-                ("Physically search her bag without consent or legal authority.", False, "Incorrect. Searches require proper authority. Searching without it can be unlawful."),
-                ("Accept her apology and let her go to avoid conflict.", False, "Incorrect. Incident procedure must be followed regardless of how cooperative the person is."),
+                ("No — wait until he has passed all cashiers and left the store before approaching him.", True, "Correct. The Alberta manual states theft is not considered complete until the subject has passed all checkout areas and left the store. Stopping earlier lets him claim he intended to pay."),
+                ("Yes — confront him now before he has a chance to run.", False, "Incorrect. The manual says the offence of theft should not be considered complete until the subject passes all cashiers and has left the store. Detaining him inside gives him a legal defence."),
+                ("Yes — you already have video evidence so it doesn't matter where you stop him.", False, "Incorrect. Where you stop him affects whether the theft is legally complete. The manual is clear: wait until he is past all cashiers and outside."),
             ],
-            "part2_prompt": "She is cooperative and your supervisor is on the way. What should you do while you wait?",
+            "part2_prompt": "He has exited. You identify yourself and he cooperates. Your supervisor is on the way. What should your notebook notes include?",
             "part2_choices": [
-                ("Start your notes: time, description of person, items observed, your actions, and the camera footage reference.", True, "Correct. Contemporary notes with specific detail and camera reference are essential evidence."),
-                ("Wait until everything is finished and write the report from memory.", False, "Incorrect. Notes should be made as soon as safely possible — not reconstructed from memory."),
-                ("Text the incident details to your personal phone as a backup.", False, "Incorrect. Use only official documentation channels for incident records."),
+                ("The time, location, a factual description of what you observed on camera, his behaviour, and your actions — no opinions.", True, "Correct. The manual states notes must record facts, not opinions or conclusions. Write what you observed, not what you think about the person."),
+                ("Your opinion that he is a repeat offender and seemed nervous, plus the camera reference.", False, "Incorrect. The manual says do not write opinions or conclusions that cannot be proven. Stick to factual observations only."),
+                ("A brief summary now and a full detailed account later from memory once you are less stressed.", False, "Incorrect. The manual says notes must be made at the time events occur — not reconstructed later from memory, which is less accurate."),
             ],
         },
         {
@@ -387,18 +388,18 @@ def _situation_pool() -> list[dict]:
                 "graffiti and two broken windows in the east corridor. The damage appears recent "
                 "and there are spray paint cans sitting on the floor."
             ),
-            "title": "Scene preservation: vandalism discovery",
-            "part1_prompt": "You have just discovered the vandalism and spray cans. What should you do first?",
+            "title": "Scene preservation: evidence rules on criminal activity",
+            "part1_prompt": "The manual has a specific rule about what to do when you find evidence of criminal activity during a patrol. What does it say?",
             "part1_choices": [
-                ("Do not touch anything. Secure the area, radio dispatch, and note the exact time and location.", True, "Correct. Scene preservation and timely reporting protect the evidence for police."),
-                ("Pick up the spray cans to prevent further vandalism.", False, "Incorrect. Touching items at a potential crime scene can destroy fingerprints and other evidence."),
-                ("Photograph the damage and post it to social media to warn the community.", False, "Incorrect. Evidence must be handled through official channels only."),
+                ("Notify the police immediately and take care not to displace or destroy any evidence.", True, "Correct. The manual states exactly: 'If you see evidence of a break-in or other criminal activity, notify the police immediately; document your findings and take care not to displace or destroy evidence.'"),
+                ("Document everything and clean up the scene so it is safe before police arrive.", False, "Incorrect. Cleaning up is exactly what the manual prohibits — you must not displace or destroy evidence. Preserve the scene as found."),
+                ("Pick up identifiable items like the spray cans as evidence to hand to police when they arrive.", False, "Incorrect. Touching and moving items is displacing evidence, which the manual explicitly warns against. Leave everything in place and let police process the scene."),
             ],
-            "part2_prompt": "Police have been called and are 10 minutes away. What should you do while waiting?",
+            "part2_prompt": "Police have been called and are 10 minutes away. What should you do while you wait at the scene?",
             "part2_choices": [
-                ("Stand at the perimeter to preserve the scene, write a detailed description of everything observed, and wait for police.", True, "Correct. Scene preservation and detailed notes prepare you for the police handoff."),
-                ("Start cleaning up so the school looks better when police arrive.", False, "Incorrect. Cleaning destroys evidence before it can be documented and photographed."),
-                ("Take only a mental note and report it verbally to police when they arrive.", False, "Incorrect. Written notes made at the time are far more accurate and legally reliable than memory."),
+                ("Secure the perimeter to stop anyone else from entering, and write a detailed factual account of exactly what you found and when.", True, "Correct. Scene security and contemporaneous notes are both required. Your written record of what you found — before police arrive — is valuable evidence."),
+                ("Start photographing and then post the images online so administration can see what happened overnight.", False, "Incorrect. The manual says photos or video obtained during an investigation must not be released to media or posted on social networking sites."),
+                ("Wait until after you speak with police to write your notes, so you can include what they tell you.", False, "Incorrect. Notes must record what you personally observed at the time. Write them immediately — before your memory fades and before talking to others."),
             ],
         },
         {
@@ -432,18 +433,18 @@ def _situation_pool() -> list[dict]:
                 "through a gap in the perimeter fence and is in a restricted zone. When you approach, "
                 "he claims he has a right to be there and refuses to identify himself or leave."
             ),
-            "title": "Trespass: lawful authority and limits",
-            "part1_prompt": "The man refuses to leave and denies trespassing. What should you do first?",
+            "title": "Trespass: Petty Trespass Act and escalation steps",
+            "part1_prompt": "Under the Alberta Petty Trespass Act, what is a person required to do when directed to leave by a security officer authorized by the owner?",
             "part1_choices": [
-                ("Calmly explain that this is private property, that he is trespassing, and that he is required to leave.", True, "Correct. Clearly stating the trespass and the legal requirement to leave is the necessary first step."),
-                ("Physically drag him off the property immediately.", False, "Incorrect. Physical removal without police involvement can expose you to legal liability."),
-                ("Do nothing until he causes property damage.", False, "Incorrect. You have authority to address trespassing before damage occurs."),
+                ("Leave immediately after being directed — there is no right to stay and argue once told to leave.", True, "Correct. The Petty Trespass Act states a person 'does not leave land immediately after he or she is directed to do so by the owner or occupier or a person authorized by them' is guilty of an offence. Immediate compliance is required."),
+                ("They have the right to ask for a written notice before they are required to leave.", False, "Incorrect. The Petty Trespass Act requires the person to leave immediately after a verbal direction from an authorized person. No written notice is required for this obligation to apply."),
+                ("They may stay if they can provide a reasonable explanation for their presence.", False, "Incorrect. Once directed to leave by an authorized person, the person must leave immediately under the Petty Trespass Act. Their reason for being there is not a defence."),
             ],
-            "part2_prompt": "He still refuses to leave after your second verbal direction. What is the correct next step?",
+            "part2_prompt": "He still refuses to leave after two verbal directions. The manual describes an escalation process for persistent non-compliance. What is the correct next step?",
             "part2_choices": [
-                ("Call police, document the encounter start time and his description, and monitor him from a safe distance.", True, "Correct. Police involvement and documentation are the correct escalation steps when verbal directions fail."),
-                ("Attempt a citizen's arrest immediately.", False, "Incorrect. Citizen's arrest has specific lawful conditions that may not apply in this situation."),
-                ("Walk away since your authority is limited.", False, "Incorrect. You should call police and document while maintaining safe scene awareness."),
+                ("Call your supervisor or designated contact for direction, document the encounter, and if he continues, advise him you will treat this as a trespass requiring police.", True, "Correct. The manual says if an individual is persistent and keeps you from your duties, call your supervisor. If they still will not leave, advise them you will treat the incident as trespassing and involve police."),
+                ("Physically force him off the property yourself since the Trespass Act gives you full authority to remove him.", False, "Incorrect. The Petty Trespass Act does not give security guards the right to physically drag a person off property. Police involvement is the required escalation."),
+                ("Do nothing further since you have already given two warnings and your authority is exhausted.", False, "Incorrect. The manual is clear — if a person is persistent, you escalate to your supervisor and then to police. Walking away abandons your post and duty."),
             ],
         },
         {
@@ -550,11 +551,11 @@ def _situation_pool() -> list[dict]:
                 ("Wait for the other guard to return before assuming control.", False, "Incorrect. The post needs immediate coverage — waiting leaves it unmonitored further."),
                 ("Leave the post yourself since the other guard is not following policy anyway.", False, "Incorrect. Two wrongs do not make a right — you must fulfill your duty."),
             ],
-            "part2_prompt": "Your supervisor asks you to document what happened. What should your notes include?",
+            "part2_prompt": "Your supervisor asks you to document what happened. The manual has specific rules about what belongs in a security notebook. Which entry follows those rules correctly?",
             "part2_choices": [
-                ("The time you arrived, observed state of the post, any log gaps, and your actions upon assuming the post.", True, "Correct. Accurate, factual notes covering the timeline and your actions are required."),
-                ("Your personal opinion about the other guard's character and reliability.", False, "Incorrect. Notes should contain factual observations, not personal opinions."),
-                ("Only the time you arrived and nothing about the missing guard.", False, "Incorrect. Documenting the full situation including the gap is necessary for accountability."),
+                ("'Arrived 1900. Post unoccupied. Log shows last entry 1826 by Guard Smith. No note left. Notified Supervisor Davis at 1902. Assumed post 1902.' — factual, time-stamped, no opinion.", True, "Correct. The manual says notebook entries must record facts — who, what, where, when — with no opinions or conclusions. This entry does exactly that. The manual also says do not write anything you would not want your employer, the police, or the court to read."),
+                ("'Guard Smith clearly abandoned the post and is not suited for this job. I arrived at 1900 and had to clean up his mess again.'", False, "Incorrect. The manual explicitly says do not write opinions or conclusions that cannot be proven. Writing that someone 'is not suited for the job' is an opinion that does not belong in a security notebook."),
+                ("'Post was empty when I arrived. I took over and everything is fine now.' — brief but covers the basics.", False, "Incorrect. This entry omits key details the manual requires: exact times, log entry references, and supervisory notification. Brief notes that leave out facts are not sufficient for accountability or legal purposes."),
             ],
         },
     ]

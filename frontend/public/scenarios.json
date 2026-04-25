@@ -4,7 +4,7 @@
     "name": "Mall Food Court Altercation",
     "roleMode": "active",
     "sourceModule": "Use of Force and De-escalation",
-    "scenarioDescription": "You are a security guard at Southgate Centre mall. Two customers near the food court are shouting and shoving each other. Bystanders are filming on their phones and the area is getting crowded. You are the first guard on scene.",
+    "scenarioDescription": "You are a security guard at Southgate Centre mall. Two customers near the food court are shouting and shoving each other. The crowd is growing and bystanders are filming. You are the first guard on scene.",
     "aiPoliceChat": [
       "Dispatch: Scenario — Mall Food Court Altercation.",
       "AI Coach: Think about lawful authority, de-escalation, and documentation.",
@@ -14,11 +14,11 @@
     "questions": [
       {
         "id": "q1",
-        "title": "Altercation: de-escalation and control",
+        "title": "Altercation: crowd control and backup",
         "parts": [
           {
             "id": "q1p1",
-            "prompt": "The two customers are now chest-to-chest. What should you do first?",
+            "prompt": "The crowd around the fight is growing fast. The manual identifies a specific first action when an incident involves a crowd. What is it?",
             "manual_reference": {
               "page_number": 70,
               "excerpt": ":  Obey all traffic laws when traveling to the location of the alarm; as a security professional you have no special authority to travel at a higher rate of speed or ignore traffic signal devices  Upon arrival at the scene check to see if doors and windows are secure; make note of any which appear to be open, unlocked, or otherwise unsecured  If you see evidence of a break in or other criminal activity, notify the police immediately; document your findings and take care no"
@@ -26,30 +26,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Wait at a distance and call police without engaging, to regain control before backup arrives.",
+                "text": "Announce loudly that police are on their way and that everyone must leave right away, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You should attempt verbal de-escalation first while waiting for backup — standing by can let the situation worsen.",
+                "simplifiedExplanation": "Incorrect. A loud announcement can escalate crowd panic. The manual recommends de-escalation and calling backup, not triggering a stampede.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Physically grab both individuals right away to stop the fight, to avoid getting stuck in a long interaction.",
+                "text": "Handle the crowd yourself first and call backup only if you cannot get the situation under control, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Physical force should only be used when verbal control fails and it is necessary and proportionate.",
+                "simplifiedExplanation": "Incorrect. The manual says to call backup at the first sign of trouble — waiting until you are overwhelmed is too late and unsafe.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Use a calm, commanding voice to separate them and give clear instructions to step back.",
+                "text": "Call for backup at the first sign of a crowd incident — do not wait for it to escalate before asking for help.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Verbal de-escalation and creating space reduces immediate danger without unnecessary force.",
+                "simplifiedExplanation": "Correct. The manual states: 'Call for back-up at the first sign of an incident as it can turn from something minor into something quite large.' Backup must be called immediately, not after things worsen.",
                 "module": "Use of Force and De-escalation"
               }
             ]
           },
           {
             "id": "q1p2",
-            "prompt": "One person complies and steps back. The other is still aggressive and yelling. What is the best next step?",
+            "prompt": "The crowd is still growing. The manual describes a strategy for breaking down a crowd. What is the recommended approach?",
             "manual_reference": {
               "page_number": 70,
               "excerpt": ":  Obey all traffic laws when traveling to the location of the alarm; as a security professional you have no special authority to travel at a higher rate of speed or ignore traffic signal devices  Upon arrival at the scene check to see if doors and windows are secure; make note of any which appear to be open, unlocked, or otherwise unsecured  If you see evidence of a break in or other criminal activity, notify the police immediately; document your findings and take care no"
@@ -57,23 +57,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Continue verbal commands, position yourself between them, and call for backup.",
+                "text": "Try to remove the most vocal leaders of the crowd — de-escalating the leaders can calm the group as a whole.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Positioning and communication reduce risk while you wait for support.",
+                "simplifiedExplanation": "Correct. The manual's strategy is: 'Remove the Leaders. One strategy you should keep in mind is to always try to de-escalate a crowd by removing its leaders.' Isolating the instigators drains the crowd's energy.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Physically restrain the aggressive person right away, to prevent delays in the response.",
+                "text": "Position yourself in the centre of the crowd to show authority and take control physically, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Exhaust verbal control options and call backup before moving to physical restraint.",
+                "simplifiedExplanation": "Incorrect. The manual warns that lone officers cannot contain an out-of-control crowd. Placing yourself in the middle is dangerous and ineffective.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Let the aggressive person leave without documenting the incident, to avoid getting stuck in a long interaction.",
+                "text": "Tell bystanders they are legally required to leave and will be detained if they stay, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You must document all security incidents regardless of outcome.",
+                "simplifiedExplanation": "Incorrect. Bystanders have no legal obligation to leave a public area, and making false threats about detention can escalate the situation and expose you to liability.",
                 "module": "Use of Force and De-escalation"
               }
             ]
@@ -87,7 +87,7 @@
     "name": "Impaired Person Refusing to Leave a Venue",
     "roleMode": "active",
     "sourceModule": "Use of Force and De-escalation",
-    "scenarioDescription": "You are working security at a large concert venue. A visibly intoxicated man is standing near the stage shouting and spilling drinks on other guests. Staff have asked him to leave twice and he refuses. Your supervisor directs you to remove him.",
+    "scenarioDescription": "You are working security at a large concert venue. A man near the stage is acting erratically — swaying, slurring his words, bumping into guests, and shouting. Staff have asked him to leave twice and he refuses. Your supervisor directs you to deal with it.",
     "aiPoliceChat": [
       "Dispatch: Scenario — Impaired Person Refusing to Leave a Venue.",
       "AI Coach: Think about lawful authority, de-escalation, and documentation.",
@@ -97,11 +97,11 @@
     "questions": [
       {
         "id": "q2",
-        "title": "Removal: impaired and non-compliant person",
+        "title": "Impairment: recognizing signs and responding",
         "parts": [
           {
             "id": "q2p1",
-            "prompt": "The man is swaying and verbally abusive. What should you do first?",
+            "prompt": "Before approaching, you want to confirm the man is actually impaired and not experiencing a medical episode. Which combination of signs does the manual specifically list as indicators of substance impairment?",
             "manual_reference": {
               "page_number": 136,
               "excerpt": "responsibility to check all alarm indicators, but always start with the assumption the alarm is genuine  Contact your supervisor to advise you ar e leaving your post and to advise about the alarm  Determine the source of the alarm and the appropriate response o False alarm – follow the protocol provided in your post orders; report back to your supervisor o Emergency – follow the protocols provided in your post orders  Manage the scene and persons at the scene in a manner a"
@@ -109,30 +109,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "right away grab his arm and pull him toward the door, to regain control before backup arrives.",
+                "text": "Wearing sunglasses indoors and carrying an unusually large bag — signs the person is hiding something.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Physical removal without verbal instruction can escalate and cause injury.",
+                "simplifiedExplanation": "Incorrect. These are loss-prevention indicators, not impairment signs. The manual's list of substance abuse indicators includes slurred speech, poor coordination, tremors, and bloodshot eyes.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Ignore him and wait for police to arrive on their own, so the scene does not get more chaotic.",
+                "text": "Refusing to answer questions and walking quickly away from security — signs of guilt and impairment, so the scene does not get more chaotic.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You have a duty to act within your authority while maintaining safety.",
+                "simplifiedExplanation": "Incorrect. These behaviours may indicate awareness of security but are not on the manual's list of physical impairment signs. Behavioural signs include secretive behaviour, but the physical signs are different.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Calmly identify yourself, explain why he must leave, and give him a clear direction toward the exit.",
+                "text": "Bloodshot eyes, slurred speech, poor coordination, and tremors — all listed as physical signs of impairment.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Lawful verbal instruction gives the person a chance to comply before you escalate.",
+                "simplifiedExplanation": "Correct. The manual lists bloodshot eyes, slurred speech, poor coordination, and tremors (shaking) as physical signs of substance abuse. Seeing these helps distinguish impairment from a medical condition like a stroke.",
                 "module": "Use of Force and De-escalation"
               }
             ]
           },
           {
             "id": "q2p2",
-            "prompt": "He refuses to comply a third time and plants his feet. What is the best next step?",
+            "prompt": "You have confirmed he is impaired. He refuses to leave a third time and plants his feet. What is the appropriate next step according to the manual?",
             "manual_reference": {
               "page_number": 136,
               "excerpt": "responsibility to check all alarm indicators, but always start with the assumption the alarm is genuine  Contact your supervisor to advise you ar e leaving your post and to advise about the alarm  Determine the source of the alarm and the appropriate response o False alarm – follow the protocol provided in your post orders; report back to your supervisor o Emergency – follow the protocols provided in your post orders  Manage the scene and persons at the scene in a manner a"
@@ -140,23 +140,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Request police assistance and continue monitoring without escalating force unnecessarily.",
+                "text": "Request police assistance and continue monitoring — do not escalate to physical force when verbal compliance has failed.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Police involvement is the appropriate escalation when voluntary compliance fails.",
+                "simplifiedExplanation": "Correct. The manual says most situations can be handled through skilled communication, and escalating to force is risky. When verbal means are exhausted, police involvement is the correct next escalation.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Use a chokehold to force him toward the exit, to avoid getting stuck in a long interaction.",
+                "text": "Use a restraint hold to guide him toward the exit since he has been given three chances to leave, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. This level of force is not appropriate and could be unlawful.",
+                "simplifiedExplanation": "Incorrect. Section 26 of the Criminal Code makes every person criminally responsible for excessive force. A restraint on a non-violent impaired person who is only refusing to walk creates serious legal exposure.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Leave him alone and return to your post, to regain control before backup arrives.",
+                "text": "Leave him alone and return to your post since you cannot physically force him to move, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Abandoning an active situation creates safety and liability risk.",
+                "simplifiedExplanation": "Incorrect. Abandoning an active situation without completing your duty is a conduct failure. Call police to assist — do not simply walk away.",
                 "module": "Use of Force and De-escalation"
               }
             ]
@@ -350,7 +350,7 @@
         "parts": [
           {
             "id": "q5p1",
-            "prompt": "You are at the forced gate. The site is dark and you do not know how many people are inside. What should you do first?",
+            "prompt": "You are at the forced gate and can see evidence of a break-in. What does the manual say you must do first upon finding a scene like this?",
             "manual_reference": {
               "page_number": 139,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Six: Emergency Response Procedur es for Security Professionals, Page 10  Make note of occasions when you find st oves or hotplates left on when nobody is around; make note also if you see evidence of candles being used (many facilities do not permit burning of candles – check what the role is at your location). Include these occurrences in your shift report to your supervi"
@@ -358,30 +358,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Leave the site and file a report in the morning, to avoid getting stuck in a long interaction.",
+                "text": "Inspect every entrance to determine exactly how many people entered before calling anyone, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. An active intrusion requires immediate reporting and monitoring, not deferral.",
+                "simplifiedExplanation": "Incorrect. The manual says to notify police immediately and avoid disturbing the scene. A full solo perimeter check before calling in delays the response unnecessarily.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Enter the site right away and confront whoever is inside, to prevent delays in the response.",
+                "text": "Enter the site right away to locate and confront whoever is inside before they escape, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Entering alone without backup creates serious personal safety risk.",
+                "simplifiedExplanation": "Incorrect. The manual requires you to notify police and secure your position first. Entering alone into an unknown situation without backup is unsafe and can destroy evidence.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Stay outside the gate, radio dispatch with your location and the situation, and wait for backup.",
+                "text": "Stay outside, radio dispatch with your location, and notify police immediately — do not enter alone or disturb anything.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Entering alone into an unknown situation is high-risk. Secure your position and report first.",
+                "simplifiedExplanation": "Correct. The manual states: if you see evidence of a break-in or criminal activity, notify the police immediately and take care not to displace or destroy evidence. Do not enter alone.",
                 "module": "Officer Safety"
               }
             ]
           },
           {
             "id": "q5p2",
-            "prompt": "Backup arrives. You find a teenager inside who got in on a dare and is cooperative. What is the correct next step?",
+            "prompt": "Police and backup arrive. They find a teenager inside who got in on a dare and cooperates fully. What is the correct next step for you?",
             "manual_reference": {
               "page_number": 139,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Six: Emergency Response Procedur es for Security Professionals, Page 10  Make note of occasions when you find st oves or hotplates left on when nobody is around; make note also if you see evidence of candles being used (many facilities do not permit burning of candles – check what the role is at your location). Include these occurrences in your shift report to your supervi"
@@ -389,23 +389,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Let them go without documenting since no damage was done, to prevent delays in the response.",
+                "text": "Let them go without documenting since police are already on scene and no damage was done, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. All security incidents must be documented even when minor.",
+                "simplifiedExplanation": "Incorrect. You must document all security incidents, including trespass. Your report is your record regardless of what police do.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Identify yourself, advise them they are trespassing, escort them out safely, and document the incident.",
+                "text": "Identify yourself, advise them they are trespassing, escort them out safely, and document the full incident in your notebook.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Lawful trespass notice, safe escort, and documentation are all required steps.",
+                "simplifiedExplanation": "Correct. Lawful trespass notice, safe escort, and thorough documentation are all required steps — even for a cooperative minor.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Physically detain the teenager until police arrive regardless of their cooperation, to show authority in front of bystanders.",
+                "text": "Physically detain the teenager until police decide what to do, regardless of their cooperation, to show authority in front of bystanders.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Unnecessary detention of a cooperative person may be unlawful and excessive.",
+                "simplifiedExplanation": "Incorrect. Unnecessary physical detention of a cooperative person who is being escorted out can be unlawful and is disproportionate.",
                 "module": "Officer Safety"
               }
             ]
@@ -751,7 +751,7 @@
     "name": "Shoplifting Stop at a Retail Store",
     "roleMode": "active",
     "sourceModule": "Notebook and Evidence",
-    "scenarioDescription": "You are a loss prevention officer at a large clothing retailer. You observed a woman on camera conceal two items in her bag and walk past all points of sale without paying. You approach her at the exit and she admits to having the items.",
+    "scenarioDescription": "You are a loss prevention officer at a large clothing retailer. You have been watching a man on CCTV who appears furtive — glancing at cameras, wearing an unusually bulky coat on a warm day, and carrying a large backpack. He conceals two items inside the backpack and is now walking toward the exit.",
     "aiPoliceChat": [
       "Dispatch: Scenario — Shoplifting Stop at a Retail Store.",
       "AI Coach: Think about lawful authority, de-escalation, and documentation.",
@@ -761,11 +761,11 @@
     "questions": [
       {
         "id": "q10",
-        "title": "Loss prevention: documentation after a stop",
+        "title": "Loss prevention: detention timing and documentation",
         "parts": [
           {
             "id": "q10p1",
-            "prompt": "The person has admitted to having the items. What should you do first?",
+            "prompt": "The man has concealed the items but is still inside the store near the last cashier. Should you stop him now?",
             "manual_reference": {
               "page_number": 138,
               "excerpt": "cape routes for all areas.  Ask if there are individuals within the building who may need assistance during an emergency situation; this may include persons in wheelchairs, individuals with health problems, and the visually or hearing impaired.  Report hazards when you find them; overloaded plug sockets, uncleared piles of garbage, space heaters placed close to furniture, window coverings, or other items are unsightly (they take away from the professional appearance of the "
@@ -773,30 +773,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Accept her apology and let her go to avoid conflict, to regain control before backup arrives.",
+                "text": "Yes — you already have video evidence so it doesn't matter where you stop him, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Incident procedure must be followed regardless of how cooperative the person is.",
+                "simplifiedExplanation": "Incorrect. Where you stop him affects whether the theft is legally complete. The manual is clear: wait until he is past all cashiers and outside.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "b",
-                "text": "Physically search her bag without consent or legal authority, to avoid getting stuck in a long interaction.",
+                "text": "Yes — confront him now before he has a chance to run, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Searches require proper authority. Searching without it can be unlawful.",
+                "simplifiedExplanation": "Incorrect. The manual says the offence of theft should not be considered complete until the subject passes all cashiers and has left the store. Detaining him inside gives him a legal defence.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Identify yourself, ask her to accompany you to the security office, and contact your supervisor.",
+                "text": "No — wait until he has passed all cashiers and left the store before approaching him.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Proper identification and supervisor notification are your first required steps.",
+                "simplifiedExplanation": "Correct. The Alberta manual states theft is not considered complete until the subject has passed all checkout areas and left the store. Stopping earlier lets him claim he intended to pay.",
                 "module": "Notebook and Evidence"
               }
             ]
           },
           {
             "id": "q10p2",
-            "prompt": "She is cooperative and your supervisor is on the way. What should you do while you wait?",
+            "prompt": "He has exited. You identify yourself and he cooperates. Your supervisor is on the way. What should your notebook notes include?",
             "manual_reference": {
               "page_number": 138,
               "excerpt": "cape routes for all areas.  Ask if there are individuals within the building who may need assistance during an emergency situation; this may include persons in wheelchairs, individuals with health problems, and the visually or hearing impaired.  Report hazards when you find them; overloaded plug sockets, uncleared piles of garbage, space heaters placed close to furniture, window coverings, or other items are unsightly (they take away from the professional appearance of the "
@@ -804,23 +804,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Start your notes: time, description of person, items observed, your actions, and the camera footage reference.",
+                "text": "The time, location, a factual description of what you observed on camera, his behaviour, and your actions — no opinions.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Contemporary notes with specific detail and camera reference are essential evidence.",
+                "simplifiedExplanation": "Correct. The manual states notes must record facts, not opinions or conclusions. Write what you observed, not what you think about the person.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "b",
-                "text": "Wait until everything is finished and write the report from memory, to prevent delays in the response.",
+                "text": "Your opinion that he is a repeat offender and seemed nervous, plus the camera reference, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Notes should be made as soon as safely possible — not reconstructed from memory.",
+                "simplifiedExplanation": "Incorrect. The manual says do not write opinions or conclusions that cannot be proven. Stick to factual observations only.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Text the incident details to your personal phone as a backup, to avoid getting stuck in a long interaction.",
+                "text": "A brief summary now and a full detailed account later from memory once you are less stressed, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Use only official documentation channels for incident records.",
+                "simplifiedExplanation": "Incorrect. The manual says notes must be made at the time events occur — not reconstructed later from memory, which is less accurate.",
                 "module": "Notebook and Evidence"
               }
             ]
@@ -844,11 +844,11 @@
     "questions": [
       {
         "id": "q11",
-        "title": "Scene preservation: vandalism discovery",
+        "title": "Scene preservation: evidence rules on criminal activity",
         "parts": [
           {
             "id": "q11p1",
-            "prompt": "You have just discovered the vandalism and spray cans. What should you do first?",
+            "prompt": "The manual has a specific rule about what to do when you find evidence of criminal activity during a patrol. What does it say?",
             "manual_reference": {
               "page_number": 137,
               "excerpt": "Alberta Jan-14 Docu Em When secur action mean and c perso peop emer Upo wind to be a Solicitor Genera ument events ergency n an emerge rity of the sc ns. Regardle ns you must continually o ons and prop le to arrive o rgency. Pers n arrival at t dows are sec e open, unlo If you see e activity, no findings an evidence. Be co premi I ( p s al and Ministry of s in your not y Scene ency situatio cene. Emerg ess of the ro be calm, uti observant. D perty you are on scene if, sons on"
@@ -856,30 +856,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Do not touch anything. Secure the area, radio dispatch, and note the exact time and location.",
+                "text": "Notify the police immediately and take care not to displace or destroy any evidence.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Scene preservation and timely reporting protect the evidence for police.",
+                "simplifiedExplanation": "Correct. The manual states exactly: 'If you see evidence of a break-in or other criminal activity, notify the police immediately; document your findings and take care not to displace or destroy evidence.'",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "b",
-                "text": "Photograph the damage and post it to social media to warn the community, to regain control before backup arrives.",
+                "text": "Pick up identifiable items like the spray cans as evidence to hand to police when they arrive.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Evidence must be handled through official channels only.",
+                "simplifiedExplanation": "Incorrect. Touching and moving items is displacing evidence, which the manual explicitly warns against. Leave everything in place and let police process the scene.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Pick up the spray cans to prevent further vandalism, to avoid getting stuck in a long interaction.",
+                "text": "Document everything and clean up the scene so it is safe before police arrive, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Touching items at a potential crime scene can destroy fingerprints and other evidence.",
+                "simplifiedExplanation": "Incorrect. Cleaning up is exactly what the manual prohibits — you must not displace or destroy evidence. Preserve the scene as found.",
                 "module": "Notebook and Evidence"
               }
             ]
           },
           {
             "id": "q11p2",
-            "prompt": "Police have been called and are 10 minutes away. What should you do while waiting?",
+            "prompt": "Police have been called and are 10 minutes away. What should you do while you wait at the scene?",
             "manual_reference": {
               "page_number": 137,
               "excerpt": "Alberta Jan-14 Docu Em When secur action mean and c perso peop emer Upo wind to be a Solicitor Genera ument events ergency n an emerge rity of the sc ns. Regardle ns you must continually o ons and prop le to arrive o rgency. Pers n arrival at t dows are sec e open, unlo If you see e activity, no findings an evidence. Be co premi I ( p s al and Ministry of s in your not y Scene ency situatio cene. Emerg ess of the ro be calm, uti observant. D perty you are on scene if, sons on"
@@ -887,23 +887,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Stand at the perimeter to preserve the scene, write a detailed description of everything observed, and wait for police.",
+                "text": "Secure the perimeter to stop anyone else from entering, and write a detailed factual account of exactly what you found and when.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Scene preservation and detailed notes prepare you for the police handoff.",
+                "simplifiedExplanation": "Correct. Scene security and contemporaneous notes are both required. Your written record of what you found — before police arrive — is valuable evidence.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "b",
-                "text": "Start cleaning up so the school looks better when police arrive, to prevent delays in the response.",
+                "text": "Start photographing and then post the images online so administration can see what happened overnight, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Cleaning destroys evidence before it can be documented and photographed.",
+                "simplifiedExplanation": "Incorrect. The manual says photos or video obtained during an investigation must not be released to media or posted on social networking sites.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Take only a mental note and report it verbally to police when they arrive, to avoid getting stuck in a long interaction.",
+                "text": "Wait until after you speak with police to write your notes, so you can include what they tell you, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Written notes made at the time are far more accurate and legally reliable than memory.",
+                "simplifiedExplanation": "Incorrect. Notes must record what you personally observed at the time. Write them immediately — before your memory fades and before talking to others.",
                 "module": "Notebook and Evidence"
               }
             ]
@@ -1010,11 +1010,11 @@
     "questions": [
       {
         "id": "q13",
-        "title": "Trespass: lawful authority and limits",
+        "title": "Trespass: Petty Trespass Act and escalation steps",
         "parts": [
           {
             "id": "q13p1",
-            "prompt": "The man refuses to leave and denies trespassing. What should you do first?",
+            "prompt": "Under the Alberta Petty Trespass Act, what is a person required to do when directed to leave by a security officer authorized by the owner?",
             "manual_reference": {
               "page_number": 35,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Oct-14 Module Two: The Canadian Legal System and Security Professionals, Page 10 Individuals may grant permission for the search, and then change their mind. At such point as they advise you they would like you to stop searching, you must stop immediately. If you have arrested an individual in accordance with section 494, you may search the individual if you have reason to believe they a"
@@ -1022,30 +1022,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Calmly explain that this is private property, that he is trespassing, and that he is required to leave.",
+                "text": "Leave immediately after being directed — there is no right to stay and argue once told to leave.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Clearly stating the trespass and the legal requirement to leave is the necessary first step.",
+                "simplifiedExplanation": "Correct. The Petty Trespass Act states a person 'does not leave land immediately after he or she is directed to do so by the owner or occupier or a person authorized by them' is guilty of an offence. Immediate compliance is required.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "b",
-                "text": "Physically drag him off the property right away, to avoid getting stuck in a long interaction.",
+                "text": "They have the right to ask for a written notice before they are required to leave, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Physical removal without police involvement can expose you to legal liability.",
+                "simplifiedExplanation": "Incorrect. The Petty Trespass Act requires the person to leave immediately after a verbal direction from an authorized person. No written notice is required for this obligation to apply.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "c",
-                "text": "Do nothing until he causes property damage, to regain control before backup arrives.",
+                "text": "They may stay if they can provide a reasonable explanation for their presence, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You have authority to address trespassing before damage occurs.",
+                "simplifiedExplanation": "Incorrect. Once directed to leave by an authorized person, the person must leave immediately under the Petty Trespass Act. Their reason for being there is not a defence.",
                 "module": "Legal Authority and Licensing"
               }
             ]
           },
           {
             "id": "q13p2",
-            "prompt": "He still refuses to leave after your second verbal direction. What is the correct next step?",
+            "prompt": "He still refuses to leave after two verbal directions. The manual describes an escalation process for persistent non-compliance. What is the correct next step?",
             "manual_reference": {
               "page_number": 35,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Oct-14 Module Two: The Canadian Legal System and Security Professionals, Page 10 Individuals may grant permission for the search, and then change their mind. At such point as they advise you they would like you to stop searching, you must stop immediately. If you have arrested an individual in accordance with section 494, you may search the individual if you have reason to believe they a"
@@ -1053,23 +1053,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Call police, document the encounter start time and his description, and monitor him from a safe distance.",
+                "text": "Call your supervisor or designated contact for direction, document the encounter, and if he continues, advise him you will treat this as a trespass requiring police.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Police involvement and documentation are the correct escalation steps when verbal directions fail.",
+                "simplifiedExplanation": "Correct. The manual says if an individual is persistent and keeps you from your duties, call your supervisor. If they still will not leave, advise them you will treat the incident as trespassing and involve police.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "b",
-                "text": "Walk away since your authority is limited, to avoid getting stuck in a long interaction.",
+                "text": "Do nothing further since you have already given two warnings and your authority is exhausted, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You should call police and document while maintaining safe scene awareness.",
+                "simplifiedExplanation": "Incorrect. The manual is clear — if a person is persistent, you escalate to your supervisor and then to police. Walking away abandons your post and duty.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "c",
-                "text": "Attempt a citizen's arrest right away, to prevent delays in the response.",
+                "text": "Physically force him off the property yourself since the Trespass Act gives you full authority to remove him, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Citizen's arrest has specific lawful conditions that may not apply in this situation.",
+                "simplifiedExplanation": "Incorrect. The Petty Trespass Act does not give security guards the right to physically drag a person off property. Police involvement is the required escalation.",
                 "module": "Legal Authority and Licensing"
               }
             ]
@@ -1460,7 +1460,7 @@
           },
           {
             "id": "q18p2",
-            "prompt": "Your supervisor asks you to document what happened. What should your notes include?",
+            "prompt": "Your supervisor asks you to document what happened. The manual has specific rules about what belongs in a security notebook. Which entry follows those rules correctly?",
             "manual_reference": {
               "page_number": 76,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 26 Interacting with the Media As you are reminded several times throughout this course, your primary duty is to safeguard the persons or property as directed by your employer. On occasion, incidents which attract media attention may occur at your premises. For example, an executive working in an office which is housed in the office bui"
@@ -1468,23 +1468,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Your personal opinion about the other guard's character and reliability, to show authority in front of bystanders.",
+                "text": "'Guard Smith clearly abandoned the post and is not suited for this job. I arrived at 1900 and had to clean up his mess again.', to show authority in front of bystanders.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Notes should contain factual observations, not personal opinions.",
+                "simplifiedExplanation": "Incorrect. The manual explicitly says do not write opinions or conclusions that cannot be proven. Writing that someone 'is not suited for the job' is an opinion that does not belong in a security notebook.",
                 "module": "Professional Conduct"
               },
               {
                 "id": "b",
-                "text": "The time you arrived, observed state of the post, any log gaps, and your actions upon assuming the post.",
+                "text": "'Arrived 1900. Post unoccupied. Log shows last entry 1826 by Guard Smith. No note left. Notified Supervisor Davis at 1902. Assumed post 1902.' — factual, time-stamped, no opinion.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Accurate, factual notes covering the timeline and your actions are required.",
+                "simplifiedExplanation": "Correct. The manual says notebook entries must record facts — who, what, where, when — with no opinions or conclusions. This entry does exactly that. The manual also says do not write anything you would not want your employer, the police, or the court to read.",
                 "module": "Professional Conduct"
               },
               {
                 "id": "c",
-                "text": "Only the time you arrived and nothing about the missing guard, to prevent delays in the response.",
+                "text": "'Post was empty when I arrived. I took over and everything is fine now.' — brief but covers the basics, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Documenting the full situation including the gap is necessary for accountability.",
+                "simplifiedExplanation": "Incorrect. This entry omits key details the manual requires: exact times, log entry references, and supervisory notification. Brief notes that leave out facts are not sufficient for accountability or legal purposes.",
                 "module": "Professional Conduct"
               }
             ]
@@ -1498,7 +1498,7 @@
     "name": "Mall Food Court Altercation",
     "roleMode": "active",
     "sourceModule": "Use of Force and De-escalation",
-    "scenarioDescription": "You are a security guard at Southgate Centre mall. Two customers near the food court are shouting and shoving each other. Bystanders are filming on their phones and the area is getting crowded. You are the first guard on scene.",
+    "scenarioDescription": "You are a security guard at Southgate Centre mall. Two customers near the food court are shouting and shoving each other. The crowd is growing and bystanders are filming. You are the first guard on scene.",
     "aiPoliceChat": [
       "Dispatch: Scenario — Mall Food Court Altercation.",
       "AI Coach: Think about lawful authority, de-escalation, and documentation.",
@@ -1508,11 +1508,11 @@
     "questions": [
       {
         "id": "q19",
-        "title": "Altercation: de-escalation and control",
+        "title": "Altercation: crowd control and backup",
         "parts": [
           {
             "id": "q19p1",
-            "prompt": "The two customers are now chest-to-chest. What should you do first?",
+            "prompt": "The crowd around the fight is growing fast. The manual identifies a specific first action when an incident involves a crowd. What is it?",
             "manual_reference": {
               "page_number": 75,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 25 Physical Behavioural Psychological  Blood shot eyes  Pupils larger or smaller than usual  Changes in appetite or sleep patterns; sudden weight loss or gain  Deteriorated physical appearance, poor grooming  Unusual smells on breath, body, or clothing  Tremors (shaking), slurred speech, poor coordination  Poor attendance at wor"
@@ -1520,30 +1520,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically grab both individuals right away to stop the fight, to prevent delays in the response.",
+                "text": "Handle the crowd yourself first and call backup only if you cannot get the situation under control, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Physical force should only be used when verbal control fails and it is necessary and proportionate.",
+                "simplifiedExplanation": "Incorrect. The manual says to call backup at the first sign of trouble — waiting until you are overwhelmed is too late and unsafe.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Wait at a distance and call police without engaging, to avoid getting stuck in a long interaction.",
+                "text": "Announce loudly that police are on their way and that everyone must leave right away, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You should attempt verbal de-escalation first while waiting for backup — standing by can let the situation worsen.",
+                "simplifiedExplanation": "Incorrect. A loud announcement can escalate crowd panic. The manual recommends de-escalation and calling backup, not triggering a stampede.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Use a calm, commanding voice to separate them and give clear instructions to step back.",
+                "text": "Call for backup at the first sign of a crowd incident — do not wait for it to escalate before asking for help.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Verbal de-escalation and creating space reduces immediate danger without unnecessary force.",
+                "simplifiedExplanation": "Correct. The manual states: 'Call for back-up at the first sign of an incident as it can turn from something minor into something quite large.' Backup must be called immediately, not after things worsen.",
                 "module": "Use of Force and De-escalation"
               }
             ]
           },
           {
             "id": "q19p2",
-            "prompt": "One person complies and steps back. The other is still aggressive and yelling. What is the best next step?",
+            "prompt": "The crowd is still growing. The manual describes a strategy for breaking down a crowd. What is the recommended approach?",
             "manual_reference": {
               "page_number": 75,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 25 Physical Behavioural Psychological  Blood shot eyes  Pupils larger or smaller than usual  Changes in appetite or sleep patterns; sudden weight loss or gain  Deteriorated physical appearance, poor grooming  Unusual smells on breath, body, or clothing  Tremors (shaking), slurred speech, poor coordination  Poor attendance at wor"
@@ -1551,23 +1551,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically restrain the aggressive person right away, to show authority in front of bystanders.",
+                "text": "Position yourself in the centre of the crowd to show authority and take control physically, to show authority in front of bystanders.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Exhaust verbal control options and call backup before moving to physical restraint.",
+                "simplifiedExplanation": "Incorrect. The manual warns that lone officers cannot contain an out-of-control crowd. Placing yourself in the middle is dangerous and ineffective.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Let the aggressive person leave without documenting the incident, to prevent delays in the response.",
+                "text": "Tell bystanders they are legally required to leave and will be detained if they stay, to prevent delays in the response.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You must document all security incidents regardless of outcome.",
+                "simplifiedExplanation": "Incorrect. Bystanders have no legal obligation to leave a public area, and making false threats about detention can escalate the situation and expose you to liability.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Continue verbal commands, position yourself between them, and call for backup.",
+                "text": "Try to remove the most vocal leaders of the crowd — de-escalating the leaders can calm the group as a whole.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Positioning and communication reduce risk while you wait for support.",
+                "simplifiedExplanation": "Correct. The manual's strategy is: 'Remove the Leaders. One strategy you should keep in mind is to always try to de-escalate a crowd by removing its leaders.' Isolating the instigators drains the crowd's energy.",
                 "module": "Use of Force and De-escalation"
               }
             ]
@@ -1581,7 +1581,7 @@
     "name": "Impaired Person Refusing to Leave a Venue",
     "roleMode": "active",
     "sourceModule": "Use of Force and De-escalation",
-    "scenarioDescription": "You are working security at a large concert venue. A visibly intoxicated man is standing near the stage shouting and spilling drinks on other guests. Staff have asked him to leave twice and he refuses. Your supervisor directs you to remove him.",
+    "scenarioDescription": "You are working security at a large concert venue. A man near the stage is acting erratically — swaying, slurring his words, bumping into guests, and shouting. Staff have asked him to leave twice and he refuses. Your supervisor directs you to deal with it.",
     "aiPoliceChat": [
       "Dispatch: Scenario — Impaired Person Refusing to Leave a Venue.",
       "AI Coach: Think about lawful authority, de-escalation, and documentation.",
@@ -1591,11 +1591,11 @@
     "questions": [
       {
         "id": "q20",
-        "title": "Removal: impaired and non-compliant person",
+        "title": "Impairment: recognizing signs and responding",
         "parts": [
           {
             "id": "q20p1",
-            "prompt": "The man is swaying and verbally abusive. What should you do first?",
+            "prompt": "Before approaching, you want to confirm the man is actually impaired and not experiencing a medical episode. Which combination of signs does the manual specifically list as indicators of substance impairment?",
             "manual_reference": {
               "page_number": 65,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 15 Follow a consistent route through or around the premises; you should make a routine to ensure you have covered all areas you are responsible for. Be careful, however, not to become so familiar with your route that you stop looking closely enough to notice when things are amiss. Check doors and windows as you walk by; if they should "
@@ -1603,30 +1603,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Calmly identify yourself, explain why he must leave, and give him a clear direction toward the exit.",
+                "text": "Bloodshot eyes, slurred speech, poor coordination, and tremors — all listed as physical signs of impairment.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Lawful verbal instruction gives the person a chance to comply before you escalate.",
+                "simplifiedExplanation": "Correct. The manual lists bloodshot eyes, slurred speech, poor coordination, and tremors (shaking) as physical signs of substance abuse. Seeing these helps distinguish impairment from a medical condition like a stroke.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Ignore him and wait for police to arrive on their own, so the scene does not get more chaotic.",
+                "text": "Refusing to answer questions and walking quickly away from security — signs of guilt and impairment, so the scene does not get more chaotic.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. You have a duty to act within your authority while maintaining safety.",
+                "simplifiedExplanation": "Incorrect. These behaviours may indicate awareness of security but are not on the manual's list of physical impairment signs. Behavioural signs include secretive behaviour, but the physical signs are different.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "right away grab his arm and pull him toward the door, to regain control before backup arrives.",
+                "text": "Wearing sunglasses indoors and carrying an unusually large bag — signs the person is hiding something.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Physical removal without verbal instruction can escalate and cause injury.",
+                "simplifiedExplanation": "Incorrect. These are loss-prevention indicators, not impairment signs. The manual's list of substance abuse indicators includes slurred speech, poor coordination, tremors, and bloodshot eyes.",
                 "module": "Use of Force and De-escalation"
               }
             ]
           },
           {
             "id": "q20p2",
-            "prompt": "He refuses to comply a third time and plants his feet. What is the best next step?",
+            "prompt": "You have confirmed he is impaired. He refuses to leave a third time and plants his feet. What is the appropriate next step according to the manual?",
             "manual_reference": {
               "page_number": 65,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 15 Follow a consistent route through or around the premises; you should make a routine to ensure you have covered all areas you are responsible for. Be careful, however, not to become so familiar with your route that you stop looking closely enough to notice when things are amiss. Check doors and windows as you walk by; if they should "
@@ -1634,23 +1634,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Request police assistance and continue monitoring without escalating force unnecessarily.",
+                "text": "Request police assistance and continue monitoring — do not escalate to physical force when verbal compliance has failed.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Police involvement is the appropriate escalation when voluntary compliance fails.",
+                "simplifiedExplanation": "Correct. The manual says most situations can be handled through skilled communication, and escalating to force is risky. When verbal means are exhausted, police involvement is the correct next escalation.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Leave him alone and return to your post, to regain control before backup arrives.",
+                "text": "Leave him alone and return to your post since you cannot physically force him to move, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Abandoning an active situation creates safety and liability risk.",
+                "simplifiedExplanation": "Incorrect. Abandoning an active situation without completing your duty is a conduct failure. Call police to assist — do not simply walk away.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Use a chokehold to force him toward the exit, to avoid getting stuck in a long interaction.",
+                "text": "Use a restraint hold to guide him toward the exit since he has been given three chances to leave, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. This level of force is not appropriate and could be unlawful.",
+                "simplifiedExplanation": "Incorrect. Section 26 of the Criminal Code makes every person criminally responsible for excessive force. A restraint on a non-violent impaired person who is only refusing to walk creates serious legal exposure.",
                 "module": "Use of Force and De-escalation"
               }
             ]
@@ -1844,7 +1844,7 @@
         "parts": [
           {
             "id": "q23p1",
-            "prompt": "You are at the forced gate. The site is dark and you do not know how many people are inside. What should you do first?",
+            "prompt": "You are at the forced gate and can see evidence of a break-in. What does the manual say you must do first upon finding a scene like this?",
             "manual_reference": {
               "page_number": 60,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 10 There are other instances when your ability to accurately interpret information will be distorted by other factors. For example, individuals who have had strokes or other types of brain injury may have slurred speech and uncoordinated movement. They may appear intoxicated, but the reality is their physical impairment causes them to "
@@ -1852,30 +1852,30 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Leave the site and file a report in the morning, so the scene does not get more chaotic.",
+                "text": "Inspect every entrance to determine exactly how many people entered before calling anyone, so the scene does not get more chaotic.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. An active intrusion requires immediate reporting and monitoring, not deferral.",
+                "simplifiedExplanation": "Incorrect. The manual says to notify police immediately and avoid disturbing the scene. A full solo perimeter check before calling in delays the response unnecessarily.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Enter the site right away and confront whoever is inside, to regain control before backup arrives.",
+                "text": "Enter the site right away to locate and confront whoever is inside before they escape, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Entering alone without backup creates serious personal safety risk.",
+                "simplifiedExplanation": "Incorrect. The manual requires you to notify police and secure your position first. Entering alone into an unknown situation without backup is unsafe and can destroy evidence.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Stay outside the gate, radio dispatch with your location and the situation, and wait for backup.",
+                "text": "Stay outside, radio dispatch with your location, and notify police immediately — do not enter alone or disturb anything.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Entering alone into an unknown situation is high-risk. Secure your position and report first.",
+                "simplifiedExplanation": "Correct. The manual states: if you see evidence of a break-in or criminal activity, notify the police immediately and take care not to displace or destroy evidence. Do not enter alone.",
                 "module": "Officer Safety"
               }
             ]
           },
           {
             "id": "q23p2",
-            "prompt": "Backup arrives. You find a teenager inside who got in on a dare and is cooperative. What is the correct next step?",
+            "prompt": "Police and backup arrive. They find a teenager inside who got in on a dare and cooperates fully. What is the correct next step for you?",
             "manual_reference": {
               "page_number": 60,
               "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Module Three: Basic Security Procedures, Page 10 There are other instances when your ability to accurately interpret information will be distorted by other factors. For example, individuals who have had strokes or other types of brain injury may have slurred speech and uncoordinated movement. They may appear intoxicated, but the reality is their physical impairment causes them to "
@@ -1883,23 +1883,23 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically detain the teenager until police arrive regardless of their cooperation, to avoid getting stuck in a long interaction.",
+                "text": "Physically detain the teenager until police decide what to do, regardless of their cooperation, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. Unnecessary detention of a cooperative person may be unlawful and excessive.",
+                "simplifiedExplanation": "Incorrect. Unnecessary physical detention of a cooperative person who is being escorted out can be unlawful and is disproportionate.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Identify yourself, advise them they are trespassing, escort them out safely, and document the incident.",
+                "text": "Identify yourself, advise them they are trespassing, escort them out safely, and document the full incident in your notebook.",
                 "isCorrect": true,
-                "simplifiedExplanation": "Correct. Lawful trespass notice, safe escort, and documentation are all required steps.",
+                "simplifiedExplanation": "Correct. Lawful trespass notice, safe escort, and thorough documentation are all required steps — even for a cooperative minor.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Let them go without documenting since no damage was done, to regain control before backup arrives.",
+                "text": "Let them go without documenting since police are already on scene and no damage was done, to regain control before backup arrives.",
                 "isCorrect": false,
-                "simplifiedExplanation": "Incorrect. All security incidents must be documented even when minor.",
+                "simplifiedExplanation": "Incorrect. You must document all security incidents, including trespass. Your report is your record regardless of what police do.",
                 "module": "Officer Safety"
               }
             ]
