@@ -6,9 +6,9 @@ type ModeSwitcherProps = {
 };
 
 const MODES: Array<{ id: Mode; label: string }> = [
-  { id: 'text-tutor', label: 'Text Tutor' },
+  { id: 'ask', label: 'Text Tutor' },
   { id: 'practice', label: 'Exam Practice' },
-  { id: 'roleplay', label: 'Roleplay' },
+  { id: 'listen', label: 'Listen' },
 ];
 
 function ModeSwitcher({ activeMode, onChange }: ModeSwitcherProps) {
