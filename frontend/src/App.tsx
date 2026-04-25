@@ -24,7 +24,7 @@ function App() {
           </span>
           <div>
             <p className="brand-title">SecurePass</p>
-            <p className="brand-subtitle">Accessibility-first security guard training UI</p>
+            <p className="brand-subtitle">Security guard training UI</p>
           </div>
         </div>
         <nav aria-label="Primary">
