@@ -1,20 +1,38 @@
 """
 lambda_tutor.py
 
-API Gateway Lambda handler sketch for the SecurePass tutor endpoint.
+API Gateway Lambda handler for SecurePass POST /tutor.
 
-Tonight's version returns a batched JSON response so the frontend can type
-against the final shape. Phase 5 will replace the batched response with a
-streaming Lambda Function URL / API Gateway setup.
+Request:
+    {
+        "question": "When am I allowed to physically restrain someone?",
+        "input_language_hint": "Punjabi",
+        "image_b64": "<optional JPEG base64>",
+        "include_diagram": "auto",
+        "top_k": 5
+    }
+
+Response:
+    {
+        "answer": "... simplified English ...",
+        "svg": "<svg ...>...</svg>" | null,
+        "citations": [...],
+        "priority": "HIGH",
+        "priority_rationale": "...",
+        "glossary_terms": [...]
+    }
 """
 
+from __future__ import annotations
+
+import base64
 import json
 import sys
 from typing import Any
 
 from botocore.exceptions import ClientError
 
-from rag_query import DEFAULT_LANGUAGE, TOP_K, Citation, answer_question
+from rag_query import TOP_K, answer_question_blocking
 
 
 def _response(status_code: int, payload: dict[str, Any]) -> dict[str, Any]:
@@ -35,57 +53,78 @@ def _parse_body(event: dict[str, Any]) -> dict[str, Any]:
     """Parse an API Gateway event body into a dict."""
     raw_body = event.get("body") or "{}"
     if event.get("isBase64Encoded"):
-        return json.loads(raw_body)
-    return json.loads(raw_body)
+        raw_body = base64.b64decode(raw_body).decode("utf-8")
+
+    parsed = json.loads(raw_body)
+    if not isinstance(parsed, dict):
+        raise ValueError("Request body must be a JSON object.")
+    return parsed
+
+
+def _coerce_top_k(value: Any) -> int:
+    """Parse top_k while keeping a safe lower/upper bound for demo latency."""
+    if value is None:
+        return TOP_K
+
+    try:
+        top_k = int(value)
+    except (TypeError, ValueError) as error:
+        raise ValueError("top_k must be an integer.") from error
+
+    if top_k < 1 or top_k > 10:
+        raise ValueError("top_k must be between 1 and 10.")
+    return top_k
+
+
+def _method(event: dict[str, Any]) -> str:
+    """Return the HTTP method for API Gateway v1 or v2 events."""
+    request_context = event.get("requestContext", {})
+    http_context = request_context.get("http", {})
+    return str(
+        http_context.get("method")
+        or event.get("httpMethod")
+        or "POST"
+    ).upper()
 
 
 def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
     """Handle POST /tutor requests."""
-    if event.get("requestContext", {}).get("http", {}).get("method") == "OPTIONS":
+    if _method(event) == "OPTIONS":
         return _response(204, {})
 
     try:
         body = _parse_body(event)
     except json.JSONDecodeError:
         return _response(400, {"error": "Request body must be valid JSON."})
+    except ValueError as error:
+        return _response(400, {"error": str(error)})
 
     question = str(body.get("question", "")).strip()
-    language = str(body.get("language", DEFAULT_LANGUAGE)).strip() or DEFAULT_LANGUAGE
+    input_language_hint = body.get("input_language_hint")
     image_b64 = body.get("image_b64")
-    top_k = int(body.get("top_k", TOP_K))
+    include_diagram = str(body.get("include_diagram", "auto")).strip() or "auto"
 
     if not question:
-        return _response(400, {"error": "question is required"})
-
-    answer_parts: list[str] = []
-    citations: list[Citation] = []
-    priority_rationale = ""
+        return _response(400, {"error": "question is required."})
+    if input_language_hint is not None:
+        input_language_hint = str(input_language_hint).strip() or None
+    if image_b64 is not None:
+        image_b64 = str(image_b64).strip() or None
 
     try:
-        # TODO Phase 5: return these events through a streaming Lambda response.
-        for event_item in answer_question(
+        result = answer_question_blocking(
             question=question,
-            language=language,
-            top_k=top_k,
+            input_language_hint=input_language_hint,
+            top_k=_coerce_top_k(body.get("top_k")),
             image_b64=image_b64,
-        ):
-            if event_item["type"] == "citations":
-                citations = event_item["data"]
-            elif event_item["type"] == "token":
-                answer_parts.append(str(event_item["data"]))
-            elif event_item["type"] == "priority_rationale":
-                priority_rationale = str(event_item["data"])
-    except (ClientError, FileNotFoundError, ValueError, RuntimeError) as error:
+            include_diagram=include_diagram,
+        )
+    except ValueError as error:
+        return _response(400, {"error": str(error)})
+    except (ClientError, FileNotFoundError, RuntimeError) as error:
         return _response(500, {"error": str(error)})
 
-    return _response(
-        200,
-        {
-            "answer": "".join(answer_parts),
-            "citations": citations,
-            "priority_rationale": priority_rationale,
-        },
-    )
+    return _response(200, result)
 
 
 def main() -> None:
@@ -97,7 +136,7 @@ def main() -> None:
         "requestContext": {"http": {"method": "POST"}},
         "body": json.dumps({
             "question": "When am I allowed to physically restrain someone?",
-            "language": "Punjabi",
+            "include_diagram": "auto",
         }),
     }
     response = handler(event, None)
