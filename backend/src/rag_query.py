@@ -7,11 +7,14 @@ The tutor accepts a question in any typed language, retrieves relevant Alberta
 Basic Security Training manual chunks, and answers only in simplified English.
 The Claude response is streamed in a structured envelope so callers can show the
 answer live while still receiving citations, exam priority, glossary terms, and
-an optional SVG diagram.
+an optional SVG diagram. Separately, Bedrock text-to-image (default: Stable
+Diffusion 3.5, or opt-in Nova Canvas) can generate a text-free photorealistic
+PNG scene for situational context.
 
 Usage:
     python src/rag_query.py "When am I allowed to physically restrain someone?"
     python src/rag_query.py "ਮੈਂ ਕਿਸੇ ਨੂੰ ਕਦੋਂ ਰੋਕ ਸਕਦਾ ਹਾਂ?" --input-language-hint Punjabi
+    python src/rag_query.py "Show me excessive force" --include-scene-image always --write-scene-png output/scene.png
 """
 
 from __future__ import annotations
@@ -20,6 +23,7 @@ import argparse
 import base64
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -45,6 +49,21 @@ TITAN_EMBED_MODEL_ID = os.getenv(
     "TITAN_EMBED_MODEL_ID",
     "amazon.titan-embed-text-v2:0",
 )
+NOVA_CANVAS_MODEL_ID = os.getenv("NOVA_CANVAS_MODEL_ID", "amazon.nova-canvas-v1:0")
+# Nova Canvas image generation is not available in every Bedrock region. The project
+# defaults Claude/Titan to us-west-2, but Canvas is documented for us-east-1 (and
+# a few others). Use a dedicated region so scene images work without moving RAG.
+NOVA_CANVAS_REGION = os.getenv("NOVA_CANVAS_REGION", "us-east-1")
+# Scene PNG provider: "stability" (default) = Stable Diffusion 3.5 Large; "nova" = Nova
+# Canvas. Nova Canvas is Legacy on Bedrock; many accounts get blocked without recent use.
+# SD 3.5 is typically available in the same region as the rest of the stack (e.g. us-west-2).
+SCENE_IMAGE_PROVIDER = os.getenv("SCENE_IMAGE_PROVIDER", "stability").lower().strip()
+STABILITY_SD35_MODEL_ID = os.getenv(
+    "STABILITY_SD35_MODEL_ID", "stability.sd3-5-large-v1:0"
+)
+STABILITY_IMAGE_REGION = os.getenv("STABILITY_IMAGE_REGION", AWS_REGION)
+SCENE_IMAGE_WIDTH = int(os.getenv("SCENE_IMAGE_WIDTH", "1024"))
+SCENE_IMAGE_HEIGHT = int(os.getenv("SCENE_IMAGE_HEIGHT", "1024"))
 
 CHUNKS_PATH_ENV = os.getenv("CHUNKS_OUTPUT_PATH", "data/chunks.json")
 CHUNKS_PATH = (
@@ -61,7 +80,79 @@ MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
 
 VALID_DIAGRAM_MODES = {"auto", "always", "never"}
+VALID_SCENE_IMAGE_MODES = {"auto", "always", "never"}
 PRIORITY_VALUES = {"HIGH", "MEDIUM", "BACKGROUND"}
+
+# Photorealistic scene images must never show readable text
+NO_TEXT_IMAGERY_RULES = (
+    "The image must contain no text, no labels, no signs, no logos with readable words, "
+    "no captions, and no book pages. Use only the scene, body language, and setting to tell the story. "
+    "Photorealistic, educational, calm, and suitable for a workplace training app."
+)
+
+# Strengthen no-text and safety for Stability SD3.5 (short negative prompt)
+STABILITY_NEGATIVE_PROMPT = (
+    "text, words, letters, signage, labels, logos, typography, watermarks, "
+    "solo portrait, close-up headshot, cropped person, blur, deformed, low quality, ugly"
+)
+
+# If SD3.5 filter rejects a topic-specific scene, retry with bland workplace stock photos.
+STABILITY_FALLBACK_SCENE_PROMPT = (
+    "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+    "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
+    "conversational distance, relaxed posture, open hands, friendly neutral expressions, spacious clean interior. "
+    f"{NO_TEXT_IMAGERY_RULES} "
+    "Wide shot, bright, corporate brochure look."
+)
+STABILITY_SAFE_FALLBACK_PROMPTS = [
+    STABILITY_FALLBACK_SCENE_PROMPT,
+    (
+        "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+        "walking through a wide bright indoor shopping centre corridor, relaxed posture, open hands, "
+        "spacious public walkway, friendly professional expression. "
+        f"{NO_TEXT_IMAGERY_RULES} "
+        "Wide shot, natural light, brochure style."
+    ),
+    (
+        "Photorealistic corporate training stock photo: an empty wide bright indoor shopping centre "
+        "corridor with clean floors, soft daylight, plants, benches, and a calm professional public-space atmosphere. "
+        f"{NO_TEXT_IMAGERY_RULES} "
+        "Wide shot, simple calm composition."
+    ),
+]
+STABILITY_BLOCKED_PROMPT_WORDS = (
+    "arrest",
+    "blood",
+    "crime",
+    "criminal",
+    "danger",
+    "distress",
+    "emergency",
+    "evidence",
+    "fight",
+    "fire",
+    "force",
+    "gore",
+    "grab",
+    "grasp",
+    "held",
+    "injury",
+    "panic",
+    "restrain",
+    "restraining",
+    "scared",
+    "self-defence",
+    "self defense",
+    "theft",
+    "thief",
+    "weapon",
+    "worried",
+    "angry",
+    "yelling",
+    "hostile",
+    "threat",
+    "threats",
+)
 
 
 class Citation(TypedDict):
@@ -86,6 +177,9 @@ class TutorResult(TypedDict):
 
     answer: str
     svg: str | None
+    scene_png_b64: str | None
+    scene_image_prompt: str | None
+    scene_image_error: str | None
     citations: list[Citation]
     priority: Literal["HIGH", "MEDIUM", "BACKGROUND"]
     priority_rationale: str
@@ -97,6 +191,7 @@ class StreamEvent(TypedDict):
 
     type: Literal[
         "citations",
+        "scene_image",
         "token",
         "svg",
         "priority",
@@ -112,6 +207,10 @@ class StreamEvent(TypedDict):
 # ---------------------------------------------------------------------------
 
 bedrock = boto3.client("bedrock-runtime", region_name=AWS_REGION)
+# Separate client: Nova Canvas TEXT_IMAGE in regions where the model is supported.
+bedrock_nova = boto3.client("bedrock-runtime", region_name=NOVA_CANVAS_REGION)
+# Stable Diffusion 3.5 (default scene provider) — usually same region as Claude/Titan
+bedrock_stability = boto3.client("bedrock-runtime", region_name=STABILITY_IMAGE_REGION)
 _chunk_cache: tuple[list[dict[str, Any]], np.ndarray] | None = None
 
 
@@ -225,6 +324,509 @@ def build_citations(retrieved: list[dict[str, Any]]) -> list[Citation]:
         }
         for index, chunk in enumerate(retrieved)
     ]
+
+
+# ---------------------------------------------------------------------------
+# Nova Canvas: runtime PNG scene images (text-free, photorealistic)
+# ---------------------------------------------------------------------------
+
+
+def normalize_scene_image_mode(mode: str | None) -> str:
+    """Normalize include_scene_image to auto, always, or never."""
+    m = (mode or "auto").strip().lower()
+    if m not in VALID_SCENE_IMAGE_MODES:
+        raise ValueError("include_scene_image must be one of: auto, always, never.")
+    return m
+
+
+def _retrieval_text_snippet(retrieved: list[dict[str, Any]], max_chars: int = 2000) -> str:
+    """Short joined text from top chunks for keyword routing."""
+    parts: list[str] = []
+    total = 0
+    for chunk in retrieved:
+        t = str(chunk.get("text", ""))
+        if not t:
+            continue
+        take = t[: min(len(t), max_chars - total)]
+        parts.append(take)
+        total += len(take)
+        if total >= max_chars:
+            break
+    return " ".join(parts)
+
+
+def infer_scene_topic(
+    include_scene_image: str,
+    question: str,
+    retrieved: list[dict[str, Any]],
+) -> str | None:
+    """Route the requested image to a stable, explicit visual topic."""
+    if include_scene_image == "never":
+        return None
+
+    q = question.strip().lower()
+    blob = (q + " " + _retrieval_text_snippet(retrieved).lower())
+
+    # First trust the student's question. Retrieved chunks often mention related
+    # topics (for example patrol pages mention exits), which can otherwise hijack
+    # the visual route.
+    if any(k in q for k in ("evacuation", "evacuate", "fire exit", "escape route")):
+        return "evacuation"
+    if any(
+        k in q
+        for k in (
+            "angry",
+            "yelling",
+            "hostile",
+            "de-escalation",
+            "deescalation",
+            "calm down",
+            "customer",
+        )
+    ):
+        return "deescalation"
+    if any(k in q for k in ("patrol", "positioning", "floor plan", "route")):
+        return "patrol"
+    if any(
+        k in q
+        for k in (
+            "notebook",
+            "report",
+            "evidence",
+            "chain of custody",
+            "incident report",
+        )
+    ):
+        return "notebook"
+
+    if any(
+        k in blob
+        for k in (
+            "excessive force",
+            "too much force",
+            "restrain",
+            "restraining",
+            "reasonable force",
+            "self-defence",
+            "self defense",
+            "citizen",
+            "arrest",
+            "use of force",
+            "section 26",
+        )
+    ) or "force" in q:
+        return "force"
+    if any(
+        k in blob
+        for k in ("evacuation", "fire exit", "emergency", "escape route", "delirium")
+    ):
+        return "evacuation"
+    if any(
+        k in blob
+        for k in (
+            "angry",
+            "yelling",
+            "hostile",
+            "de-escalation",
+            "deescalation",
+            "escalating",
+            "composure",
+        )
+    ):
+        return "deescalation"
+    if any(k in blob for k in ("patrol", "positioning", "floor plan", "route")):
+        return "patrol"
+    if any(
+        k in blob
+        for k in (
+            "notebook",
+            "report",
+            "evidence",
+            "chain of custody",
+            "incident report",
+        )
+    ):
+        return "notebook"
+    if include_scene_image == "always":
+        return "generic"
+    return None
+
+
+def build_scene_image_prompt(
+    include_scene_image: str,
+    question: str,
+    retrieved: list[dict[str, Any]],
+) -> str | None:
+    """Return a Nova Canvas prompt, or None if auto mode should skip the image.
+
+    In ``always`` mode, returns a safe generic training scene if no topic matches.
+    """
+    mode = include_scene_image
+    if mode == "never":
+        return None
+
+    topic = infer_scene_topic(mode, question, retrieved)
+
+    # Excessive or misuse of physical control
+    if topic == "force":
+        # SD3.5 filters can reject prompts that depict direct physical control.
+        # Keep the image as a neutral training stock photo; the answer explains the legal risk.
+        return (
+            "Photorealistic corporate training stock photo: a uniformed building concierge and "
+            "one visitor in everyday clothes in a wide bright shopping mall corridor. The staff "
+            "member has a relaxed professional posture with open hands; both people have friendly "
+            "neutral expressions and stand at a comfortable conversational distance. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Well-lit, wide camera angle, neutral positive workplace training look."
+        )
+
+    # Patrol / positioning
+    if topic == "patrol":
+        return (
+            "Photorealistic training scene: a security guard in a high-visibility uniform "
+            "walking a wide, well-lit modern mall concourse, observing shoppers from a safe "
+            "distance, professional posture, hands visible, calm. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Daytime, neutral camera angle, relaxed public setting."
+        )
+
+    # De-escalation / upset customer
+    if topic == "deescalation":
+        return (
+            "Photorealistic training scene: a uniformed security staff member standing near "
+            "a retail customer service counter inside a bright store entrance. Show two full adults "
+            "clearly in the frame: the staff member on one side of the counter and one customer on "
+            "the other side using animated hand gestures. The staff member keeps comfortable space, "
+            "relaxed shoulders, open hands, and attentive listening posture. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide two-person shot, calm professional workplace training style."
+        )
+
+    # Fire / evacuation
+    if topic == "evacuation":
+        return (
+            "Photorealistic training scene: a security guard in uniform calmly directing people "
+            "toward a clearly visible, well-lit fire exit in a public building, orderly crowd, no panic. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Indoor, neutral wide shot."
+        )
+
+    # Notebooks / evidence
+    if topic == "notebook":
+        return (
+            "Photorealistic training scene: a security guard at a small desk in a back office, "
+            "writing in a paper notebook, professional uniform, a plain sealed evidence bag and "
+            "a small camera on the desk, no visible documents or readable text. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Neutral, documentary style."
+        )
+
+    if topic == "generic":
+        return STABILITY_FALLBACK_SCENE_PROMPT
+    return None
+
+
+def resolve_scene_image_provider() -> str:
+    """Map SCENE_IMAGE_PROVIDER env to 'stability' or 'nova'."""
+    p = SCENE_IMAGE_PROVIDER
+    if p in ("stability", "stability.sd3", "sd35", "sd3-5", "sd3_5"):
+        return "stability"
+    if p in ("nova", "nova-canvas", "canvas", "nova_canvas", "amazon-nova-canvas"):
+        return "nova"
+    if p == "":
+        return "stability"
+    raise ValueError(
+        f"SCENE_IMAGE_PROVIDER must be 'stability' or 'nova', not {p!r}."
+    )
+
+
+def strip_stability_filter_terms(prompt: str) -> str:
+    """Remove common SD3.5 prompt-filter trigger terms before InvokeModel."""
+    cleaned = prompt
+    for word in STABILITY_BLOCKED_PROMPT_WORDS:
+        cleaned = re.sub(rf"\b{re.escape(word)}\b", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s+", " ", cleaned)
+    cleaned = re.sub(r"\s+([,.])", r"\1", cleaned)
+    return cleaned.strip()
+
+
+def rewrite_for_stability_image_model(scene_prompt: str, scene_topic: str | None) -> str:
+    """
+    Convert any topic scene into a conservative SD3.5-safe stock-photo prompt.
+
+    The RAG answer carries the lesson details. The generated image is only a safe
+    situational backdrop, so never pass raw/legal/safety wording to the image model.
+    """
+    p = scene_prompt.lower()
+    topic = scene_topic or ""
+    if topic == "force":
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+            "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
+            "conversational distance, relaxed posture, open hands, friendly neutral expressions. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, natural light, professional training brochure style."
+        )
+    elif topic == "patrol":
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+            "walking through a wide bright indoor shopping centre corridor, relaxed posture, open hands, "
+            "spacious public walkway, friendly professional expression. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, natural light, brochure style."
+        )
+    elif topic == "deescalation":
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+            "standing behind or beside a retail service counter inside a bright store entrance. "
+            "Show two full adults clearly in the frame: the staff member and one customer facing each "
+            "other across the counter. The customer uses animated hand gestures; the staff member has "
+            "open hands and attentive listening posture, with comfortable space between them. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide two-person shot, natural light, workplace training brochure style."
+        )
+    elif topic == "evacuation":
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed facility team member "
+            "standing in a bright public building lobby and politely guiding a small group "
+            "toward a clearly visible open doorway, one open hand showing the direction, "
+            "orderly spacious interior, calm people walking together. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, neutral workplace training style."
+        )
+    elif topic == "notebook":
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed facility team member "
+            "sitting at a tidy office desk with a blank notebook and a plain envelope, bright "
+            "neutral office, relaxed posture, professional workplace setting. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, clean brochure style."
+        )
+    elif any(k in p for k in ("notebook", "desk", "camera", "chain of custody")):
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed facility team member "
+            "sitting at a tidy office desk with a blank notebook and a plain envelope, bright "
+            "neutral office, relaxed posture, professional workplace setting. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, clean brochure style."
+        )
+    elif any(k in p for k in ("patrol", "walking", "route", "corridor", "mall")):
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
+            "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
+            "conversational distance, relaxed posture, open hands, friendly neutral expressions. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, natural light, brochure style."
+        )
+    elif any(k in p for k in ("exit", "doorway", "building")):
+        rewritten = (
+            "Photorealistic corporate training stock photo: a uniformed facility team member "
+            "standing in a bright public building lobby and politely gesturing toward a doorway, "
+            "orderly spacious interior, calm people in the background. "
+            f"{NO_TEXT_IMAGERY_RULES} "
+            "Wide shot, neutral workplace training style."
+        )
+    else:
+        rewritten = STABILITY_FALLBACK_SCENE_PROMPT
+    return strip_stability_filter_terms(rewritten)[:1000]
+
+
+def invoke_stability_sd35(
+    text_prompt: str,
+    scene_topic: str | None = None,
+) -> tuple[str, str]:
+    """Stability SD 3.5 Large text-to-image; returns (base64 PNG, prompt used)."""
+    if not text_prompt.strip():
+        raise ValueError("Stability image prompt cannot be empty.")
+
+    prompt_lineup: list[str] = []
+    for candidate in [
+        rewrite_for_stability_image_model(text_prompt, scene_topic),
+        *STABILITY_SAFE_FALLBACK_PROMPTS,
+    ]:
+        clean_candidate = strip_stability_filter_terms(candidate)[:1000]
+        if clean_candidate and clean_candidate not in prompt_lineup:
+            prompt_lineup.append(clean_candidate)
+
+    for pi, ptext in enumerate(prompt_lineup):
+        for attempt in range(MAX_RETRIES):
+            seed = random.randint(0, 4_294_967_294)
+            native_request: dict[str, Any] = {
+                "prompt": ptext,
+                "mode": "text-to-image",
+                "negative_prompt": STABILITY_NEGATIVE_PROMPT,
+                "aspect_ratio": "1:1",
+                "seed": seed,
+                "output_format": "png",
+            }
+            try:
+                response = bedrock_stability.invoke_model(
+                    modelId=STABILITY_SD35_MODEL_ID,
+                    body=json.dumps(native_request),
+                    contentType="application/json",
+                    accept="application/json",
+                )
+                model_response = json.loads(response["body"].read())
+                finish = model_response.get("finish_reasons") or [None]
+                if finish and len(finish) > 0 and finish[0] is not None:
+                    fr0 = str(finish[0])
+                    if (
+                        "filter" in fr0.lower()
+                        and "prompt" in fr0.lower()
+                        and pi < len(prompt_lineup) - 1
+                    ):
+                        print(
+                            "  SD3.5: safe prompt was filtered; retrying with a simpler fallback scene.",
+                            file=sys.stderr,
+                        )
+                        break
+                    raise RuntimeError(
+                        f"Stable Diffusion blocked or errored: finish_reasons={finish!r}."
+                    )
+                images = model_response.get("images")
+                if not images:
+                    raise RuntimeError(
+                        f"Stable Diffusion returned no images. Keys: {list(model_response.keys())}"
+                    )
+                b64 = images[0]
+                if not isinstance(b64, str) or not b64.strip():
+                    raise RuntimeError("Stable Diffusion image payload is empty.")
+                return b64, ptext
+            except ClientError as error:
+                code = error.response.get("Error", {}).get("Code", "")
+                if code == "ValidationException" and "model identifier" in str(error).lower():
+                    raise RuntimeError(
+                        f"Stable Diffusion 3.5 not available: {error}. "
+                        f"Set STABILITY_IMAGE_REGION (default: same as AWS_REGION) and enable "
+                        f"{STABILITY_SD35_MODEL_ID!r} in the Bedrock console, or set "
+                        f"SCENE_IMAGE_PROVIDER=nova to use Nova Canvas in NOVA_CANVAS_REGION."
+                    ) from error
+                if code in ("ThrottlingException", "ServiceUnavailableException"):
+                    wait = RETRY_BACKOFF_SECONDS * (2**attempt)
+                    print(
+                        f"  Stable Diffusion throttled, retrying in {wait}s...",
+                        file=sys.stderr,
+                    )
+                    time.sleep(wait)
+                    continue
+                raise
+        else:
+            raise RuntimeError(
+                f"Stable Diffusion 3.5 failed after {MAX_RETRIES} tries (throttling): "
+                f"last prompt was {ptext[:120]!r}..."
+            )
+
+    raise RuntimeError(
+        "Stable Diffusion 3.5: all sanitized fallback prompts were blocked by the content filter."
+    )
+
+
+def invoke_nova_canvas(text_prompt: str) -> tuple[str, str]:
+    """Call Amazon Nova Canvas TEXT_IMAGE and return (base64 PNG, prompt used)."""
+    if not text_prompt.strip():
+        raise ValueError("Nova Canvas prompt cannot be empty.")
+
+    w = max(512, min(SCENE_IMAGE_WIDTH, 1024))
+    h = max(512, min(SCENE_IMAGE_HEIGHT, 1024))
+    if w > 1024 or h > 1024:
+        w = min(w, 1024)
+        h = min(h, 1024)
+
+    seed = random.randint(0, 858_993_459)
+    native_request = {
+        "taskType": "TEXT_IMAGE",
+        "textToImageParams": {"text": text_prompt},
+        "imageGenerationConfig": {
+            "seed": seed,
+            "quality": "standard",
+            "height": h,
+            "width": w,
+            "numberOfImages": 1,
+        },
+    }
+    last_exception: BaseException | None = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = bedrock_nova.invoke_model(
+                modelId=NOVA_CANVAS_MODEL_ID,
+                body=json.dumps(native_request),
+                contentType="application/json",
+                accept="application/json",
+            )
+            model_response = json.loads(response["body"].read())
+            images = model_response.get("images")
+            if not images:
+                raise RuntimeError(
+                    f"Nova Canvas returned no images. Keys: {list(model_response.keys())}"
+                )
+            b64 = images[0]
+            if not isinstance(b64, str) or not b64.strip():
+                raise RuntimeError("Nova Canvas image payload is empty.")
+            return b64, text_prompt
+        except ClientError as error:
+            last_exception = error
+            code = error.response.get("Error", {}).get("Code", "")
+            if code == "ValidationException" and "model identifier" in str(error).lower():
+                raise RuntimeError(
+                    f"Nova Canvas model not available in this setup: {error}. "
+                    f"Set NOVA_CANVAS_REGION to a region that offers Nova Canvas on Bedrock "
+                    f"(for example us-east-1). Current NOVA_CANVAS_REGION={NOVA_CANVAS_REGION!r}, "
+                    f"modelId={NOVA_CANVAS_MODEL_ID!r}."
+                ) from error
+            if code in ("ResourceNotFoundException", "AccessDeniedException") and any(
+                s in str(error).lower()
+                for s in ("legacy", "upgrade to an active model", "last 30 days")
+            ):
+                raise RuntimeError(
+                    f"Nova Canvas is not available to this account (Legacy / inactivity). {error!s} "
+                    f"Set SCENE_IMAGE_PROVIDER=stability in .env to use Stable Diffusion 3.5 in "
+                    f"STABILITY_IMAGE_REGION (default: same as AWS_REGION), and enable that model in Bedrock. "
+                ) from error
+            if code in ("ThrottlingException", "ServiceUnavailableException"):
+                wait = RETRY_BACKOFF_SECONDS * (2 ** attempt)
+                print(f"  Nova throttled, retrying in {wait}s...", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            raise
+
+    raise RuntimeError(f"Nova Canvas failed after {MAX_RETRIES} tries: {last_exception}")
+
+
+def invoke_runtime_scene_image(
+    text_prompt: str,
+    scene_topic: str | None = None,
+) -> tuple[str, str]:
+    """Dispatch to Stable Diffusion 3.5 (default) or Nova Canvas (opt-in)."""
+    provider = resolve_scene_image_provider()
+    if provider == "stability":
+        return invoke_stability_sd35(text_prompt, scene_topic)
+    return invoke_nova_canvas(text_prompt)
+
+
+def try_generate_runtime_scene(
+    include_scene_image: str,
+    question: str,
+    retrieved: list[dict[str, Any]],
+) -> tuple[str | None, str | None, str | None]:
+    """Return (base64_png, prompt, error). Skips on never or when auto has no topic."""
+    try:
+        mode = normalize_scene_image_mode(include_scene_image)
+    except ValueError as e:
+        return None, None, str(e)
+    if mode == "never":
+        return None, None, None
+    try:
+        prompt = build_scene_image_prompt(mode, question, retrieved)
+    except (ValueError, TypeError) as e:
+        return None, None, str(e)
+    if not prompt:
+        return None, None, None
+    try:
+        scene_topic = infer_scene_topic(mode, question, retrieved)
+        png, used_prompt = invoke_runtime_scene_image(prompt, scene_topic)
+        return png, used_prompt, None
+    except (ClientError, OSError, ValueError, TypeError, RuntimeError) as e:
+        return None, prompt, str(e)
 
 
 # ---------------------------------------------------------------------------
@@ -510,6 +1112,9 @@ def parse_tutor_result(raw_text: str, citations: list[Citation]) -> TutorResult:
     return {
         "answer": answer,
         "svg": parse_svg(extract_diagram_value(raw_text)),
+        "scene_png_b64": None,
+        "scene_image_prompt": None,
+        "scene_image_error": None,
         "citations": citations,
         "priority": parse_priority(extract_tag(raw_text, "priority")),
         "priority_rationale": extract_tag(raw_text, "priority_rationale"),
@@ -597,12 +1202,14 @@ def answer_question(
     top_k: int = TOP_K,
     image_b64: str | None = None,
     include_diagram: str | None = "auto",
+    include_scene_image: str | None = "auto",
 ) -> Iterator[StreamEvent]:
     """Answer a student question as typed stream events."""
     if not question.strip():
         raise ValueError("question cannot be empty.")
 
     diagram_mode = normalize_diagram_mode(include_diagram)
+    scene_mode = normalize_scene_image_mode(include_scene_image)
     validate_image_b64(image_b64)
 
     chunks, chunk_matrix = load_chunk_store()
@@ -613,6 +1220,20 @@ def answer_question(
     yield {
         "type": "citations",
         "data": citations,
+    }
+
+    scene_png, scene_prompt, scene_err = try_generate_runtime_scene(
+        scene_mode,
+        question,
+        retrieved,
+    )
+    yield {
+        "type": "scene_image",
+        "data": {
+            "scene_png_b64": scene_png,
+            "scene_image_prompt": scene_prompt,
+            "scene_image_error": scene_err,
+        },
     }
 
     system_prompt = build_system_prompt(diagram_mode)
@@ -636,6 +1257,9 @@ def answer_question(
             }
 
     result = parse_tutor_result(raw_text, citations)
+    result["scene_png_b64"] = scene_png
+    result["scene_image_prompt"] = scene_prompt
+    result["scene_image_error"] = scene_err
 
     yield {"type": "svg", "data": result["svg"]}
     yield {"type": "priority", "data": result["priority"]}
@@ -650,11 +1274,15 @@ def answer_question_blocking(
     top_k: int = TOP_K,
     image_b64: str | None = None,
     include_diagram: str | None = "auto",
+    include_scene_image: str | None = "auto",
 ) -> TutorResult:
     """Run the tutor pipeline and return the final response shape."""
     answer_parts: list[str] = []
     citations: list[Citation] = []
     svg: str | None = None
+    scene_png: str | None = None
+    scene_prompt: str | None = None
+    scene_err: str | None = None
     priority: Literal["HIGH", "MEDIUM", "BACKGROUND"] = "BACKGROUND"
     priority_rationale = ""
     glossary_terms: list[GlossaryTerm] = []
@@ -665,9 +1293,16 @@ def answer_question_blocking(
         top_k=top_k,
         image_b64=image_b64,
         include_diagram=include_diagram,
+        include_scene_image=include_scene_image,
     ):
         if event["type"] == "citations":
             citations = event["data"]
+        elif event["type"] == "scene_image":
+            payload = event["data"]
+            if isinstance(payload, dict):
+                scene_png = payload.get("scene_png_b64")
+                scene_prompt = payload.get("scene_image_prompt")
+                scene_err = payload.get("scene_image_error")
         elif event["type"] == "token":
             answer_parts.append(str(event["data"]))
         elif event["type"] == "svg":
@@ -686,6 +1321,9 @@ def answer_question_blocking(
     return {
         "answer": "".join(answer_parts).strip(),
         "svg": svg,
+        "scene_png_b64": scene_png,
+        "scene_image_prompt": scene_prompt,
+        "scene_image_error": scene_err,
         "citations": citations,
         "priority": priority,
         "priority_rationale": priority_rationale,
@@ -718,6 +1356,19 @@ def parse_args() -> argparse.Namespace:
         choices=sorted(VALID_DIAGRAM_MODES),
         default="auto",
         help="Whether Claude should include an inline SVG diagram.",
+    )
+    parser.add_argument(
+        "--include-scene-image",
+        choices=sorted(VALID_SCENE_IMAGE_MODES),
+        default="auto",
+        help="Whether Bedrock TTI should return a text-free photorealistic PNG (see SCENE_IMAGE_PROVIDER).",
+    )
+    parser.add_argument(
+        "--write-scene-png",
+        type=str,
+        default=None,
+        metavar="PATH",
+        help="If a scene PNG is returned, write it to this file path (e.g. output/scene.png).",
     )
     parser.add_argument(
         "--top-k",
@@ -768,6 +1419,9 @@ def main() -> None:
 
         citations: list[Citation] = []
         svg: str | None = None
+        scene_png: str | None = None
+        scene_prompt: str | None = None
+        scene_err: str | None = None
         priority = ""
         priority_rationale = ""
         glossary_terms: list[GlossaryTerm] = []
@@ -777,6 +1431,7 @@ def main() -> None:
             input_language_hint=args.input_language_hint,
             top_k=args.top_k,
             include_diagram=args.include_diagram,
+            include_scene_image=args.include_scene_image,
         ):
             if event["type"] == "citations":
                 citations = event["data"]
@@ -784,6 +1439,12 @@ def main() -> None:
                     str(citation["page_number"]) for citation in citations
                 )
                 print(f"Retrieved pages: {pages}\n")
+            elif event["type"] == "scene_image":
+                payload = event["data"]
+                if isinstance(payload, dict):
+                    scene_png = payload.get("scene_png_b64")
+                    scene_prompt = payload.get("scene_image_prompt")
+                    scene_err = payload.get("scene_image_error")
             elif event["type"] == "token":
                 print(event["data"], end="", flush=True)
             elif event["type"] == "svg":
@@ -797,6 +1458,18 @@ def main() -> None:
 
         print(f"\n\nPriority: {priority}")
         print(f"Why: {priority_rationale}")
+        if scene_png and args.write_scene_png:
+            out_path = Path(args.write_scene_png)
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_bytes(base64.b64decode(scene_png, validate=True))
+            print(f"\nScene PNG written to: {out_path.resolve()}")
+        elif scene_png:
+            print("\nScene PNG: returned as base64 in API response. Use --write-scene-png to save a file.")
+        if scene_err:
+            print(f"\nScene image error: {scene_err}")
+        if scene_prompt:
+            preview = scene_prompt[:200] + "..." if len(scene_prompt) > 200 else scene_prompt
+            print(f"\nScene prompt (for debugging): {preview}")
         if svg:
             print("\nSVG: returned")
         if glossary_terms:
