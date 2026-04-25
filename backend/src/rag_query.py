@@ -17,6 +17,7 @@ import sys
 import time
 from collections.abc import Iterator
 from pathlib import Path
+from typing import Any, Literal, TypedDict
 
 import boto3
 import numpy as np
@@ -43,9 +44,24 @@ TOP_K = 5
 # the fixed four-line prompt still prevents long answers.
 MAX_OUTPUT_TOKENS = 1600
 DEFAULT_LANGUAGE = "Punjabi"
+PRIORITY_RATIONALE_PLACEHOLDER = "<rationale TBD on hack day>"
 
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
+
+
+class Citation(TypedDict):
+    """Manual chunk citation returned to frontend clients."""
+
+    page_number: int
+    chunk_text: str
+
+
+class StreamEvent(TypedDict):
+    """Typed event emitted by the reusable RAG answer pipeline."""
+
+    type: Literal["token", "citations", "priority_rationale", "done"]
+    data: Any
 
 
 # ---------------------------------------------------------------------------
@@ -231,6 +247,63 @@ def stream_claude(system_prompt: str, user_message: str) -> Iterator[str]:
         yield "\n\n[Response stopped at the configured token limit.]"
 
 
+def build_citations(retrieved: list[dict]) -> list[Citation]:
+    """Convert retrieved chunks into the F4 citation payload."""
+    return [
+        {
+            "page_number": int(chunk["page_number"]),
+            "chunk_text": str(chunk["text"]),
+        }
+        for chunk in retrieved
+    ]
+
+
+def answer_question(
+    question: str,
+    language: str = DEFAULT_LANGUAGE,
+    top_k: int = TOP_K,
+    image_b64: str | None = None,
+) -> Iterator[StreamEvent]:
+    """Answer a student question as typed stream events.
+
+    `image_b64` is accepted now so the Lambda and frontend can lock the F1 API
+    shape tonight; Claude vision wiring lands during Phase 5.
+    """
+    if not question.strip():
+        raise ValueError("Question cannot be empty.")
+
+    if image_b64:
+        # Phase 5 will pass this through to Claude as a multimodal message.
+        pass
+
+    chunks, chunk_matrix = load_chunk_store(Path(CHUNKS_PATH))
+    question_vec = embed_question(question)
+    retrieved = retrieve_top_k(question_vec, chunk_matrix, chunks, top_k)
+
+    yield {
+        "type": "citations",
+        "data": build_citations(retrieved),
+    }
+
+    system_prompt = build_system_prompt(language)
+    user_message = build_user_message(question, retrieved, language)
+
+    for token in stream_claude(system_prompt, user_message):
+        yield {
+            "type": "token",
+            "data": token,
+        }
+
+    yield {
+        "type": "priority_rationale",
+        "data": PRIORITY_RATIONALE_PLACEHOLDER,
+    }
+    yield {
+        "type": "done",
+        "data": None,
+    }
+
+
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
@@ -288,6 +361,17 @@ def print_sources(retrieved: list[dict]) -> None:
         )
 
 
+def print_citation_sources(citations: list[Citation]) -> None:
+    """Print frontend-shaped citation metadata for demo/debugging visibility."""
+    print("\n\nSources:")
+    for index, citation in enumerate(citations, start=1):
+        preview = " ".join(citation["chunk_text"].split())[:100]
+        print(
+            f"- citation {index} | page {citation['page_number']} | "
+            f"{preview}..."
+        )
+
+
 def main() -> None:
     """Run the RAG query CLI."""
     try:
@@ -297,21 +381,23 @@ def main() -> None:
         args = parse_args()
         question = get_question(args)
 
-        chunks, chunk_matrix = load_chunk_store(Path(CHUNKS_PATH))
-        question_vec = embed_question(question)
-        retrieved = retrieve_top_k(question_vec, chunk_matrix, chunks, args.top_k)
-
-        pages = ", ".join(str(chunk["page_number"]) for chunk in retrieved)
-        print(f"Retrieved pages: {pages}\n")
-
-        system_prompt = build_system_prompt(args.language)
-        user_message = build_user_message(question, retrieved, args.language)
-
-        for token in stream_claude(system_prompt, user_message):
-            print(token, end="", flush=True)
+        citations: list[Citation] = []
+        for event in answer_question(
+            question=question,
+            language=args.language,
+            top_k=args.top_k,
+        ):
+            if event["type"] == "citations":
+                citations = event["data"]
+                pages = ", ".join(
+                    str(citation["page_number"]) for citation in citations
+                )
+                print(f"Retrieved pages: {pages}\n")
+            elif event["type"] == "token":
+                print(event["data"], end="", flush=True)
 
         if args.show_sources:
-            print_sources(retrieved)
+            print_citation_sources(citations)
         else:
             print()
     except (ClientError, FileNotFoundError, ValueError, RuntimeError) as error:
