@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ClipboardCheck, FileSearch, Gauge } from 'lucide-react';
 
 import FeatureGrid from '../components/FeatureGrid';
+import MockExamRunner from '../components/tier1/MockExamRunner';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { examPracticeHighlights } from '../lib/siteContent';
@@ -70,6 +71,8 @@ export default function ExamPracticePage() {
           </CardContent>
         </Card>
       </section>
+
+      <MockExamRunner />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import Badge from '../ui/badge';
-import Button from '../ui/button';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
 import {
     Card,
     CardContent,
@@ -173,7 +173,7 @@ function RoleplayScenario() {
                 </CardContent>
                 <CardFooter className="actions-row">
                     <Button onClick={restart}>Retry same role</Button>
-                    <Button variant="outline" onClick={() => resetForMode(mode === 'passive' ? 'active' : 'passive')}>
+                    <Button variant="secondary" onClick={() => resetForMode(mode === 'passive' ? 'active' : 'passive')}>
                         Switch role and retry
                     </Button>
                 </CardFooter>
@@ -199,14 +199,14 @@ function RoleplayScenario() {
                     <div className="role-choice-compact" aria-label="Role selection">
                         <Button
                             size="sm"
-                            variant={mode === 'active' ? 'default' : 'outline'}
+                            variant={mode === 'active' ? 'primary' : 'secondary'}
                             onClick={() => resetForMode('active')}
                         >
                             Officer
                         </Button>
                         <Button
                             size="sm"
-                            variant={mode === 'passive' ? 'default' : 'outline'}
+                            variant={mode === 'passive' ? 'primary' : 'secondary'}
                             onClick={() => resetForMode('passive')}
                         >
                             Suspect
@@ -240,7 +240,7 @@ function RoleplayScenario() {
                             <strong>AI image prompt</strong>
                             <p>{displayScenario.imagePrompt}</p>
                             <p>Variation seed: {imageSeed}</p>
-                            <Button size="sm" variant="outline" onClick={() => setImageSeed((prev) => prev + 1)}>
+                            <Button size="sm" variant="secondary" onClick={() => setImageSeed((prev) => prev + 1)}>
                                 Regenerate image
                             </Button>
                         </div>
@@ -259,7 +259,7 @@ function RoleplayScenario() {
 
                 {current && (
                     <div className="question-column">
-                        <Badge variant="muted">{current.questionTitle}</Badge>
+                        <Badge variant="neutral">{current.questionTitle}</Badge>
                         <h4>{current.part.prompt}</h4>
                         <p className="muted-text">
                             Step {currentIndex + 1} of {totalParts}
@@ -314,7 +314,7 @@ function RoleplayScenario() {
             </CardContent>
 
             <CardFooter className="actions-row">
-                <Button variant="outline" onClick={restart}>Restart scenario</Button>
+                <Button variant="secondary" onClick={restart}>Restart scenario</Button>
                 <Button onClick={next} disabled={!canProceed}>
                     {currentIndex + 1 >= totalParts ? 'Finish and see summary' : 'Next part'}
                 </Button>

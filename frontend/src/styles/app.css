@@ -499,9 +499,7 @@ meter {
 }
 
 .ui-card {
-  background:
-    radial-gradient(circle at 100% 0%, rgb(255 237 196 / 65%), transparent 38%),
-    #ffffff;
+  background: #ffffff;
   border: 1px solid #e2ded6;
   border-radius: 24px;
   box-shadow: 0 18px 40px rgb(40 30 10 / 8%);
@@ -541,6 +539,7 @@ meter {
 .ui-button {
   border: 0;
   border-radius: 999px;
+  cursor: pointer;
   font-weight: 800;
   transition: transform 120ms ease;
 }
@@ -662,9 +661,7 @@ meter {
 }
 
 .image-frame {
-  background:
-    linear-gradient(155deg, rgb(42 84 189 / 28%), rgb(255 177 112 / 26%)),
-    #111728;
+  background: #111728;
   border-radius: 18px;
   color: #f4f7ff;
   min-height: 225px;
@@ -674,7 +671,6 @@ meter {
 }
 
 .image-frame::after {
-  background: radial-gradient(circle at 60% 30%, rgb(255 255 255 / 28%), transparent 40%);
   content: '';
   inset: 0;
   position: absolute;
@@ -811,6 +807,325 @@ meter {
 audio {
   margin-top: 16px;
   width: 100%;
+}
+
+/* ===== Button variant aliases (component uses primary/secondary/ghost/danger) ===== */
+.ui-button--primary {
+  background: #172033;
+  color: #ffffff;
+}
+
+.ui-button--secondary {
+  background: #ffffff;
+  border: 1px solid #c8cedb;
+  color: #172033;
+}
+
+.ui-button--danger {
+  background: #9b1c1c;
+  color: #ffffff;
+}
+
+/* ===== Badge variant aliases (component uses primary/neutral/success/warning) ===== */
+.ui-badge--primary {
+  background: #dbecff;
+  border: 1px solid #accfff;
+  color: #173259;
+}
+
+.ui-badge--neutral {
+  background: #efecff;
+  border: 1px solid #d5ccff;
+  color: #3d2f80;
+}
+
+/* ===== Page layout ===== */
+.page-stack {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+}
+
+/* ===== Scenario dropdown ===== */
+#scenario-select {
+  border: 1px solid #d0cac2;
+  border-radius: 10px;
+  color: #1f2a3f;
+  font-size: 0.88rem;
+  padding: 7px 11px;
+}
+
+/* ===== Camera capture (F1) ===== */
+.feature-card {
+  padding: 20px;
+}
+
+.feature-id {
+  background: #e8eefb;
+  border-radius: 6px;
+  color: #173259;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+  padding: 3px 9px;
+  text-transform: uppercase;
+}
+
+.camera-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.webcam-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ===== Mock Exam (F3) ===== */
+.exam-timer {
+  background: #1b2950;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 8px 18px;
+  width: fit-content;
+}
+
+.exam-timer.urgent {
+  background: #9b1c1c;
+}
+
+.exam-questions {
+  display: grid;
+  gap: 1rem;
+}
+
+.exam-q-card {
+  background: #fff;
+  border: 1px solid #dde2ea;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.exam-q-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.exam-score-big {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0 0 4px;
+}
+
+/* ===== Priority tooltip (F8) ===== */
+.tooltip-host {
+  display: inline-block;
+  position: relative;
+}
+
+.priority-chip {
+  cursor: default;
+}
+
+.priority-tooltip {
+  background: #1b2950;
+  border-radius: 10px;
+  bottom: calc(100% + 8px);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 25%);
+  color: #fff;
+  font-size: 0.82rem;
+  left: 50%;
+  line-height: 1.5;
+  max-width: 280px;
+  min-width: 180px;
+  padding: 10px 13px;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 200;
+}
+
+.priority-tooltip::after {
+  border: 6px solid transparent;
+  border-top-color: #1b2950;
+  bottom: -12px;
+  content: '';
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+/* ===== Citation block (F4) ===== */
+.citation-block {
+  background: #f7f4ee;
+  border-left: 3px solid #2d7fff;
+  border-radius: 4px;
+  color: #2b3344;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 12px 16px;
+}
+
+/* ===== Dashboard page layout ===== */
+.stats-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+
+.trend {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.trend.warning {
+  color: var(--warning);
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.module-list,
+.todo-list {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.module-list li,
+.todo-list li {
+  align-items: start;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.status {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.status.active {
+  background: #e0f7ea;
+  color: #145c33;
+}
+
+.status.done {
+  background: #e8eefb;
+  color: #173259;
+}
+
+.status.locked {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.mistake-head {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.mistake-list li {
+  display: grid;
+  gap: 3px;
+}
+
+.mistake-list p {
+  margin: 0;
+}
+
+/* ===== Dialog (Radix UI) ===== */
+.ui-dialog__overlay {
+  background: rgba(0, 0, 0, 0.55);
+  inset: 0;
+  position: fixed;
+  z-index: 100;
+}
+
+.ui-dialog__content {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  left: 50%;
+  max-height: 85vh;
+  max-width: 480px;
+  overflow-y: auto;
+  padding: 28px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  z-index: 101;
+}
+
+.ui-dialog__close {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 4px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.ui-dialog__close:hover {
+  background: #f3f4f6;
+}
+
+.ui-dialog__header {
+  margin-bottom: 16px;
+  padding-right: 28px;
+}
+
+.ui-dialog__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.ui-dialog__description {
+  color: #546173;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ===== Responsive additions ===== */
+@media (max-width: 860px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 860px) {

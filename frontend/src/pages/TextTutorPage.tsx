@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Languages, MapPinned, MessageSquareQuote } from 'lucide-react';
 
+import AskMode from '../components/AskMode';
 import FeatureGrid from '../components/FeatureGrid';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -69,6 +70,8 @@ export default function TextTutorPage() {
           </CardContent>
         </Card>
       </section>
+
+      <AskMode />
     </div>
   );
 }

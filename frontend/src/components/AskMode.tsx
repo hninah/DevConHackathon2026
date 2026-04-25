@@ -15,12 +15,14 @@ function AskMode() {
   const [response, setResponse] = useState<TutorResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imageB64, setImageB64] = useState<string | undefined>(undefined);
 
   async function handleSubmit(): Promise<void> {
     setIsLoading(true);
     setError(null);
     try {
-      setResponse(await askTutor(question, language));
+      setResponse(await askTutor(question, language, imageB64));
+      setImageB64(undefined);
     } catch (requestError) {
       setError(
         requestError instanceof Error
@@ -70,7 +72,7 @@ function AskMode() {
       </div>
 
       <div className="feature-grid">
-        <CameraCapture />
+        <CameraCapture onCapture={setImageB64} hasCapture={Boolean(imageB64)} />
         <CitationPopover citation={response?.citations[0]} />
         <PriorityTooltip rationale={response?.priority_rationale} />
       </div>
