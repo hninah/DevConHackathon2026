@@ -3,7 +3,6 @@ import type { Profile } from './types';
 const PROFILE_KEY = 'securepass:profile';
 
 export const DEFAULT_PROFILE: Profile = {
-  language: 'Punjabi',
   learning_style: 'text',
 };
 
