@@ -24,3 +24,7 @@ export function CardDescription({
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('ui-card__content', className)} {...props} />;
 }
+
+export function CardFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <footer className={cn('ui-card__footer', className)} {...props} />;
+}

@@ -7,10 +7,11 @@ function PracticeMode() {
     <section className="mode-panel">
       <div className="primary-card">
         <p className="eyebrow">Practice mode</p>
-        <h2>Exam-format scenarios</h2>
+        <h2>Exam-format practice in student language</h2>
         <p>
-          Person B will wire `/diagnostic`, `/scenario`, and `/mock-exam` here.
-          The Tier 1 containers are ready for data.
+          Multiple-choice practice stays in the student language, includes
+          citations, and gives simplified-English explanations for wrong
+          answers.
         </p>
       </div>
       <div className="feature-grid">
