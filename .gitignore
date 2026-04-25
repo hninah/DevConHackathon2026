@@ -1,6 +1,7 @@
 backend/venv/
 backend/.env
 backend/data/manual.pdf
+backend/data/*.pdf
 backend/data/chunks.json
 Prompt.md
 __pycache__/
