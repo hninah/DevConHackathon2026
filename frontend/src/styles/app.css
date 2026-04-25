@@ -486,8 +486,260 @@ textarea {
   gap: 6px;
 }
 
+.heatmap-row-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.heatmap-row-head small {
+  color: #6c7480;
+  font-weight: 700;
+}
+
 meter {
   width: 100%;
+}
+
+.quiz-container {
+  display: grid;
+  gap: 14px;
+}
+
+.quiz-topbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.simplified-toggle {
+  background: #3557ff;
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  font-weight: 900;
+  padding: 10px 14px;
+}
+
+.quiz-progress {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-progress-meta {
+  color: #6c7480;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: space-between;
+}
+
+.quiz-progress-bar {
+  background: #e9e3d7;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  background: #3557ff;
+  height: 100%;
+  width: 0;
+}
+
+.quiz-question {
+  margin-bottom: 6px;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-option {
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid #e2ded6;
+  border-radius: 16px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 18px 1fr;
+  padding: 12px 12px;
+}
+
+.quiz-option.selected {
+  border-color: #3557ff;
+  box-shadow: 0 8px 18px rgb(53 87 255 / 12%);
+}
+
+.quiz-option.correct {
+  border-color: #17b26a;
+  background: #ecfdf3;
+}
+
+.quiz-option.wrong {
+  border-color: #f04438;
+  background: #fff1f0;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quiz-feedback {
+  display: grid;
+  gap: 12px;
+}
+
+.pass-banner,
+.fail-banner {
+  border-radius: 16px;
+  font-weight: 900;
+  padding: 12px 14px;
+}
+
+.pass-banner {
+  background: #ecfdf3;
+  border: 1px solid #17b26a;
+  color: #067647;
+}
+
+.fail-banner {
+  background: #fff1f0;
+  border: 1px solid #f04438;
+  color: #912018;
+}
+
+.explanation-block {
+  background: #f5f7ff;
+  border: 1px solid #dfe5ff;
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.explanation-title {
+  color: #3557ff;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.citation-block summary {
+  cursor: pointer;
+  font-weight: 900;
+  margin-top: 8px;
+}
+
+.citation-block pre {
+  white-space: pre-wrap;
+}
+
+.mistake-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.wrong-reasons {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.mistake-entry {
+  padding: 4px 0;
+}
+
+.mistake-question {
+  font-weight: 900;
+}
+
+.mistake-group {
+  border-top: 1px solid #efe9df;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.mistake-group-header {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.exam-card {
+  display: grid;
+  gap: 14px;
+}
+
+.exam-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.exam-meta {
+  color: #6c7480;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 900;
+  justify-content: space-between;
+}
+
+.exam-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.flag-button.flagged {
+  background: #3557ff;
+}
+
+.exam-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.exam-cell {
+  background: #ffffff;
+  border: 1px solid #e2ded6;
+  border-radius: 12px;
+  color: #172033;
+  font-weight: 900;
+  padding: 10px 0;
+}
+
+.exam-cell.answered {
+  border-color: #3557ff;
+}
+
+.exam-cell.flagged {
+  border-color: #ffd37a;
+  box-shadow: 0 10px 18px rgb(255 211 122 / 22%);
+}
+
+.exam-cell.active {
+  outline: 2px solid #172033;
+}
+
+.exam-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exam-results h4 {
+  margin-top: 18px;
 }
 
 .scenario-svg {
@@ -1125,6 +1377,10 @@ audio {
 
   .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+
+  .exam-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
