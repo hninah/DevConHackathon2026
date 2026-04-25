@@ -13,8 +13,8 @@ export default function ExamPracticePage() {
       <section className="page-intro">
         <h1>Exam Format Practice</h1>
         <p>
-          Practice in student language first, then complete mock exams in English to match the
-          provincial format and pass threshold.
+          Practice key concepts first, then complete mock exams in English to match the provincial
+          format and pass threshold.
         </p>
       </section>
 

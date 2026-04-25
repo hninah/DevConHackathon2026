@@ -28,13 +28,7 @@ export type TutorResponse = {
 };
 
 export type Profile = {
-  language: string;
   learning_style: LearningStyle;
-};
-
-export type LanguageOption = {
-  name: string;
-  nativeName: string;
 };
 
 export type Mode = 'ask' | 'practice' | 'listen';

@@ -32,9 +32,9 @@ export const navLinks = [
 export const textTutorHighlights = [
   {
     icon: MessageSquareText,
-    title: 'Ask in learner language',
+    title: 'Ask exam questions',
     description:
-      'The learner asks in their own language, then receives simplified English plus source citations.',
+      'The learner receives simplified English plus source citations from the Alberta manual.',
   },
   {
     icon: BookCheck,
