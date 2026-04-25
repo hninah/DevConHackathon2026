@@ -9,6 +9,7 @@ Request:
         "input_language_hint": "Punjabi",
         "image_b64": "<optional JPEG base64>",
         "include_diagram": "auto",
+        "include_scene_image": "auto",
         "top_k": 5
     }
 
@@ -16,6 +17,9 @@ Response:
     {
         "answer": "... simplified English ...",
         "svg": "<svg ...>...</svg>" | null,
+        "scene_png_b64": "<base64 png>" | null,
+        "scene_image_prompt": "TTI scene prompt used, or null",
+        "scene_image_error": "Error string if image gen failed, or null",
         "citations": [...],
         "priority": "HIGH",
         "priority_rationale": "...",
@@ -103,6 +107,9 @@ def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
     input_language_hint = body.get("input_language_hint")
     image_b64 = body.get("image_b64")
     include_diagram = str(body.get("include_diagram", "auto")).strip() or "auto"
+    include_scene_image = str(
+        body.get("include_scene_image", "auto"),
+    ).strip() or "auto"
 
     if not question:
         return _response(400, {"error": "question is required."})
@@ -137,6 +144,7 @@ def main() -> None:
         "body": json.dumps({
             "question": "When am I allowed to physically restrain someone?",
             "include_diagram": "auto",
+            "include_scene_image": "auto",
         }),
     }
     response = handler(event, None)
