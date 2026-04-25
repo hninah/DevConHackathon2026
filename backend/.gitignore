@@ -1,0 +1,21 @@
+# Virtual environment
+venv/
+
+# Environment variables (NEVER commit)
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Data files
+data/manual.pdf
+data/chunks.json
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.cursor/

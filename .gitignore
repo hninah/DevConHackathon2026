@@ -1,0 +1,7 @@
+backend/venv/
+backend/.env
+backend/data/manual.pdf
+backend/data/chunks.json
+__pycache__/
+.DS_Store
+Thumbs.db
