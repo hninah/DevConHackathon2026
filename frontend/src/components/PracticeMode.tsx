@@ -82,7 +82,7 @@ function PracticeMode() {
     <section className="mode-panel">
       <div className="primary-card">
         <p className="eyebrow">Practice mode</p>
-        <h2>Exam-format practice</h2>
+        <h2>Practice Hub</h2>
         <p>
           Knowledge Checks let you toggle Simplified English for the question text.
           Explanations are always simplified English with manual citations.

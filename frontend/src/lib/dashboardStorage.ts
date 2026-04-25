@@ -1,3 +1,6 @@
+import { getLatestMockExamResult } from './mockExamStorage';
+import { loadAttempts, loadMistakes } from './mistakeLog';
+
 export type DashboardStat = {
   value: string;
   note: string;
@@ -103,13 +106,14 @@ export const DEFAULT_DASHBOARD: DashboardData = {
 export function loadDashboardData(): DashboardData {
   const raw = window.localStorage.getItem(DASHBOARD_KEY);
   if (!raw) {
-    saveDashboardData(DEFAULT_DASHBOARD);
-    return DEFAULT_DASHBOARD;
+    const seeded = syncDerivedStats(DEFAULT_DASHBOARD);
+    saveDashboardData(seeded);
+    return seeded;
   }
 
   try {
     const parsed = JSON.parse(raw) as Partial<DashboardData>;
-    return {
+    const merged: DashboardData = {
       ...DEFAULT_DASHBOARD,
       ...parsed,
       stats: {
@@ -120,11 +124,40 @@ export function loadDashboardData(): DashboardData {
       todos: parsed.todos ?? DEFAULT_DASHBOARD.todos,
       mistakes: parsed.mistakes ?? DEFAULT_DASHBOARD.mistakes,
     };
+    return syncDerivedStats(merged);
   } catch {
-    return DEFAULT_DASHBOARD;
+    return syncDerivedStats(DEFAULT_DASHBOARD);
   }
 }
 
 export function saveDashboardData(data: DashboardData): void {
   window.localStorage.setItem(DASHBOARD_KEY, JSON.stringify(data));
+}
+
+function syncDerivedStats(data: DashboardData): DashboardData {
+  const latestResult = getLatestMockExamResult();
+  const attempts = loadAttempts();
+  const mistakes = loadMistakes();
+
+  const next: DashboardData = {
+    ...data,
+    stats: {
+      ...data.stats,
+      examScore: latestResult
+        ? {
+            value: `${latestResult.percentScore}%`,
+            note: `${latestResult.examLabel} latest result`,
+          }
+        : data.stats.examScore,
+      questionsAnswered: {
+        value: `${attempts.length}`,
+        note: attempts.length ? `${Math.min(25, attempts.length)} recent tracked attempts` : 'No attempts yet',
+      },
+      mistakesToReview: {
+        value: `${mistakes.length}`,
+        note: mistakes.length ? 'Review recommended' : 'No mistakes logged',
+      },
+    },
+  };
+  return next;
 }

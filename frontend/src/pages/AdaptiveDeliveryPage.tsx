@@ -4,12 +4,20 @@ import { AlertCircle, ArrowUpRight, BookOpenCheck, FileText, ShieldAlert, Wrench
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { DEFAULT_DASHBOARD, loadDashboardData } from '../lib/dashboardStorage';
+import { getLatestMockExamResult } from '../lib/mockExamStorage';
 
 export default function AdaptiveDeliveryPage() {
   const [dashboard, setDashboard] = useState(DEFAULT_DASHBOARD);
+  const [latestResultLabel, setLatestResultLabel] = useState('No mock exam submitted yet');
 
   useEffect(() => {
     setDashboard(loadDashboardData());
+    const latest = getLatestMockExamResult();
+    if (latest) {
+      setLatestResultLabel(
+        `${latest.examLabel}: ${latest.score}/${latest.total} (${latest.percentScore}%)`,
+      );
+    }
   }, []);
 
   const highPriorityCount = useMemo(
@@ -65,6 +73,17 @@ export default function AdaptiveDeliveryPage() {
             <CardDescription className="trend">
               <ArrowUpRight size={14} aria-hidden="true" /> Accuracy after review
             </CardDescription>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Latest Mock Exam</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="stat-value" style={{ fontSize: '1.25rem' }}>
+              {latestResultLabel}
+            </p>
+            <CardDescription>Synced from saved exam results</CardDescription>
           </CardContent>
         </Card>
       </section>

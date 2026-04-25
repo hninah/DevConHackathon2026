@@ -36,6 +36,7 @@ from typing import Any
 
 from botocore.exceptions import ClientError
 
+from mock_exam_service import create_mock_exam
 from rag_query import TOP_K, answer_question_blocking
 from roleplay_engine import generate_next_manual_scenario, process_roleplay_answer
 
@@ -102,12 +103,35 @@ def _path(event: dict[str, Any]) -> str:
     return str(raw_path)
 
 
+def _normalize_path(path: str) -> str:
+    normalized = (path or "/").strip()
+    if normalized != "/" and normalized.endswith("/"):
+        normalized = normalized.rstrip("/")
+    return normalized or "/"
+
+
+def _create_mock_exam_response(body: dict[str, Any]) -> dict[str, Any]:
+    label_raw = body.get("label")
+    label = str(label_raw).strip() if isinstance(label_raw, str) else None
+
+    question_count_raw = body.get("question_count", 50)
+    try:
+        question_count = int(question_count_raw)
+    except (TypeError, ValueError) as error:
+        raise ValueError("question_count must be an integer.") from error
+
+    if question_count < 1 or question_count > 200:
+        raise ValueError("question_count must be between 1 and 200.")
+
+    return create_mock_exam(label=label or None, question_count=question_count)
+
+
 def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
-    """Handle POST /tutor and POST /roleplay/answer requests."""
+    """Handle tutor, roleplay, and mock exam creation requests."""
     if _method(event) == "OPTIONS":
         return _response(204, {})
 
-    path = _path(event)
+    path = _normalize_path(_path(event))
 
     if path == "/roleplay/answer":
         try:
@@ -133,12 +157,34 @@ def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
         except (FileNotFoundError, RuntimeError) as error:
             return _response(500, {"error": str(error)})
 
+    if path == "/mock-exams/create":
+        try:
+            body = _parse_body(event)
+            result = _create_mock_exam_response(body)
+            return _response(200, result)
+        except json.JSONDecodeError:
+            return _response(400, {"error": "Request body must be valid JSON."})
+        except ValueError as error:
+            return _response(400, {"error": str(error)})
+        except (FileNotFoundError, RuntimeError) as error:
+            return _response(500, {"error": str(error)})
+
     try:
         body = _parse_body(event)
     except json.JSONDecodeError:
         return _response(400, {"error": "Request body must be valid JSON."})
     except ValueError as error:
         return _response(400, {"error": str(error)})
+
+    route_hint = _normalize_path(str(body.get("_route", "")))
+    if route_hint == "/mock-exams/create":
+        try:
+            result = _create_mock_exam_response(body)
+            return _response(200, result)
+        except ValueError as error:
+            return _response(400, {"error": str(error)})
+        except (FileNotFoundError, RuntimeError) as error:
+            return _response(500, {"error": str(error)})
 
     question = str(body.get("question", "")).strip()
     input_language_hint = body.get("input_language_hint")

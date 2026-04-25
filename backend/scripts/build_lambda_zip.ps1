@@ -25,6 +25,14 @@ try {
     Write-Warning "data/chunks.json not found. Run: python scripts/chunk_manual.py && python scripts/embed_chunks.py (chunks are required for retrieval)."
   }
 
+  $abstFormat = Join-Path $backendRoot "data\abst_practice_quiz_answer_key.txt"
+  if (Test-Path $abstFormat) {
+    New-Item -ItemType Directory -Path $dataDir -Force | Out-Null
+    Copy-Item $abstFormat (Join-Path $dataDir "abst_practice_quiz_answer_key.txt")
+  } else {
+    Write-Warning "data/abst_practice_quiz_answer_key.txt not found. Mock exam generation will fail unless Lambda env var ABST_FORMAT_PATH points to a valid file."
+  }
+
   $req = Join-Path $backendRoot "requirements.txt"
   Write-Host "pip install -r requirements.txt -t (may take a minute)..."
   python -m pip install -r $req -t $stage --disable-pip-version-check -q

@@ -1,12 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import type { ExamResult, MistakeEntry, Question } from '../../lib/types';
+import { saveMockExamResult, type ExamQuestionOutcome } from '../../lib/mockExamStorage';
 import { recordAttempt, saveMistake } from '../../lib/mistakeLog';
 
 type Phase = 'start' | 'in_progress' | 'results';
 
-const TOTAL_QUESTIONS = 50;
-const DURATION_SECONDS = 60 * 60;
+const DEFAULT_TOTAL_QUESTIONS = 50;
+const DEFAULT_DURATION_SECONDS = 60 * 60;
 
 function formatTime(seconds: number): string {
   const clamped = Math.max(0, seconds);
@@ -28,9 +31,9 @@ function shuffle<T>(items: T[]): T[] {
   return copy;
 }
 
-function pickExamQuestions(all: Question[]): Question[] {
+function pickExamQuestions(all: Question[], totalQuestions: number): Question[] {
   const mcqOnly = all.filter((q) => q.type === 'mcq');
-  return shuffle(mcqOnly).slice(0, Math.min(TOTAL_QUESTIONS, mcqOnly.length));
+  return shuffle(mcqOnly).slice(0, Math.min(totalQuestions, mcqOnly.length));
 }
 
 function isAnswerCorrect(selected: number | null, correctAnswers: number[]): boolean {
@@ -40,7 +43,25 @@ function isAnswerCorrect(selected: number | null, correctAnswers: number[]): boo
   return correctAnswers.length === 1 && correctAnswers[0] === selected;
 }
 
-function MockExamRunner() {
+type MockExamRunnerProps = {
+  examId?: string;
+  examLabel?: string;
+  totalQuestions?: number;
+  durationSeconds?: number;
+  presetQuestions?: Question[];
+  onSubmitted?: (resultId: string) => void;
+  autoStartOnEntry?: boolean;
+};
+
+function MockExamRunner({
+  examId = 'default-mock-exam',
+  examLabel = 'Mock Exam',
+  totalQuestions = DEFAULT_TOTAL_QUESTIONS,
+  durationSeconds = DEFAULT_DURATION_SECONDS,
+  presetQuestions,
+  onSubmitted,
+  autoStartOnEntry = false,
+}: MockExamRunnerProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
@@ -51,9 +72,11 @@ function MockExamRunner() {
   const [flagged, setFlagged] = useState<Set<string>>(new Set());
   const [answers, setAnswers] = useState<Record<string, number | null>>({});
 
-  const [timeLeft, setTimeLeft] = useState(DURATION_SECONDS);
+  const [timeLeft, setTimeLeft] = useState(durationSeconds);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [result, setResult] = useState<ExamResult | null>(null);
+  const [isSubmitConfirmOpen, setIsSubmitConfirmOpen] = useState(false);
+  const didAutoPromptRef = useRef(false);
 
   const current = examQuestions[currentIndex];
 
@@ -117,11 +140,22 @@ function MockExamRunner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft, phase]);
 
+  useEffect(() => {
+    if (!autoStartOnEntry || isLoading || Boolean(error) || phase !== 'start' || didAutoPromptRef.current) {
+      return;
+    }
+    didAutoPromptRef.current = true;
+    startExam();
+  }, [autoStartOnEntry, examLabel, error, isLoading, phase]);
+
   function startExam(): void {
-    const picked = pickExamQuestions(allQuestions);
-    if (picked.length < TOTAL_QUESTIONS) {
+    const picked =
+      presetQuestions && presetQuestions.length > 0
+        ? presetQuestions.slice(0, totalQuestions)
+        : pickExamQuestions(allQuestions, totalQuestions);
+    if (picked.length < totalQuestions) {
       setError(
-        `Need at least ${TOTAL_QUESTIONS} MCQ questions; found ${picked.length}.`,
+        `Need at least ${totalQuestions} MCQ questions; found ${picked.length}.`,
       );
       return;
     }
@@ -133,7 +167,7 @@ function MockExamRunner() {
       initialAnswers[q.id] = null;
     }
     setAnswers(initialAnswers);
-    setTimeLeft(DURATION_SECONDS);
+    setTimeLeft(durationSeconds);
     setStartedAt(Date.now());
     setResult(null);
     setPhase('in_progress');
@@ -175,10 +209,17 @@ function MockExamRunner() {
 
     let score = 0;
     const mistakes: MistakeEntry[] = [];
+    const outcomes: ExamQuestionOutcome[] = [];
 
-    for (const q of examQuestions) {
+    for (let idx = 0; idx < examQuestions.length; idx += 1) {
+      const q = examQuestions[idx];
       const selected = answers[q.id] ?? null;
       const correct = isAnswerCorrect(selected, q.correctAnswers);
+      outcomes.push({
+        questionId: q.id,
+        questionNumber: idx + 1,
+        wasCorrect: correct,
+      });
 
       recordAttempt({
         questionId: q.id,
@@ -216,8 +257,21 @@ function MockExamRunner() {
       completedAt,
       secondsTaken,
     };
+    const saved = saveMockExamResult(examResult, examId, examLabel, outcomes, examQuestions);
+    if (onSubmitted) {
+      onSubmitted(saved.id);
+      return;
+    }
     setResult(examResult);
     setPhase('results');
+  }
+
+  function requestStartExam(): void {
+    startExam();
+  }
+
+  function requestSubmitExam(): void {
+    setIsSubmitConfirmOpen(true);
   }
 
   if (isLoading) {
@@ -245,10 +299,12 @@ function MockExamRunner() {
       <section className="feature-card">
         <p className="feature-id">F3</p>
         <h3>Mock Exam Mode</h3>
-        <p>50 questions • 60 minutes • 80% to pass</p>
-        <button onClick={startExam} type="button">
-          Start mock exam
-        </button>
+        <p>
+          {totalQuestions} questions • {Math.round(durationSeconds / 60)} minutes • 80% to pass
+        </p>
+        <Button onClick={requestStartExam} type="button">
+          Start {examLabel.toLowerCase()}
+        </Button>
       </section>
     );
   }
@@ -268,9 +324,9 @@ function MockExamRunner() {
           Explanations are shown in simplified English.
         </p>
 
-        <button onClick={() => setPhase('start')} type="button">
+        <Button onClick={() => setPhase('start')} type="button">
           Back to start
-        </button>
+        </Button>
 
         <div className="exam-wrong-list">
           <h4>Review mistakes ({result.mistakes.length})</h4>
@@ -323,92 +379,130 @@ function MockExamRunner() {
   const isFlagged = flagged.has(current.id);
 
   return (
-    <section className="feature-card exam-card">
-      <p className="feature-id">F3</p>
-      <div className="exam-header">
-        <h3>Mock Exam</h3>
-        <div className="timer-pill exam-timer">{formatTime(timeLeft)}</div>
-      </div>
+    <>
+      <section className="feature-card exam-card">
+        <p className="feature-id">F3</p>
+        <div className="exam-header">
+          <h3>Mock Exam</h3>
+          <div className="timer-pill exam-timer">{formatTime(timeLeft)}</div>
+        </div>
 
-      <div className="exam-meta">
-        <span>
-          Question {currentIndex + 1}/{examQuestions.length}
-        </span>
-        <span>
-          Answered: {answeredCount}/{examQuestions.length}
-        </span>
-      </div>
+        <div className="exam-meta">
+          <span>
+            Question {currentIndex + 1}/{examQuestions.length}
+          </span>
+          <span>
+            Answered: {answeredCount}/{examQuestions.length}
+          </span>
+        </div>
 
-      <p className="quiz-question">{current.question}</p>
+        <p className="quiz-question">{current.question}</p>
 
-      <div className="quiz-options">
-        {current.options.map((option, optionIndex) => {
-          const checked = selected === optionIndex;
-          const className = checked ? 'quiz-option selected' : 'quiz-option';
-          return (
-            <label className={className} key={option}>
-              <input
-                checked={checked}
-                name={`me-${current.id}`}
-                onChange={() => setAnswer(optionIndex)}
-                type="radio"
-              />
-              <span>{option}</span>
-            </label>
-          );
-        })}
-      </div>
+        <div className="quiz-options">
+          {current.options.map((option, optionIndex) => {
+            const checked = selected === optionIndex;
+            const className = checked ? 'quiz-option selected' : 'quiz-option';
+            return (
+              <label className={className} key={option}>
+                <input
+                  checked={checked}
+                  name={`me-${current.id}`}
+                  onChange={() => setAnswer(optionIndex)}
+                  type="radio"
+                />
+                <span>{option}</span>
+              </label>
+            );
+          })}
+        </div>
 
-      <div className="exam-actions">
-        <button onClick={() => goTo(currentIndex - 1)} disabled={currentIndex === 0} type="button">
-          Previous
-        </button>
-        <button className={isFlagged ? 'flag-button flagged' : 'flag-button'} onClick={toggleFlag} type="button">
-          {isFlagged ? 'Flagged' : 'Flag for review'}
-        </button>
-        <button
-          onClick={() => goTo(currentIndex + 1)}
-          disabled={currentIndex === examQuestions.length - 1}
-          type="button"
-        >
-          Next
-        </button>
-      </div>
+        <div className="exam-actions">
+          <Button
+            onClick={() => goTo(currentIndex - 1)}
+            disabled={currentIndex === 0}
+            variant="secondary"
+            type="button"
+          >
+            Previous
+          </Button>
+          <Button
+            className={isFlagged ? 'flag-button flagged' : 'flag-button'}
+            onClick={toggleFlag}
+            variant={isFlagged ? 'primary' : 'secondary'}
+            type="button"
+          >
+            {isFlagged ? 'Flagged' : 'Flag for review'}
+          </Button>
+          <Button
+            onClick={() => goTo(currentIndex + 1)}
+            disabled={currentIndex === examQuestions.length - 1}
+            variant="secondary"
+            type="button"
+          >
+            Next
+          </Button>
+        </div>
 
-      <div className="exam-grid">
-        {examQuestions.map((q, idx) => {
-          const value = answers[q.id];
-          const answered = value !== null && value !== undefined;
-          const cellFlagged = flagged.has(q.id);
-          let className = 'exam-cell';
-          if (idx === currentIndex) {
-            className += ' active';
-          }
-          if (answered) {
-            className += ' answered';
-          }
-          if (cellFlagged) {
-            className += ' flagged';
-          }
-          return (
-            <button
-              className={className}
-              key={q.id}
-              onClick={() => goTo(idx)}
+        <div className="exam-grid">
+          {examQuestions.map((q, idx) => {
+            const value = answers[q.id];
+            const answered = value !== null && value !== undefined;
+            const cellFlagged = flagged.has(q.id);
+            let className = 'exam-cell';
+            if (idx === currentIndex) {
+              className += ' active';
+            }
+            if (answered) {
+              className += ' answered';
+            }
+            if (cellFlagged) {
+              className += ' flagged';
+            }
+            return (
+              <button
+                className={className}
+                key={q.id}
+                onClick={() => goTo(idx)}
+                type="button"
+              >
+                {idx + 1}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="exam-submit">
+          <Button onClick={requestSubmitExam} type="button">
+            Submit exam
+          </Button>
+        </div>
+      </section>
+
+      <Dialog open={isSubmitConfirmOpen} onOpenChange={setIsSubmitConfirmOpen}>
+        <DialogContent aria-describedby="submit-exam-description">
+          <DialogHeader>
+            <DialogTitle>Submit exam now?</DialogTitle>
+            <DialogDescription id="submit-exam-description">
+              You cannot change answers after submitting this attempt.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="dialog-actions">
+            <Button variant="secondary" onClick={() => setIsSubmitConfirmOpen(false)} type="button">
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                setIsSubmitConfirmOpen(false);
+                submitExam();
+              }}
               type="button"
             >
-              {idx + 1}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="exam-submit">
-        <button onClick={submitExam} type="button">
-          Submit exam
-        </button>
-      </div>
-    </section>
+              Submit exam
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 
