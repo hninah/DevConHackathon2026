@@ -64,7 +64,6 @@ export type RoleplayAnswerResponse = {
 };
 
 export type AskTutorOptions = {
-  input_language_hint?: string;
   image_b64?: string;
   include_diagram?: 'auto' | 'always' | 'never';
   include_scene_image?: 'auto' | 'always' | 'never';
@@ -93,7 +92,6 @@ export async function askTutor(
   }
 
   const {
-    input_language_hint,
     image_b64,
     include_diagram = 'auto',
     include_scene_image = 'auto',
@@ -105,7 +103,6 @@ export async function askTutor(
     include_diagram,
     include_scene_image,
   };
-  if (input_language_hint) body.input_language_hint = input_language_hint;
   if (image_b64) body.image_b64 = image_b64;
   if (top_k !== undefined) body.top_k = top_k;
 

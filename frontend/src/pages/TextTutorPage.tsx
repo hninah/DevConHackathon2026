@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { BookOpen, ImageIcon, MessageSquareQuote, Shapes } from 'lucide-react';
 
 import { askTutor, isTutorLiveConfigured } from '../api/tutorClient';
-import LanguagePicker from '../components/LanguagePicker';
 import CameraCapture from '../components/tier1/CameraCapture';
 import CitationPopover from '../components/tier1/CitationPopover';
 import PriorityTooltip from '../components/tier1/PriorityTooltip';
@@ -15,7 +14,6 @@ export default function TextTutorPage() {
   const [question, setQuestion] = useState(
     'When am I allowed to physically restrain someone?',
   );
-  const [language, setLanguage] = useState('Punjabi');
   const [includeSceneImage, setIncludeSceneImage] = useState(true);
   const [includeDiagram, setIncludeDiagram] = useState<'auto' | 'always' | 'never'>('auto');
   const [response, setResponse] = useState<TutorResponse | null>(null);
@@ -31,7 +29,6 @@ export default function TextTutorPage() {
     try {
       setResponse(
         await askTutor(question, {
-          input_language_hint: language,
           image_b64: imageB64,
           include_diagram: includeDiagram,
           include_scene_image: includeSceneImage ? 'auto' : 'never',
@@ -54,9 +51,9 @@ export default function TextTutorPage() {
       <section className="page-intro">
         <h1>Text Tutor</h1>
         <p>
-          Ask in a familiar language; the tutor answers in simplified English and cites the Alberta
-          manual by page. Optional scene images and diagrams come from the same RAG pipeline as the
-          CLI.
+          Ask a security-guard exam question; the tutor answers in simplified English and cites the
+          Alberta manual by page. Optional scene images and diagrams come from the same RAG pipeline
+          as the CLI.
         </p>
         {!liveConfigured && (
           <p className="config-banner" role="status">
@@ -82,11 +79,10 @@ export default function TextTutorPage() {
             </div>
             <CardTitle>Ask the RAG tutor</CardTitle>
             <CardDescription>
-              Language is an input hint only. Answers stay in simplified English.
+              Answers stay in simplified English with page citations.
             </CardDescription>
           </CardHeader>
           <CardContent className="tutor-ask-content">
-            <LanguagePicker value={language} onChange={setLanguage} />
             <label className="tutor-check">
               <input
                 type="checkbox"

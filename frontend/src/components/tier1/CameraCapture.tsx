@@ -87,7 +87,7 @@ function CameraCapture({ onCapture, hasCapture }: CameraCaptureProps) {
     <section className="feature-card">
       <p className="feature-id">F1</p>
       <h3>Photo-of-Manual question</h3>
-      <p>Snap or upload a confusing manual passage. Claude reads the image and answers in your language.</p>
+      <p>Snap or upload a confusing manual passage. Claude reads the image and answers in simplified English.</p>
       <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFile} />
       {!webcamActive && (
         <div className="camera-actions">

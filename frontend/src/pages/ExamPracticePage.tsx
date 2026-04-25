@@ -88,8 +88,9 @@ export default function ExamPracticePage() {
       <section className="page-intro">
         <h1>Mock Exam Practice</h1>
         <p>
-          Choose a clearly labeled mock exam card below. Submissions open a dedicated result page
-          via deep link, and the score remains saved for your summary dashboard.
+          Practice key concepts first, then complete mock exams in English to match the provincial
+          format and pass threshold. Submissions open a dedicated result page and remain saved for
+          your summary dashboard.
         </p>
       </section>
 
