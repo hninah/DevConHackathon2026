@@ -1,14 +1,14 @@
-import type { Mode } from '../lib/types';
+type NavMode = 'text-tutor' | 'practice' | 'roleplay';
 
 type ModeSwitcherProps = {
-  activeMode: Mode;
-  onChange: (mode: Mode) => void;
+  activeMode: NavMode;
+  onChange: (mode: NavMode) => void;
 };
 
-const MODES: Array<{ id: Mode; label: string }> = [
-  { id: 'ask', label: 'Text Tutor' },
+const MODES: Array<{ id: NavMode; label: string }> = [
+  { id: 'text-tutor', label: 'Text Tutor' },
   { id: 'practice', label: 'Exam Practice' },
-  { id: 'listen', label: 'Listen' },
+  { id: 'roleplay', label: 'Roleplay' },
 ];
 
 function ModeSwitcher({ activeMode, onChange }: ModeSwitcherProps) {

@@ -45,9 +45,6 @@ def _response(status_code: int, payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "statusCode": status_code,
         "headers": {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "content-type",
-            "Access-Control-Allow-Methods": "POST,OPTIONS",
             "Content-Type": "application/json",
         },
         "body": json.dumps(payload, ensure_ascii=False),
@@ -165,6 +162,7 @@ def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
             top_k=_coerce_top_k(body.get("top_k")),
             image_b64=image_b64,
             include_diagram=include_diagram,
+            include_scene_image=include_scene_image,
         )
     except ValueError as error:
         return _response(400, {"error": str(error)})

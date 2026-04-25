@@ -3,12 +3,28 @@ export type LearningStyle = 'text' | 'audio' | 'visual';
 export type Citation = {
   page_number: number;
   chunk_text: string;
+  chunk_id?: number;
+  score?: number;
 };
+
+export type GlossaryTerm = {
+  term: string;
+  plain_english_definition: string;
+  page_number: number | null;
+};
+
+export type ExamPriority = 'HIGH' | 'MEDIUM' | 'BACKGROUND';
 
 export type TutorResponse = {
   answer: string;
   citations: Citation[];
+  priority: ExamPriority;
   priority_rationale: string;
+  svg: string | null;
+  scene_png_b64: string | null;
+  scene_image_prompt: string | null;
+  scene_image_error: string | null;
+  glossary_terms: GlossaryTerm[];
 };
 
 export type Profile = {

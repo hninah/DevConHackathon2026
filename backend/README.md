@@ -8,7 +8,7 @@ The current backend focus is `POST /tutor`: a retrieval-augmented tutor that hel
 
 - Embeds the student question with Titan Embeddings v2
 - Retrieves the most relevant manual chunks from `data/chunks.json`
-- Optionally calls **Bedrock text-to-image** (default **Stable Diffusion 3.5 Large**; optional **Nova Canvas**) to generate a **text-free photorealistic PNG** that shows the situation (for example excessive-force body language)
+- Optionally calls **Pollinations.ai** to generate a **text-free photorealistic scene image** that shows the situation (for example disproportionate guard body language)
 - Sends the chunks to Claude Sonnet 4.6
 - Answers in simplified English only
 - Cites manual pages
@@ -36,13 +36,9 @@ Fill `.env` with:
 ```env
 CLAUDE_MODEL_ID=us.anthropic.claude-sonnet-4-6
 TITAN_EMBED_MODEL_ID=amazon.titan-embed-text-v2:0
-NOVA_CANVAS_MODEL_ID=amazon.nova-canvas-v1:0
-NOVA_CANVAS_REGION=us-east-1
 AWS_REGION=us-west-2
 MANUAL_PDF_PATH=data/manual.pdf
 CHUNKS_OUTPUT_PATH=data/chunks.json
-SCENE_IMAGE_WIDTH=1024
-SCENE_IMAGE_HEIGHT=1024
 ```
 
 Workshop Studio credentials must also be available in the shell/session.
@@ -90,7 +86,7 @@ Force an SVG diagram:
 python src\rag_query.py "Explain the use of force continuum with a simple diagram." --include-diagram always
 ```
 
-Force a PNG scene image (save to disk for viewing; see `SCENE_IMAGE_PROVIDER` in `.env`):
+Force a scene image and save it to disk:
 
 ```powershell
 python src\rag_query.py "Show me an excessive force scenario" --include-scene-image always --write-scene-png output\scene.png --no-show-sources
@@ -208,15 +204,19 @@ Use just enough force to stop the problem. No more.
 
 ## Runtime scene images (PNG)
 
-By default, scene images use **Stability AI Stable Diffusion 3.5 Large** (`stability.sd3-5-large-v1:0`) via `SCENE_IMAGE_PROVIDER=stability` in `STABILITY_IMAGE_REGION` (default: same as `AWS_REGION`, often `us-west-2`). Request model access in the Bedrock console for that model and region.
+Scene images use Pollinations.ai through a no-auth HTTPS request.
 
-To use **Amazon Nova Canvas** instead, set `SCENE_IMAGE_PROVIDER=nova` and configure `NOVA_CANVAS_REGION` (default `us-east-1`) and `NOVA_CANVAS_MODEL_ID`. Nova uses `taskType: TEXT_IMAGE` with `textToImageParams.text` set to a safe, text-free prompt.
+Standalone image smoke test:
 
-**Legacy Nova errors:** If you see a message that the model is **Legacy** and you have not used it in the last 30 days, switch to `SCENE_IMAGE_PROVIDER=stability` and enable **Stable Diffusion 3.5 Large** in Bedrock, or use an active Nova model when AWS offers one in your account.
+```powershell
+python scripts\generate_scene_image.py "A photorealistic image of a security guard inside a retail store. The guard is standing calmly while an upset customer points from a comfortable distance. No text, no logos, no signage." output\scene_angry_customer.png
+```
 
-If image generation throttles or the model is not enabled, `scene_image_error` is set and the tutor still returns the text answer and SVG when requested.
+The RAG pipeline builds scene prompts from explicit topic templates (`force`, `deescalation`, `patrol`, `evacuation`, `notebook`, `generic`). If image generation fails, `scene_image_error` is set and the tutor still returns the text answer and SVG when requested.
 
-**Region note (Nova):** If you see `ValidationException: The provided model identifier is invalid` for Canvas, set `NOVA_CANVAS_REGION=us-east-1` and enable **Amazon Nova Canvas** in that region.
+Latency is usually 5-10 seconds per image. For hackathon demos, pre-generate scenario pools when possible instead of generating every image live.
+
+Common Pollinations image errors are usually temporary network or service availability failures. Retry the request or pre-generate scenario images for the demo.
 
 ## Visual Diagram Rules
 
@@ -256,8 +256,34 @@ Observed behavior:
 - Returns `HIGH` priority on use-of-force questions
 - Returns glossary terms
 - Returns `SVG: returned` when `include_diagram=always`
-- Writes `output\\scene.png` or sets `scene_image_error` if Bedrock TTI is unavailable
+- Writes `output\\scene.png` or sets `scene_image_error` if Pollinations image generation is unavailable
 - Lambda smoke test returns `statusCode: 200`
+
+## Lambda deployment (Function URL or API Gateway)
+
+**Package a zip** (Python sources, `pip install` dependencies, and embedded vector store):
+
+```powershell
+cd backend
+.\scripts\build_lambda_zip.ps1
+```
+
+This writes `backend/lambda_deployment.zip`. Include `data/chunks.json` in the zip (the script copies it when present). On Windows, `pip` may install OS-specific wheels; for production, build the zip on **Linux** or **WSL** so `numpy` matches the Lambda runtime.
+
+**Lambda settings**
+
+- Handler: `lambda_tutor.handler`
+- Runtime: Python 3.12+ (3.13 if your region supports it)
+- Memory: 1024 MB+; **Timeout: 60 s** (Claude + image generation)
+- **Environment variables**: mirror `backend/.env` — at minimum `CHUNKS_OUTPUT_PATH=data/chunks.json`, `AWS_REGION`, `CLAUDE_MODEL_ID`, and `TITAN_EMBED_MODEL_ID`.
+- **IAM role**: allow `bedrock:InvokeModel` (and any console-required actions) for Claude and Titan embeddings in the used region.
+- **Network egress**: Lambda must be able to reach Pollinations.ai. If the function is attached to a VPC, configure NAT or avoid VPC attachment for the demo.
+
+**Function URL (simplest for demos)**  
+Create a public URL with `POST` + `OPTIONS` and CORS allowing `content-type`. The handler already returns `Access-Control-Allow-Origin: *` for the Function URL to work alongside console CORS.
+
+**API Gateway**  
+If you use HTTP API with stage `prod` and route `POST /tutor`, the client should call `https://{api}.execute-api.{region}.amazonaws.com/prod/tutor`.
 
 ## Files
 
@@ -266,3 +292,5 @@ Observed behavior:
 - `scripts/chunk_manual.py`: PDF extraction and chunking
 - `scripts/embed_chunks.py`: Titan embedding generation
 - `scripts/extract_glossary.py`: optional glossary extraction helper
+- `scripts/generate_scene_image.py`: standalone Pollinations image generation smoke test
+- `scripts/build_lambda_zip.ps1`: build `lambda_deployment.zip` for upload to Lambda

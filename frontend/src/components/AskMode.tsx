@@ -21,7 +21,12 @@ function AskMode() {
     setIsLoading(true);
     setError(null);
     try {
-      setResponse(await askTutor(question, language, imageB64));
+      setResponse(
+        await askTutor(question, {
+          input_language_hint: language,
+          image_b64: imageB64,
+        }),
+      );
       setImageB64(undefined);
     } catch (requestError) {
       setError(
@@ -74,7 +79,10 @@ function AskMode() {
       <div className="feature-grid">
         <CameraCapture onCapture={setImageB64} hasCapture={Boolean(imageB64)} />
         <CitationPopover citation={response?.citations[0]} />
-        <PriorityTooltip rationale={response?.priority_rationale} />
+        <PriorityTooltip
+          rationale={response?.priority_rationale}
+          priority={response?.priority}
+        />
       </div>
     </section>
   );

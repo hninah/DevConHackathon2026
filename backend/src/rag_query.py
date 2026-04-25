@@ -7,9 +7,8 @@ The tutor accepts a question in any typed language, retrieves relevant Alberta
 Basic Security Training manual chunks, and answers only in simplified English.
 The Claude response is streamed in a structured envelope so callers can show the
 answer live while still receiving citations, exam priority, glossary terms, and
-an optional SVG diagram. Separately, Bedrock text-to-image (default: Stable
-Diffusion 3.5, or opt-in Nova Canvas) can generate a text-free photorealistic
-PNG scene for situational context.
+an optional SVG diagram. Separately, Pollinations.ai can generate a text-free
+photorealistic scene image for situational context.
 
 Usage:
     python src/rag_query.py "When am I allowed to physically restrain someone?"
@@ -23,7 +22,6 @@ import argparse
 import base64
 import json
 import os
-import random
 import re
 import sys
 import time
@@ -35,6 +33,8 @@ import boto3
 import numpy as np
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
+
+from scene_image_pollinations import generate_scene_png_b64
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -49,21 +49,6 @@ TITAN_EMBED_MODEL_ID = os.getenv(
     "TITAN_EMBED_MODEL_ID",
     "amazon.titan-embed-text-v2:0",
 )
-NOVA_CANVAS_MODEL_ID = os.getenv("NOVA_CANVAS_MODEL_ID", "amazon.nova-canvas-v1:0")
-# Nova Canvas image generation is not available in every Bedrock region. The project
-# defaults Claude/Titan to us-west-2, but Canvas is documented for us-east-1 (and
-# a few others). Use a dedicated region so scene images work without moving RAG.
-NOVA_CANVAS_REGION = os.getenv("NOVA_CANVAS_REGION", "us-east-1")
-# Scene PNG provider: "stability" (default) = Stable Diffusion 3.5 Large; "nova" = Nova
-# Canvas. Nova Canvas is Legacy on Bedrock; many accounts get blocked without recent use.
-# SD 3.5 is typically available in the same region as the rest of the stack (e.g. us-west-2).
-SCENE_IMAGE_PROVIDER = os.getenv("SCENE_IMAGE_PROVIDER", "stability").lower().strip()
-STABILITY_SD35_MODEL_ID = os.getenv(
-    "STABILITY_SD35_MODEL_ID", "stability.sd3-5-large-v1:0"
-)
-STABILITY_IMAGE_REGION = os.getenv("STABILITY_IMAGE_REGION", AWS_REGION)
-SCENE_IMAGE_WIDTH = int(os.getenv("SCENE_IMAGE_WIDTH", "1024"))
-SCENE_IMAGE_HEIGHT = int(os.getenv("SCENE_IMAGE_HEIGHT", "1024"))
 
 CHUNKS_PATH_ENV = os.getenv("CHUNKS_OUTPUT_PATH", "data/chunks.json")
 CHUNKS_PATH = (
@@ -82,77 +67,6 @@ RETRY_BACKOFF_SECONDS = 2
 VALID_DIAGRAM_MODES = {"auto", "always", "never"}
 VALID_SCENE_IMAGE_MODES = {"auto", "always", "never"}
 PRIORITY_VALUES = {"HIGH", "MEDIUM", "BACKGROUND"}
-
-# Photorealistic scene images must never show readable text
-NO_TEXT_IMAGERY_RULES = (
-    "The image must contain no text, no labels, no signs, no logos with readable words, "
-    "no captions, and no book pages. Use only the scene, body language, and setting to tell the story. "
-    "Photorealistic, educational, calm, and suitable for a workplace training app."
-)
-
-# Strengthen no-text and safety for Stability SD3.5 (short negative prompt)
-STABILITY_NEGATIVE_PROMPT = (
-    "text, words, letters, signage, labels, logos, typography, watermarks, "
-    "solo portrait, close-up headshot, cropped person, blur, deformed, low quality, ugly"
-)
-
-# If SD3.5 filter rejects a topic-specific scene, retry with bland workplace stock photos.
-STABILITY_FALLBACK_SCENE_PROMPT = (
-    "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-    "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
-    "conversational distance, relaxed posture, open hands, friendly neutral expressions, spacious clean interior. "
-    f"{NO_TEXT_IMAGERY_RULES} "
-    "Wide shot, bright, corporate brochure look."
-)
-STABILITY_SAFE_FALLBACK_PROMPTS = [
-    STABILITY_FALLBACK_SCENE_PROMPT,
-    (
-        "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-        "walking through a wide bright indoor shopping centre corridor, relaxed posture, open hands, "
-        "spacious public walkway, friendly professional expression. "
-        f"{NO_TEXT_IMAGERY_RULES} "
-        "Wide shot, natural light, brochure style."
-    ),
-    (
-        "Photorealistic corporate training stock photo: an empty wide bright indoor shopping centre "
-        "corridor with clean floors, soft daylight, plants, benches, and a calm professional public-space atmosphere. "
-        f"{NO_TEXT_IMAGERY_RULES} "
-        "Wide shot, simple calm composition."
-    ),
-]
-STABILITY_BLOCKED_PROMPT_WORDS = (
-    "arrest",
-    "blood",
-    "crime",
-    "criminal",
-    "danger",
-    "distress",
-    "emergency",
-    "evidence",
-    "fight",
-    "fire",
-    "force",
-    "gore",
-    "grab",
-    "grasp",
-    "held",
-    "injury",
-    "panic",
-    "restrain",
-    "restraining",
-    "scared",
-    "self-defence",
-    "self defense",
-    "theft",
-    "thief",
-    "weapon",
-    "worried",
-    "angry",
-    "yelling",
-    "hostile",
-    "threat",
-    "threats",
-)
 
 
 class Citation(TypedDict):
@@ -207,10 +121,6 @@ class StreamEvent(TypedDict):
 # ---------------------------------------------------------------------------
 
 bedrock = boto3.client("bedrock-runtime", region_name=AWS_REGION)
-# Separate client: Nova Canvas TEXT_IMAGE in regions where the model is supported.
-bedrock_nova = boto3.client("bedrock-runtime", region_name=NOVA_CANVAS_REGION)
-# Stable Diffusion 3.5 (default scene provider) — usually same region as Claude/Titan
-bedrock_stability = boto3.client("bedrock-runtime", region_name=STABILITY_IMAGE_REGION)
 _chunk_cache: tuple[list[dict[str, Any]], np.ndarray] | None = None
 
 
@@ -327,7 +237,7 @@ def build_citations(retrieved: list[dict[str, Any]]) -> list[Citation]:
 
 
 # ---------------------------------------------------------------------------
-# Nova Canvas: runtime PNG scene images (text-free, photorealistic)
+# Pollinations: runtime scene images (text-free, photorealistic)
 # ---------------------------------------------------------------------------
 
 
@@ -457,350 +367,116 @@ def build_scene_image_prompt(
     question: str,
     retrieved: list[dict[str, Any]],
 ) -> str | None:
-    """Return a Nova Canvas prompt, or None if auto mode should skip the image.
-
-    In ``always`` mode, returns a safe generic training scene if no topic matches.
-    """
+    """Return a scene image prompt, or None if auto mode should skip the image."""
     mode = include_scene_image
     if mode == "never":
         return None
 
     topic = infer_scene_topic(mode, question, retrieved)
+    if topic is None:
+        return None
 
-    # Excessive or misuse of physical control
+    critical_rules = (
+        "\n\nCritical requirements:\n"
+        "- No text, words, letters, numbers, signage, or labels anywhere in the image\n"
+        "- No logos or brand names on uniforms, products, fixtures, or background\n"
+        "- No blood, no weapons, no graphic injury\n"
+        "- Both figures fully visible, faces and body language clearly readable\n"
+        "- Documentary photography, realistic colors, neutral lighting\n"
+        "- 16:9 landscape orientation"
+    )
+
     if topic == "force":
-        # SD3.5 filters can reject prompts that depict direct physical control.
-        # Keep the image as a neutral training stock photo; the answer explains the legal risk.
         return (
-            "Photorealistic corporate training stock photo: a uniformed building concierge and "
-            "one visitor in everyday clothes in a wide bright shopping mall corridor. The staff "
-            "member has a relaxed professional posture with open hands; both people have friendly "
-            "neutral expressions and stand at a comfortable conversational distance. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Well-lit, wide camera angle, neutral positive workplace training look."
+            "A photorealistic documentary-style image of a security guard inside a generic "
+            "retail store during the day.\n\n"
+            "The guard is wearing a plain dark uniform with no visible logos, badges, or text. "
+            "The guard is mid-action: leaning forward aggressively, one hand firmly gripping "
+            "the upper arm of a customer, the other hand raised in a controlling gesture. "
+            "The guard's facial expression shows tension and anger, not professionalism.\n\n"
+            "The customer is mid-30s in casual clothing, clearly smaller in build than the guard. "
+            "The customer's posture is defensive: leaning away, free arm raised in a stop gesture, "
+            "face showing surprise and discomfort. The customer is not resisting and is not holding anything.\n\n"
+            "The contrast between the guard's overly forceful grip and the customer's non-threatening "
+            "posture is the focal point of the image. A viewer should immediately recognize that "
+            "the guard's response is disproportionate to the situation.\n\n"
+            "Setting: a generic retail store interior, blurred shelves of merchandise in the background, "
+            "neutral fluorescent lighting. One or two bystanders are visible in the deep background, watching "
+            "with concerned expressions.\n\n"
+            "Style: documentary photography, sharp focus on both figures, realistic colors, neutral lighting, "
+            "mid-shot framing showing both figures from head to mid-thigh."
+            f"{critical_rules}"
         )
 
-    # Patrol / positioning
     if topic == "patrol":
         return (
-            "Photorealistic training scene: a security guard in a high-visibility uniform "
-            "walking a wide, well-lit modern mall concourse, observing shoppers from a safe "
-            "distance, professional posture, hands visible, calm. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Daytime, neutral camera angle, relaxed public setting."
+            "A photorealistic documentary-style image of a security guard walking a patrol route "
+            "inside a generic indoor shopping mall during the day.\n\n"
+            "The guard is wearing a plain dark uniform with no visible logos, badges, or text. "
+            "The guard is mid-stride with relaxed shoulders, hands visible, and eyes scanning "
+            "the public space professionally. Shoppers are spread out in the background at a safe distance.\n\n"
+            "Setting: wide mall corridor, blurred storefronts and benches, neutral fluorescent lighting, "
+            "clean floor, calm public environment.\n\n"
+            "Style: documentary photography, sharp focus on the guard, slight depth of field, "
+            "realistic colors, neutral mood."
+            f"{critical_rules}"
         )
 
-    # De-escalation / upset customer
     if topic == "deescalation":
         return (
-            "Photorealistic training scene: a uniformed security staff member standing near "
-            "a retail customer service counter inside a bright store entrance. Show two full adults "
-            "clearly in the frame: the staff member on one side of the counter and one customer on "
-            "the other side using animated hand gestures. The staff member keeps comfortable space, "
-            "relaxed shoulders, open hands, and attentive listening posture. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide two-person shot, calm professional workplace training style."
+            "A photorealistic image of a security guard inside a retail store.\n\n"
+            "The guard is wearing a dark uniform with no visible logos, badge, or text on the clothing. "
+            "The guard is standing calmly with their arms relaxed at their sides, facing a customer.\n\n"
+            "The customer is mid-30s, wearing casual clothing, visibly angry: mouth open mid-shout, "
+            "one arm raised and pointing at the guard, body leaning forward aggressively. The customer "
+            "is not holding anything.\n\n"
+            "Setting: a generic retail store interior, daytime, fluorescent lighting, blurred shelves "
+            "of merchandise in the background. Other shoppers are visible in the background looking "
+            "concerned but at a distance.\n\n"
+            "Style: documentary photography, sharp focus on both figures, slight depth of field, "
+            "realistic colors, neutral mood. The composition shows the contrast between the animated "
+            "customer and the calm guard."
+            f"{critical_rules}"
         )
 
-    # Fire / evacuation
     if topic == "evacuation":
         return (
-            "Photorealistic training scene: a security guard in uniform calmly directing people "
-            "toward a clearly visible, well-lit fire exit in a public building, orderly crowd, no panic. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Indoor, neutral wide shot."
+            "A photorealistic documentary-style image of a security guard helping people leave "
+            "a public retail building in an orderly way.\n\n"
+            "The guard is wearing a plain dark uniform with no visible logos, badges, or text. "
+            "The guard stands near a wide open doorway and uses one open hand to calmly show the "
+            "direction of travel. Several adults walk together in the background with calm body language.\n\n"
+            "Setting: bright public building lobby connected to a retail store, neutral lighting, "
+            "clear walking path, no smoke or damage.\n\n"
+            "Style: documentary photography, wide shot, realistic colors, calm workplace training tone."
+            f"{critical_rules}"
         )
 
-    # Notebooks / evidence
     if topic == "notebook":
         return (
-            "Photorealistic training scene: a security guard at a small desk in a back office, "
-            "writing in a paper notebook, professional uniform, a plain sealed evidence bag and "
-            "a small camera on the desk, no visible documents or readable text. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Neutral, documentary style."
+            "A photorealistic documentary-style image of a security guard writing notes in a "
+            "plain notebook at a small desk in a back office.\n\n"
+            "The guard is wearing a plain dark uniform with no visible logos, badges, or text. "
+            "The notebook pages are blank from the viewer's perspective with no readable writing. "
+            "A plain envelope and a small generic camera sit on the desk.\n\n"
+            "Setting: simple back office, neutral lighting, tidy desk, plain walls, professional mood.\n\n"
+            "Style: documentary photography, mid-shot framing, realistic colors, calm workplace training tone."
+            f"{critical_rules}"
         )
 
     if topic == "generic":
-        return STABILITY_FALLBACK_SCENE_PROMPT
+        return (
+            "A photorealistic documentary-style image of a security guard standing inside a "
+            "generic retail store during the day.\n\n"
+            "The guard is wearing a plain dark uniform with no visible logos, badges, or text. "
+            "The guard has a calm, professional posture with relaxed shoulders and open hands. "
+            "A customer stands nearby at a comfortable distance in casual clothing.\n\n"
+            "Setting: generic retail store interior, blurred shelves of merchandise in the background, "
+            "neutral fluorescent lighting, calm shoppers in the distance.\n\n"
+            "Style: documentary photography, mid-shot framing, realistic colors, neutral mood."
+            f"{critical_rules}"
+        )
     return None
-
-
-def resolve_scene_image_provider() -> str:
-    """Map SCENE_IMAGE_PROVIDER env to 'stability' or 'nova'."""
-    p = SCENE_IMAGE_PROVIDER
-    if p in ("stability", "stability.sd3", "sd35", "sd3-5", "sd3_5"):
-        return "stability"
-    if p in ("nova", "nova-canvas", "canvas", "nova_canvas", "amazon-nova-canvas"):
-        return "nova"
-    if p == "":
-        return "stability"
-    raise ValueError(
-        f"SCENE_IMAGE_PROVIDER must be 'stability' or 'nova', not {p!r}."
-    )
-
-
-def strip_stability_filter_terms(prompt: str) -> str:
-    """Remove common SD3.5 prompt-filter trigger terms before InvokeModel."""
-    cleaned = prompt
-    for word in STABILITY_BLOCKED_PROMPT_WORDS:
-        cleaned = re.sub(rf"\b{re.escape(word)}\b", "", cleaned, flags=re.IGNORECASE)
-    cleaned = re.sub(r"\s+", " ", cleaned)
-    cleaned = re.sub(r"\s+([,.])", r"\1", cleaned)
-    return cleaned.strip()
-
-
-def rewrite_for_stability_image_model(scene_prompt: str, scene_topic: str | None) -> str:
-    """
-    Convert any topic scene into a conservative SD3.5-safe stock-photo prompt.
-
-    The RAG answer carries the lesson details. The generated image is only a safe
-    situational backdrop, so never pass raw/legal/safety wording to the image model.
-    """
-    p = scene_prompt.lower()
-    topic = scene_topic or ""
-    if topic == "force":
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-            "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
-            "conversational distance, relaxed posture, open hands, friendly neutral expressions. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, natural light, professional training brochure style."
-        )
-    elif topic == "patrol":
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-            "walking through a wide bright indoor shopping centre corridor, relaxed posture, open hands, "
-            "spacious public walkway, friendly professional expression. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, natural light, brochure style."
-        )
-    elif topic == "deescalation":
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-            "standing behind or beside a retail service counter inside a bright store entrance. "
-            "Show two full adults clearly in the frame: the staff member and one customer facing each "
-            "other across the counter. The customer uses animated hand gestures; the staff member has "
-            "open hands and attentive listening posture, with comfortable space between them. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide two-person shot, natural light, workplace training brochure style."
-        )
-    elif topic == "evacuation":
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed facility team member "
-            "standing in a bright public building lobby and politely guiding a small group "
-            "toward a clearly visible open doorway, one open hand showing the direction, "
-            "orderly spacious interior, calm people walking together. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, neutral workplace training style."
-        )
-    elif topic == "notebook":
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed facility team member "
-            "sitting at a tidy office desk with a blank notebook and a plain envelope, bright "
-            "neutral office, relaxed posture, professional workplace setting. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, clean brochure style."
-        )
-    elif any(k in p for k in ("notebook", "desk", "camera", "chain of custody")):
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed facility team member "
-            "sitting at a tidy office desk with a blank notebook and a plain envelope, bright "
-            "neutral office, relaxed posture, professional workplace setting. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, clean brochure style."
-        )
-    elif any(k in p for k in ("patrol", "walking", "route", "corridor", "mall")):
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed customer service staff member "
-            "and one adult visitor standing in a wide bright indoor shopping centre corridor, comfortable "
-            "conversational distance, relaxed posture, open hands, friendly neutral expressions. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, natural light, brochure style."
-        )
-    elif any(k in p for k in ("exit", "doorway", "building")):
-        rewritten = (
-            "Photorealistic corporate training stock photo: a uniformed facility team member "
-            "standing in a bright public building lobby and politely gesturing toward a doorway, "
-            "orderly spacious interior, calm people in the background. "
-            f"{NO_TEXT_IMAGERY_RULES} "
-            "Wide shot, neutral workplace training style."
-        )
-    else:
-        rewritten = STABILITY_FALLBACK_SCENE_PROMPT
-    return strip_stability_filter_terms(rewritten)[:1000]
-
-
-def invoke_stability_sd35(
-    text_prompt: str,
-    scene_topic: str | None = None,
-) -> tuple[str, str]:
-    """Stability SD 3.5 Large text-to-image; returns (base64 PNG, prompt used)."""
-    if not text_prompt.strip():
-        raise ValueError("Stability image prompt cannot be empty.")
-
-    prompt_lineup: list[str] = []
-    for candidate in [
-        rewrite_for_stability_image_model(text_prompt, scene_topic),
-        *STABILITY_SAFE_FALLBACK_PROMPTS,
-    ]:
-        clean_candidate = strip_stability_filter_terms(candidate)[:1000]
-        if clean_candidate and clean_candidate not in prompt_lineup:
-            prompt_lineup.append(clean_candidate)
-
-    for pi, ptext in enumerate(prompt_lineup):
-        for attempt in range(MAX_RETRIES):
-            seed = random.randint(0, 4_294_967_294)
-            native_request: dict[str, Any] = {
-                "prompt": ptext,
-                "mode": "text-to-image",
-                "negative_prompt": STABILITY_NEGATIVE_PROMPT,
-                "aspect_ratio": "1:1",
-                "seed": seed,
-                "output_format": "png",
-            }
-            try:
-                response = bedrock_stability.invoke_model(
-                    modelId=STABILITY_SD35_MODEL_ID,
-                    body=json.dumps(native_request),
-                    contentType="application/json",
-                    accept="application/json",
-                )
-                model_response = json.loads(response["body"].read())
-                finish = model_response.get("finish_reasons") or [None]
-                if finish and len(finish) > 0 and finish[0] is not None:
-                    fr0 = str(finish[0])
-                    if (
-                        "filter" in fr0.lower()
-                        and "prompt" in fr0.lower()
-                        and pi < len(prompt_lineup) - 1
-                    ):
-                        print(
-                            "  SD3.5: safe prompt was filtered; retrying with a simpler fallback scene.",
-                            file=sys.stderr,
-                        )
-                        break
-                    raise RuntimeError(
-                        f"Stable Diffusion blocked or errored: finish_reasons={finish!r}."
-                    )
-                images = model_response.get("images")
-                if not images:
-                    raise RuntimeError(
-                        f"Stable Diffusion returned no images. Keys: {list(model_response.keys())}"
-                    )
-                b64 = images[0]
-                if not isinstance(b64, str) or not b64.strip():
-                    raise RuntimeError("Stable Diffusion image payload is empty.")
-                return b64, ptext
-            except ClientError as error:
-                code = error.response.get("Error", {}).get("Code", "")
-                if code == "ValidationException" and "model identifier" in str(error).lower():
-                    raise RuntimeError(
-                        f"Stable Diffusion 3.5 not available: {error}. "
-                        f"Set STABILITY_IMAGE_REGION (default: same as AWS_REGION) and enable "
-                        f"{STABILITY_SD35_MODEL_ID!r} in the Bedrock console, or set "
-                        f"SCENE_IMAGE_PROVIDER=nova to use Nova Canvas in NOVA_CANVAS_REGION."
-                    ) from error
-                if code in ("ThrottlingException", "ServiceUnavailableException"):
-                    wait = RETRY_BACKOFF_SECONDS * (2**attempt)
-                    print(
-                        f"  Stable Diffusion throttled, retrying in {wait}s...",
-                        file=sys.stderr,
-                    )
-                    time.sleep(wait)
-                    continue
-                raise
-        else:
-            raise RuntimeError(
-                f"Stable Diffusion 3.5 failed after {MAX_RETRIES} tries (throttling): "
-                f"last prompt was {ptext[:120]!r}..."
-            )
-
-    raise RuntimeError(
-        "Stable Diffusion 3.5: all sanitized fallback prompts were blocked by the content filter."
-    )
-
-
-def invoke_nova_canvas(text_prompt: str) -> tuple[str, str]:
-    """Call Amazon Nova Canvas TEXT_IMAGE and return (base64 PNG, prompt used)."""
-    if not text_prompt.strip():
-        raise ValueError("Nova Canvas prompt cannot be empty.")
-
-    w = max(512, min(SCENE_IMAGE_WIDTH, 1024))
-    h = max(512, min(SCENE_IMAGE_HEIGHT, 1024))
-    if w > 1024 or h > 1024:
-        w = min(w, 1024)
-        h = min(h, 1024)
-
-    seed = random.randint(0, 858_993_459)
-    native_request = {
-        "taskType": "TEXT_IMAGE",
-        "textToImageParams": {"text": text_prompt},
-        "imageGenerationConfig": {
-            "seed": seed,
-            "quality": "standard",
-            "height": h,
-            "width": w,
-            "numberOfImages": 1,
-        },
-    }
-    last_exception: BaseException | None = None
-    for attempt in range(MAX_RETRIES):
-        try:
-            response = bedrock_nova.invoke_model(
-                modelId=NOVA_CANVAS_MODEL_ID,
-                body=json.dumps(native_request),
-                contentType="application/json",
-                accept="application/json",
-            )
-            model_response = json.loads(response["body"].read())
-            images = model_response.get("images")
-            if not images:
-                raise RuntimeError(
-                    f"Nova Canvas returned no images. Keys: {list(model_response.keys())}"
-                )
-            b64 = images[0]
-            if not isinstance(b64, str) or not b64.strip():
-                raise RuntimeError("Nova Canvas image payload is empty.")
-            return b64, text_prompt
-        except ClientError as error:
-            last_exception = error
-            code = error.response.get("Error", {}).get("Code", "")
-            if code == "ValidationException" and "model identifier" in str(error).lower():
-                raise RuntimeError(
-                    f"Nova Canvas model not available in this setup: {error}. "
-                    f"Set NOVA_CANVAS_REGION to a region that offers Nova Canvas on Bedrock "
-                    f"(for example us-east-1). Current NOVA_CANVAS_REGION={NOVA_CANVAS_REGION!r}, "
-                    f"modelId={NOVA_CANVAS_MODEL_ID!r}."
-                ) from error
-            if code in ("ResourceNotFoundException", "AccessDeniedException") and any(
-                s in str(error).lower()
-                for s in ("legacy", "upgrade to an active model", "last 30 days")
-            ):
-                raise RuntimeError(
-                    f"Nova Canvas is not available to this account (Legacy / inactivity). {error!s} "
-                    f"Set SCENE_IMAGE_PROVIDER=stability in .env to use Stable Diffusion 3.5 in "
-                    f"STABILITY_IMAGE_REGION (default: same as AWS_REGION), and enable that model in Bedrock. "
-                ) from error
-            if code in ("ThrottlingException", "ServiceUnavailableException"):
-                wait = RETRY_BACKOFF_SECONDS * (2 ** attempt)
-                print(f"  Nova throttled, retrying in {wait}s...", file=sys.stderr)
-                time.sleep(wait)
-                continue
-            raise
-
-    raise RuntimeError(f"Nova Canvas failed after {MAX_RETRIES} tries: {last_exception}")
-
-
-def invoke_runtime_scene_image(
-    text_prompt: str,
-    scene_topic: str | None = None,
-) -> tuple[str, str]:
-    """Dispatch to Stable Diffusion 3.5 (default) or Nova Canvas (opt-in)."""
-    provider = resolve_scene_image_provider()
-    if provider == "stability":
-        return invoke_stability_sd35(text_prompt, scene_topic)
-    return invoke_nova_canvas(text_prompt)
 
 
 def try_generate_runtime_scene(
@@ -822,10 +498,9 @@ def try_generate_runtime_scene(
     if not prompt:
         return None, None, None
     try:
-        scene_topic = infer_scene_topic(mode, question, retrieved)
-        png, used_prompt = invoke_runtime_scene_image(prompt, scene_topic)
+        png, used_prompt = generate_scene_png_b64(prompt)
         return png, used_prompt, None
-    except (ClientError, OSError, ValueError, TypeError, RuntimeError) as e:
+    except (OSError, ValueError, TypeError, RuntimeError) as e:
         return None, prompt, str(e)
 
 
@@ -1361,7 +1036,7 @@ def parse_args() -> argparse.Namespace:
         "--include-scene-image",
         choices=sorted(VALID_SCENE_IMAGE_MODES),
         default="auto",
-        help="Whether Bedrock TTI should return a text-free photorealistic PNG (see SCENE_IMAGE_PROVIDER).",
+        help="Whether Pollinations should return a text-free photorealistic scene.",
     )
     parser.add_argument(
         "--write-scene-png",

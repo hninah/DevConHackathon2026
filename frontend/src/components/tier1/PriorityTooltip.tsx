@@ -1,10 +1,19 @@
 import { useState } from 'react';
 
-type PriorityTooltipProps = {
-  rationale?: string;
+import type { ExamPriority } from '../../lib/types';
+
+const PRIORITY_LABEL: Record<ExamPriority, string> = {
+  HIGH: 'Exam priority: HIGH',
+  MEDIUM: 'Exam priority: MEDIUM',
+  BACKGROUND: 'Exam focus: background',
 };
 
-function PriorityTooltip({ rationale }: PriorityTooltipProps) {
+type PriorityTooltipProps = {
+  rationale?: string;
+  priority?: ExamPriority;
+};
+
+function PriorityTooltip({ rationale, priority = 'HIGH' }: PriorityTooltipProps) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -22,7 +31,7 @@ function PriorityTooltip({ rationale }: PriorityTooltipProps) {
           onFocus={() => setVisible(true)}
           onBlur={() => setVisible(false)}
         >
-          Exam priority: HIGH
+          {PRIORITY_LABEL[priority]}
         </span>
         {visible && (
           <div id="priority-tip" role="tooltip" className="priority-tooltip">
