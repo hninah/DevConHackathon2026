@@ -279,33 +279,32 @@ function RoleplayScenario() {
                                         </Badge>
                                         <span className="muted-text">{item.questionTitle}</span>
                                     </div>
-                                    <h5>{item.prompt}</h5>
-                                    <p>
+                                    <h5 className="answer-review-card__prompt">{item.prompt}</h5>
+
+                                    <p className="answer-review-card__line">
                                         <strong>Your answer:</strong> {item.selectedChoice.text}
                                     </p>
-                                    {!item.selectedChoice.isCorrect && (
-                                        <p>
-                                            <strong>Right answer:</strong> {item.correctChoice.text}
-                                        </p>
-                                    )}
-                                    <p>
-                                        <strong>
-                                            {item.selectedChoice.isCorrect ? 'Why this works:' : 'Why this was wrong:'}
-                                        </strong>{' '}
-                                        {item.selectedChoice.simplifiedExplanation}
+
+                                    <p className="answer-review-card__line">
+                                        <strong>Correct answer:</strong> {item.correctChoice.text}
                                     </p>
-                                    {!item.selectedChoice.isCorrect && (
-                                        <p>
-                                            <strong>What the manual supports:</strong> {item.correctChoice.simplifiedExplanation}
+
+                                    <div className="answer-explanation">
+                                        <p className="answer-explanation__eyebrow">Explanation</p>
+                                        <p className="answer-explanation__text">
+                                            {item.selectedChoice.isCorrect
+                                                ? item.selectedChoice.simplifiedExplanation
+                                                : `${item.selectedChoice.simplifiedExplanation} ${item.correctChoice.simplifiedExplanation}`}
                                         </p>
-                                    )}
-                                    <div className="manual-check manual-check--review">
-                                        <p className="manual-check__label">Manual points, page {item.pageNumber}</p>
-                                        <ul className="manual-check__bullets">
-                                            {item.manualBullets.map((bullet) => (
-                                                <li key={bullet}>{bullet}</li>
-                                            ))}
-                                        </ul>
+
+                                        <details className="manual-check manual-check--review">
+                                            <summary className="manual-check__label">See citation (page {item.pageNumber})</summary>
+                                            <ul className="manual-check__bullets">
+                                                {item.manualBullets.map((bullet) => (
+                                                    <li key={bullet}>{bullet}</li>
+                                                ))}
+                                            </ul>
+                                        </details>
                                     </div>
                                 </section>
                             ))}
@@ -427,16 +426,16 @@ function RoleplayScenario() {
                                 <strong>{selectedChoice.isCorrect ? 'Correct' : 'Try this instead'}</strong>
                                 <p>{selectedChoice.simplifiedExplanation}</p>
                                 <p className="citation-note">Review module: {selectedChoice.module}</p>
-                                <div className="manual-check">
-                                    <p className="manual-check__label">
+                                <details className="manual-check">
+                                    <summary className="manual-check__label">
                                         Simple manual check, page {current.part.manual_reference.page_number}
-                                    </p>
+                                    </summary>
                                     <ul className="manual-check__bullets">
                                         {excerptToBullets(current.part.manual_reference.excerpt).map((bullet) => (
                                             <li key={bullet}>{bullet}</li>
                                         ))}
                                     </ul>
-                                </div>
+                                </details>
                                 <div className="feedback-actions">
                                     <Button onClick={() => void continueToNext()} disabled={isSubmitting}>
                                         {currentIndex + 1 >= totalParts ? 'Finish scenario' : 'Next step'}

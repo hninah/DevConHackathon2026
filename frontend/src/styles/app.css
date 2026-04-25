@@ -774,10 +774,15 @@ meter {
 }
 
 .manual-check {
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 8px;
+  background: #f6f2ea;
+  border-left: 4px solid #3b6ee8;
+  border-radius: 10px;
   margin-top: 10px;
-  padding: 10px 12px;
+  padding: 14px 16px;
+}
+
+.manual-check[open] {
+  padding-bottom: 10px;
 }
 
 .manual-check--review {
@@ -785,22 +790,43 @@ meter {
 }
 
 .manual-check__label {
-  color: #5f6d7d;
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin: 0 0 6px;
+  align-items: center;
+  color: #243867;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.98rem;
+  font-weight: 800;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.manual-check__label::-webkit-details-marker {
+  display: none;
+}
+
+.manual-check__label::before {
+  color: #243867;
+  content: '▸';
+  font-size: 0.95rem;
+  transform: translateY(-1px);
+}
+
+.manual-check[open] .manual-check__label::before {
+  content: '▾';
 }
 
 .manual-check__bullets {
-  margin: 0;
+  list-style: disc;
+  margin: 12px 0 0;
   padding-left: 20px;
 }
 
 .manual-check__bullets li {
-  color: #3a4556;
-  font-size: 0.84rem;
-  line-height: 1.5;
-  margin-bottom: 8px;
+  color: #243867;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin-bottom: 10px;
 }
 
 .choice-btn:disabled {
@@ -859,19 +885,17 @@ meter {
 
 .answer-review-card {
   background: #ffffff;
-  border: 1px solid #e2ddd3;
-  border-radius: 12px;
-  padding: 14px;
+  border: 1px solid #d8deef;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(32, 54, 110, 0.08);
+  padding: 18px 20px;
 }
 
 .answer-review-card h5 {
   color: #172033;
-  font-size: 1rem;
-  margin: 10px 0 8px;
-}
-
-.answer-review-card p {
-  margin: 8px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  margin: 12px 0 10px;
 }
 
 .answer-review-card__header {
@@ -879,6 +903,41 @@ meter {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.answer-review-card__prompt {
+  font-weight: 800;
+}
+
+.answer-review-card__line {
+  color: #172033;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+.answer-explanation {
+  background: #eef2ff;
+  border: 1px solid #d5defc;
+  border-radius: 22px;
+  margin-top: 14px;
+  padding: 18px 18px 16px;
+}
+
+.answer-explanation__eyebrow {
+  color: #3f5bff;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.answer-explanation__text {
+  color: #172033;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 audio {
