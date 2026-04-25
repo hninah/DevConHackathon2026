@@ -26,14 +26,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Wait at a distance and call police without engaging.",
+                "text": "Wait at a distance and call police without engaging, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You should attempt verbal de-escalation first while waiting for backup — standing by can let the situation worsen.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Physically grab both individuals immediately to stop the fight.",
+                "text": "Physically grab both individuals right away to stop the fight, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical force should only be used when verbal control fails and it is necessary and proportionate.",
                 "module": "Use of Force and De-escalation"
@@ -64,14 +64,14 @@
               },
               {
                 "id": "b",
-                "text": "Physically restrain the aggressive person immediately.",
+                "text": "Physically restrain the aggressive person right away, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Exhaust verbal control options and call backup before moving to physical restraint.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Let the aggressive person leave without documenting the incident.",
+                "text": "Let the aggressive person leave without documenting the incident, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You must document all security incidents regardless of outcome.",
                 "module": "Use of Force and De-escalation"
@@ -109,14 +109,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Immediately grab his arm and pull him toward the door.",
+                "text": "right away grab his arm and pull him toward the door, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical removal without verbal instruction can escalate and cause injury.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Ignore him and wait for police to arrive on their own.",
+                "text": "Ignore him and wait for police to arrive on their own, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You have a duty to act within your authority while maintaining safety.",
                 "module": "Use of Force and De-escalation"
@@ -147,14 +147,14 @@
               },
               {
                 "id": "b",
-                "text": "Use a chokehold to force him toward the exit.",
+                "text": "Use a chokehold to force him toward the exit, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. This level of force is not appropriate and could be unlawful.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Leave him alone and return to your post.",
+                "text": "Leave him alone and return to your post, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Abandoning an active situation creates safety and liability risk.",
                 "module": "Use of Force and De-escalation"
@@ -199,14 +199,14 @@
               },
               {
                 "id": "b",
-                "text": "Immediately tackle him to stop his movement.",
+                "text": "right away tackle him to stop his movement, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical force is not justified unless there is an immediate threat of violence.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Let him go through and monitor from a distance.",
+                "text": "Let him go through and monitor from a distance, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Allowing unauthorized access to a restricted hospital area is a safety and policy failure.",
                 "module": "Use of Force and De-escalation"
@@ -230,14 +230,14 @@
               },
               {
                 "id": "b",
-                "text": "Immediately restrain him because he is yelling loudly.",
+                "text": "right away restrain him because he is yelling loudly, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Yelling alone does not justify physical restraint — verbal de-escalation should continue.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Yell back at him to establish authority.",
+                "text": "Yell back at him to establish authority, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Matching aggression escalates the encounter and is unprofessional.",
                 "module": "Use of Force and De-escalation"
@@ -275,7 +275,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Ask a nearby bystander to watch the bag while you investigate.",
+                "text": "Ask a nearby bystander to watch the bag while you investigate, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Bystanders must not be placed in potentially dangerous situations.",
                 "module": "Officer Safety"
@@ -289,7 +289,7 @@
               },
               {
                 "id": "c",
-                "text": "Walk directly up to the man and demand he open his bag.",
+                "text": "Walk directly up to the man and demand he open his bag, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Rushing in without hazard assessment puts you and others at risk.",
                 "module": "Officer Safety"
@@ -306,7 +306,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically restrain him until police arrive.",
+                "text": "Physically restrain him until police arrive, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Restraint is not justified when there is no clear immediate threat.",
                 "module": "Officer Safety"
@@ -320,7 +320,7 @@
               },
               {
                 "id": "c",
-                "text": "Evacuate the entire station and wait outside.",
+                "text": "Evacuate the entire station and wait outside, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Proportionate response is required — a full evacuation overreacts to the situation.",
                 "module": "Officer Safety"
@@ -358,14 +358,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Leave the site and file a report in the morning.",
+                "text": "Leave the site and file a report in the morning, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. An active intrusion requires immediate reporting and monitoring, not deferral.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Enter the site immediately and confront whoever is inside.",
+                "text": "Enter the site right away and confront whoever is inside, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Entering alone without backup creates serious personal safety risk.",
                 "module": "Officer Safety"
@@ -389,7 +389,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Let them go without documenting since no damage was done.",
+                "text": "Let them go without documenting since no damage was done, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. All security incidents must be documented even when minor.",
                 "module": "Officer Safety"
@@ -403,7 +403,7 @@
               },
               {
                 "id": "c",
-                "text": "Physically detain the teenager until police arrive regardless of their cooperation.",
+                "text": "Physically detain the teenager until police arrive regardless of their cooperation, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Unnecessary detention of a cooperative person may be unlawful and excessive.",
                 "module": "Officer Safety"
@@ -441,7 +441,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Approach the dog to calm it with your hand.",
+                "text": "Approach the dog to calm it with your hand, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Approaching an aggressive dog without a handler is dangerous.",
                 "module": "Officer Safety"
@@ -455,7 +455,7 @@
               },
               {
                 "id": "c",
-                "text": "Run away as fast as possible.",
+                "text": "Run away as fast as possible, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Running can trigger a chase response and increase the risk of attack.",
                 "module": "Officer Safety"
@@ -479,14 +479,14 @@
               },
               {
                 "id": "b",
-                "text": "Continue your patrol through the same area immediately.",
+                "text": "Continue your patrol through the same area right away, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. The hazard has not been resolved — continue only once the area is confirmed safe.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Enter the loading bay alone to close the door and secure the dog.",
+                "text": "Enter the loading bay alone to close the door and secure the dog, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Entering a confined space with an aggressive animal alone creates unnecessary risk.",
                 "module": "Officer Safety"
@@ -531,14 +531,14 @@
               },
               {
                 "id": "b",
-                "text": "Reset the alarm panel yourself and leave the building.",
+                "text": "Reset the alarm panel yourself and leave the building, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Resetting alarms without dispatch clearance can compromise the response and the investigation.",
                 "module": "Communication and Dispatch"
               },
               {
                 "id": "c",
-                "text": "Continue searching the building alone since you are already on-site.",
+                "text": "Continue searching the building alone since you are already on-site, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Proceeding without communication in an unknown alarm situation is a serious safety risk.",
                 "module": "Communication and Dispatch"
@@ -555,14 +555,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Post about the situation on the building staff group chat for speed.",
+                "text": "Post about the situation on the building staff group chat for speed, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Use only official communication channels for security incidents.",
                 "module": "Communication and Dispatch"
               },
               {
                 "id": "b",
-                "text": "Go back to your vehicle and wait there.",
+                "text": "Go back to your vehicle and wait there, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Abandoning your observed position loses important situational awareness.",
                 "module": "Communication and Dispatch"
@@ -607,7 +607,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Stay silent and let the responding guards figure it out themselves.",
+                "text": "Stay silent and let the responding guards figure it out themselves, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. The command post role requires active coordination, not passive observation.",
                 "module": "Communication and Dispatch"
@@ -621,7 +621,7 @@
               },
               {
                 "id": "c",
-                "text": "Leave the command post and join the response personally.",
+                "text": "Leave the command post and join the response personally, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Abandoning the command post removes dispatch oversight and scene coordination.",
                 "module": "Communication and Dispatch"
@@ -638,7 +638,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Tell each guard to write their own separate report with no shared information.",
+                "text": "Tell each guard to write their own separate report with no shared information, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Coordinated documentation ensures consistency and an accurate incident record.",
                 "module": "Communication and Dispatch"
@@ -652,7 +652,7 @@
               },
               {
                 "id": "c",
-                "text": "Delete the CCTV footage now that the situation is resolved.",
+                "text": "Delete the CCTV footage now that the situation is resolved, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. CCTV footage is critical evidence and must be preserved, not deleted.",
                 "module": "Communication and Dispatch"
@@ -690,14 +690,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Wait in place until you receive a complete message before doing anything.",
+                "text": "Wait in place until you receive a complete message before doing anything, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Delaying evacuation during a fire alarm to get a perfect message puts people at risk.",
                 "module": "Communication and Dispatch"
               },
               {
                 "id": "b",
-                "text": "Tell staff to go back to their desks since the message was unclear.",
+                "text": "Tell staff to go back to their desks since the message was unclear, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. When in doubt during a fire alarm, treat it as real and begin evacuation.",
                 "module": "Communication and Dispatch"
@@ -728,14 +728,14 @@
               },
               {
                 "id": "b",
-                "text": "Tell dispatch everything is fine and you handled it without further detail.",
+                "text": "Tell dispatch everything is fine and you handled it without further detail, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Dispatch needs detailed updates to coordinate the broader response.",
                 "module": "Communication and Dispatch"
               },
               {
                 "id": "c",
-                "text": "Wait for dispatch to call you rather than initiating contact.",
+                "text": "Wait for dispatch to call you rather than initiating contact, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Proactive communication during an active emergency is part of your role.",
                 "module": "Communication and Dispatch"
@@ -773,14 +773,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Accept her apology and let her go to avoid conflict.",
+                "text": "Accept her apology and let her go to avoid conflict, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Incident procedure must be followed regardless of how cooperative the person is.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "b",
-                "text": "Physically search her bag without consent or legal authority.",
+                "text": "Physically search her bag without consent or legal authority, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Searches require proper authority. Searching without it can be unlawful.",
                 "module": "Notebook and Evidence"
@@ -811,14 +811,14 @@
               },
               {
                 "id": "b",
-                "text": "Wait until everything is finished and write the report from memory.",
+                "text": "Wait until everything is finished and write the report from memory, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Notes should be made as soon as safely possible — not reconstructed from memory.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Text the incident details to your personal phone as a backup.",
+                "text": "Text the incident details to your personal phone as a backup, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Use only official documentation channels for incident records.",
                 "module": "Notebook and Evidence"
@@ -863,14 +863,14 @@
               },
               {
                 "id": "b",
-                "text": "Photograph the damage and post it to social media to warn the community.",
+                "text": "Photograph the damage and post it to social media to warn the community, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Evidence must be handled through official channels only.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Pick up the spray cans to prevent further vandalism.",
+                "text": "Pick up the spray cans to prevent further vandalism, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Touching items at a potential crime scene can destroy fingerprints and other evidence.",
                 "module": "Notebook and Evidence"
@@ -894,14 +894,14 @@
               },
               {
                 "id": "b",
-                "text": "Start cleaning up so the school looks better when police arrive.",
+                "text": "Start cleaning up so the school looks better when police arrive, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Cleaning destroys evidence before it can be documented and photographed.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Take only a mental note and report it verbally to police when they arrive.",
+                "text": "Take only a mental note and report it verbally to police when they arrive, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Written notes made at the time are far more accurate and legally reliable than memory.",
                 "module": "Notebook and Evidence"
@@ -946,14 +946,14 @@
               },
               {
                 "id": "b",
-                "text": "Move the vehicle to a safer spot to avoid further incidents.",
+                "text": "Move the vehicle to a safer spot to avoid further incidents, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Moving the vehicle disturbs the evidence scene.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Chase the suspect toward the east exit immediately.",
+                "text": "Chase the suspect toward the east exit right away, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Leaving an unsecured scene and pursuing a suspect alone creates safety and evidence risks.",
                 "module": "Notebook and Evidence"
@@ -977,14 +977,14 @@
               },
               {
                 "id": "b",
-                "text": "Tell her to wait until police arrive and refuse to speak with her.",
+                "text": "Tell her to wait until police arrive and refuse to speak with her, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You should acknowledge her, take her statement, and keep her informed within appropriate limits.",
                 "module": "Notebook and Evidence"
               },
               {
                 "id": "c",
-                "text": "Share all investigation details with her immediately to help her feel better.",
+                "text": "Share all investigation details with her right away to help her feel better, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Details of an active investigation should be shared only through proper channels.",
                 "module": "Notebook and Evidence"
@@ -1029,14 +1029,14 @@
               },
               {
                 "id": "b",
-                "text": "Physically drag him off the property immediately.",
+                "text": "Physically drag him off the property right away, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical removal without police involvement can expose you to legal liability.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "c",
-                "text": "Do nothing until he causes property damage.",
+                "text": "Do nothing until he causes property damage, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You have authority to address trespassing before damage occurs.",
                 "module": "Legal Authority and Licensing"
@@ -1060,14 +1060,14 @@
               },
               {
                 "id": "b",
-                "text": "Walk away since your authority is limited.",
+                "text": "Walk away since your authority is limited, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You should call police and document while maintaining safe scene awareness.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "c",
-                "text": "Attempt a citizen's arrest immediately.",
+                "text": "Attempt a citizen's arrest right away, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Citizen's arrest has specific lawful conditions that may not apply in this situation.",
                 "module": "Legal Authority and Licensing"
@@ -1105,14 +1105,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Let them in since it is a public interest story.",
+                "text": "Let them in since it is a public interest story, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. A restricted scene on private property can be maintained regardless of public interest claims.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "b",
-                "text": "Give a brief statement on camera to appear cooperative.",
+                "text": "Give a brief statement on camera to appear cooperative, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Unauthorized statements to media can compromise an active incident response.",
                 "module": "Legal Authority and Licensing"
@@ -1136,14 +1136,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Call police to have them arrested for filming near the scene.",
+                "text": "Call police to have them arrested for filming near the scene, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Filming from a public sidewalk is generally lawful — this request would not be appropriate.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "b",
-                "text": "Block their camera with your body or hand.",
+                "text": "Block their camera with your body or hand, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Interfering with lawful media activity on public property can create legal issues for you.",
                 "module": "Legal Authority and Licensing"
@@ -1188,7 +1188,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Demand they stop recording before you explain anything.",
+                "text": "Demand they stop recording before you explain anything, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Making demands before explaining yourself escalates the situation unnecessarily.",
                 "module": "Legal Authority and Licensing"
@@ -1202,7 +1202,7 @@
               },
               {
                 "id": "c",
-                "text": "Grab their phone to stop them from recording.",
+                "text": "Grab their phone to stop them from recording, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Interfering with someone recording in a public or semi-public space is not within your authority.",
                 "module": "Legal Authority and Licensing"
@@ -1219,14 +1219,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Apologize and tell them the search was not required after all.",
+                "text": "Apologize and tell them the search was not required after all, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Inconsistent explanations undermine your credibility and the property's policy.",
                 "module": "Legal Authority and Licensing"
               },
               {
                 "id": "b",
-                "text": "Tell them they are under arrest for obstruction.",
+                "text": "Tell them they are under arrest for obstruction, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. A verbal disagreement does not meet the grounds for arrest.",
                 "module": "Legal Authority and Licensing"
@@ -1271,7 +1271,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Dismiss it as a prank and wait to see if anything happens.",
+                "text": "Dismiss it as a prank and wait to see if anything happens, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Every bomb threat must be treated as real until authorities determine otherwise.",
                 "module": "Professional Conduct"
@@ -1285,7 +1285,7 @@
               },
               {
                 "id": "c",
-                "text": "Announce over the PA system that there is a bomb threat to warn shoppers.",
+                "text": "Announce over the PA system that there is a bomb threat to warn shoppers, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Public announcements should only be made under direction from emergency services or management to avoid panic.",
                 "module": "Professional Conduct"
@@ -1309,14 +1309,14 @@
               },
               {
                 "id": "b",
-                "text": "Search the building yourself to find the device before police arrive.",
+                "text": "Search the building yourself to find the device before police arrive, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Bomb searches must only be performed by trained emergency personnel — never security guards.",
                 "module": "Professional Conduct"
               },
               {
                 "id": "c",
-                "text": "Lock the building entrances to contain the threat.",
+                "text": "Lock the building entrances to contain the threat, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Locking people inside during a bomb threat creates serious danger.",
                 "module": "Professional Conduct"
@@ -1354,7 +1354,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Confront the coworker aggressively about what you saw.",
+                "text": "Confront the coworker aggressively about what you saw, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Direct confrontation can create conflict and evidence problems. Use official reporting channels instead.",
                 "module": "Professional Conduct"
@@ -1368,7 +1368,7 @@
               },
               {
                 "id": "c",
-                "text": "Agree to stay quiet since you do not want conflict with your coworker.",
+                "text": "Agree to stay quiet since you do not want conflict with your coworker, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Ignoring misconduct can make you complicit and violates professional standards.",
                 "module": "Professional Conduct"
@@ -1392,14 +1392,14 @@
               },
               {
                 "id": "b",
-                "text": "Tell other coworkers what you reported to warn them.",
+                "text": "Tell other coworkers what you reported to warn them, to keep the situation moving quickly.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Discussing an active investigation can compromise it and create a hostile work environment.",
                 "module": "Professional Conduct"
               },
               {
                 "id": "c",
-                "text": "Withdraw your report to avoid making things awkward.",
+                "text": "Withdraw your report to avoid making things awkward, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Reports of misconduct should not be withdrawn under social pressure.",
                 "module": "Professional Conduct"
@@ -1437,7 +1437,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Wait for the other guard to return before assuming control.",
+                "text": "Wait for the other guard to return before assuming control, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. The post needs immediate coverage — waiting leaves it unmonitored further.",
                 "module": "Professional Conduct"
@@ -1451,7 +1451,7 @@
               },
               {
                 "id": "c",
-                "text": "Leave the post yourself since the other guard is not following policy anyway.",
+                "text": "Leave the post yourself since the other guard is not following policy anyway, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Two wrongs do not make a right — you must fulfill your duty.",
                 "module": "Professional Conduct"
@@ -1468,7 +1468,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Your personal opinion about the other guard's character and reliability.",
+                "text": "Your personal opinion about the other guard's character and reliability, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Notes should contain factual observations, not personal opinions.",
                 "module": "Professional Conduct"
@@ -1482,7 +1482,7 @@
               },
               {
                 "id": "c",
-                "text": "Only the time you arrived and nothing about the missing guard.",
+                "text": "Only the time you arrived and nothing about the missing guard, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Documenting the full situation including the gap is necessary for accountability.",
                 "module": "Professional Conduct"
@@ -1520,14 +1520,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically grab both individuals immediately to stop the fight.",
+                "text": "Physically grab both individuals right away to stop the fight, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical force should only be used when verbal control fails and it is necessary and proportionate.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Wait at a distance and call police without engaging.",
+                "text": "Wait at a distance and call police without engaging, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You should attempt verbal de-escalation first while waiting for backup — standing by can let the situation worsen.",
                 "module": "Use of Force and De-escalation"
@@ -1551,14 +1551,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically restrain the aggressive person immediately.",
+                "text": "Physically restrain the aggressive person right away, to show authority in front of bystanders.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Exhaust verbal control options and call backup before moving to physical restraint.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "b",
-                "text": "Let the aggressive person leave without documenting the incident.",
+                "text": "Let the aggressive person leave without documenting the incident, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You must document all security incidents regardless of outcome.",
                 "module": "Use of Force and De-escalation"
@@ -1610,14 +1610,14 @@
               },
               {
                 "id": "b",
-                "text": "Ignore him and wait for police to arrive on their own.",
+                "text": "Ignore him and wait for police to arrive on their own, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. You have a duty to act within your authority while maintaining safety.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Immediately grab his arm and pull him toward the door.",
+                "text": "right away grab his arm and pull him toward the door, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical removal without verbal instruction can escalate and cause injury.",
                 "module": "Use of Force and De-escalation"
@@ -1641,14 +1641,14 @@
               },
               {
                 "id": "b",
-                "text": "Leave him alone and return to your post.",
+                "text": "Leave him alone and return to your post, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Abandoning an active situation creates safety and liability risk.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Use a chokehold to force him toward the exit.",
+                "text": "Use a chokehold to force him toward the exit, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. This level of force is not appropriate and could be unlawful.",
                 "module": "Use of Force and De-escalation"
@@ -1693,14 +1693,14 @@
               },
               {
                 "id": "b",
-                "text": "Immediately tackle him to stop his movement.",
+                "text": "right away tackle him to stop his movement, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Physical force is not justified unless there is an immediate threat of violence.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Let him go through and monitor from a distance.",
+                "text": "Let him go through and monitor from a distance, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Allowing unauthorized access to a restricted hospital area is a safety and policy failure.",
                 "module": "Use of Force and De-escalation"
@@ -1724,14 +1724,14 @@
               },
               {
                 "id": "b",
-                "text": "Yell back at him to establish authority.",
+                "text": "Yell back at him to establish authority, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Matching aggression escalates the encounter and is unprofessional.",
                 "module": "Use of Force and De-escalation"
               },
               {
                 "id": "c",
-                "text": "Immediately restrain him because he is yelling loudly.",
+                "text": "right away restrain him because he is yelling loudly, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Yelling alone does not justify physical restraint — verbal de-escalation should continue.",
                 "module": "Use of Force and De-escalation"
@@ -1769,14 +1769,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Ask a nearby bystander to watch the bag while you investigate.",
+                "text": "Ask a nearby bystander to watch the bag while you investigate, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Bystanders must not be placed in potentially dangerous situations.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Walk directly up to the man and demand he open his bag.",
+                "text": "Walk directly up to the man and demand he open his bag, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Rushing in without hazard assessment puts you and others at risk.",
                 "module": "Officer Safety"
@@ -1807,14 +1807,14 @@
               },
               {
                 "id": "b",
-                "text": "Physically restrain him until police arrive.",
+                "text": "Physically restrain him until police arrive, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Restraint is not justified when there is no clear immediate threat.",
                 "module": "Officer Safety"
               },
               {
                 "id": "c",
-                "text": "Evacuate the entire station and wait outside.",
+                "text": "Evacuate the entire station and wait outside, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Proportionate response is required — a full evacuation overreacts to the situation.",
                 "module": "Officer Safety"
@@ -1852,14 +1852,14 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Leave the site and file a report in the morning.",
+                "text": "Leave the site and file a report in the morning, so the scene does not get more chaotic.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. An active intrusion requires immediate reporting and monitoring, not deferral.",
                 "module": "Officer Safety"
               },
               {
                 "id": "b",
-                "text": "Enter the site immediately and confront whoever is inside.",
+                "text": "Enter the site right away and confront whoever is inside, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Entering alone without backup creates serious personal safety risk.",
                 "module": "Officer Safety"
@@ -1883,7 +1883,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Physically detain the teenager until police arrive regardless of their cooperation.",
+                "text": "Physically detain the teenager until police arrive regardless of their cooperation, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Unnecessary detention of a cooperative person may be unlawful and excessive.",
                 "module": "Officer Safety"
@@ -1897,7 +1897,7 @@
               },
               {
                 "id": "c",
-                "text": "Let them go without documenting since no damage was done.",
+                "text": "Let them go without documenting since no damage was done, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. All security incidents must be documented even when minor.",
                 "module": "Officer Safety"
@@ -1935,7 +1935,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Approach the dog to calm it with your hand.",
+                "text": "Approach the dog to calm it with your hand, to regain control before backup arrives.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Approaching an aggressive dog without a handler is dangerous.",
                 "module": "Officer Safety"
@@ -1949,7 +1949,7 @@
               },
               {
                 "id": "c",
-                "text": "Run away as fast as possible.",
+                "text": "Run away as fast as possible, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Running can trigger a chase response and increase the risk of attack.",
                 "module": "Officer Safety"
@@ -1966,7 +1966,7 @@
             "choices": [
               {
                 "id": "a",
-                "text": "Enter the loading bay alone to close the door and secure the dog.",
+                "text": "Enter the loading bay alone to close the door and secure the dog, to avoid getting stuck in a long interaction.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. Entering a confined space with an aggressive animal alone creates unnecessary risk.",
                 "module": "Officer Safety"
@@ -1980,7 +1980,7 @@
               },
               {
                 "id": "c",
-                "text": "Continue your patrol through the same area immediately.",
+                "text": "Continue your patrol through the same area right away, to prevent delays in the response.",
                 "isCorrect": false,
                 "simplifiedExplanation": "Incorrect. The hazard has not been resolved — continue only once the area is confirmed safe.",
                 "module": "Officer Safety"

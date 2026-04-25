@@ -50,6 +50,43 @@ def _shuffle_choices(choice_tuples: list[tuple], seed: int) -> list[tuple[str, t
     return [(choice_ids[index], choice) for index, choice in enumerate(ordered)]
 
 
+def _harden_choice_set(choice_tuples: list[tuple], seed: int) -> list[tuple]:
+    """Make distractors more plausible and less obviously short than the correct option."""
+    if not choice_tuples:
+        return choice_tuples
+
+    correct_text = next((text for text, is_correct, _ in choice_tuples if is_correct), "")
+    target_len = max(80, len(correct_text) - 6)
+
+    nuance_clauses = [
+        "to regain control before backup arrives",
+        "so the scene does not get more chaotic",
+        "to keep the situation moving quickly",
+        "to show authority in front of bystanders",
+        "to prevent delays in the response",
+        "to avoid getting stuck in a long interaction",
+    ]
+
+    hardened: list[tuple] = []
+    for index, (text, is_correct, explanation) in enumerate(choice_tuples):
+        if is_correct:
+            hardened.append((text, is_correct, explanation))
+            continue
+
+        softened = text
+        softened = re.sub(r"\bimmediately\b", "right away", softened, flags=re.IGNORECASE)
+        softened = re.sub(r"\binstantly\b", "quickly", softened, flags=re.IGNORECASE)
+
+        if len(softened) < target_len:
+            clause = nuance_clauses[(seed + index) % len(nuance_clauses)]
+            softened = softened.rstrip(".")
+            softened = f"{softened}, {clause}."
+
+        hardened.append((softened, is_correct, explanation))
+
+    return hardened
+
+
 def _is_usable_chunk(chunk: dict) -> bool:
     text = _normalize(str(chunk.get("text", "")), 2000)
     if len(text) < 240:
@@ -532,8 +569,11 @@ def _build_scenario(chunk: dict, index: int, role_mode: str, situation: dict) ->
     scenario_id = f"manual-{role_mode}-p{page}-c{chunk_id}"
     question_id = f"q{index + 1}"
 
-    part1_choices = _shuffle_choices(situation["part1_choices"], page * 100 + chunk_id + 1)
-    part2_choices = _shuffle_choices(situation["part2_choices"], page * 100 + chunk_id + 2)
+    part1_source = _harden_choice_set(situation["part1_choices"], page * 100 + chunk_id + 11)
+    part2_source = _harden_choice_set(situation["part2_choices"], page * 100 + chunk_id + 22)
+
+    part1_choices = _shuffle_choices(part1_source, page * 100 + chunk_id + 1)
+    part2_choices = _shuffle_choices(part2_source, page * 100 + chunk_id + 2)
 
     def _make_choice(choice_tuple: tuple, cid: str) -> dict:
         text, is_correct, explanation = choice_tuple

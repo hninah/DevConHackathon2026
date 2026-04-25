@@ -903,6 +903,7 @@ meter {
 }
 
 .roleplay-grid {
+  align-items: start;
   display: grid;
   gap: 16px;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -910,8 +911,15 @@ meter {
 
 .scene-column,
 .question-column {
+  align-content: start;
+  align-items: start;
   display: grid;
   gap: 12px;
+}
+
+.scene-column>*,
+.question-column>* {
+  width: 100%;
 }
 
 .image-frame {
@@ -1893,6 +1901,7 @@ audio {
 }
 
 @media (max-width: 900px) {
+
   .roleplay-grid,
   .summary-grid {
     grid-template-columns: 1fr;
