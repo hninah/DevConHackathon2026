@@ -1,0 +1,164 @@
+[
+    {
+        "id": "manual-passive",
+        "name": "Manual Scenario, Suspect Perspective",
+        "roleMode": "passive",
+        "aiPoliceChat": [
+            "Dispatch: Suspect movement reported near the perimeter.",
+            "Officer AI: Keep hands visible and follow commands.",
+            "Officer AI: Backup requested for safe containment."
+        ],
+        "imagePrompt": "Generate a perimeter checkpoint scene with officers and one suspect path.",
+        "questions": [
+            {
+                "id": "q1",
+                "title": "Sequence, communication first",
+                "parts": [
+                    {
+                        "id": "q1p1",
+                        "prompt": "What should police do first in this situation?",
+                        "manual_reference": {
+                            "page_number": 4,
+                            "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Table of Contents Table of Contents Introduction Learning Outcomes Icons in This Manual Module One: Introduction to the Sec"
+                        },
+                        "choices": [
+                            {
+                                "id": "a",
+                                "text": "Report location and direction before isolated pursuit.",
+                                "isCorrect": true,
+                                "simplifiedExplanation": "Correct. Communication first improves team safety and tracking.",
+                                "module": "Communication and Dispatch"
+                            },
+                            {
+                                "id": "b",
+                                "text": "Pursue alone and report later.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Delayed reporting increases risk.",
+                                "module": "Officer Safety"
+                            },
+                            {
+                                "id": "c",
+                                "text": "Wait without sharing updates.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Team coordination depends on updates.",
+                                "module": "Communication and Dispatch"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "q1p2",
+                        "prompt": "What should happen after initial communication?",
+                        "manual_reference": {
+                            "page_number": 4,
+                            "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Table of Contents Table of Contents Introduction Learning Outcomes Icons in This Manual Module One: Introduction to the Sec"
+                        },
+                        "choices": [
+                            {
+                                "id": "a",
+                                "text": "Set containment and maintain safe positioning.",
+                                "isCorrect": true,
+                                "simplifiedExplanation": "Correct. Containment limits escape and protects bystanders.",
+                                "module": "Patrol and Perimeter Control"
+                            },
+                            {
+                                "id": "b",
+                                "text": "Ignore perimeter and focus only on speed.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Losing perimeter control raises risk.",
+                                "module": "Patrol and Perimeter Control"
+                            },
+                            {
+                                "id": "c",
+                                "text": "Complete full notes before scene control.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Control the scene first, then document.",
+                                "module": "Notebook and Evidence"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "manual-active",
+        "name": "Manual Scenario, Officer Perspective",
+        "roleMode": "active",
+        "aiPoliceChat": [
+            "Dispatch: Officer approaching suspect in a public zone.",
+            "Officer AI Coach: Start with clear verbal commands.",
+            "Officer AI Coach: Record actions accurately after control."
+        ],
+        "imagePrompt": "Generate a public transit approach scene with one officer and safe standoff distance.",
+        "questions": [
+            {
+                "id": "q1",
+                "title": "Sequence, lawful control",
+                "parts": [
+                    {
+                        "id": "q1p1",
+                        "prompt": "What is the best first action?",
+                        "manual_reference": {
+                            "page_number": 4,
+                            "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Table of Contents Table of Contents Introduction Learning Outcomes Icons in This Manual Module One: Introduction to the Sec"
+                        },
+                        "choices": [
+                            {
+                                "id": "a",
+                                "text": "Use clear verbal commands and assess compliance.",
+                                "isCorrect": true,
+                                "simplifiedExplanation": "Correct. Start with verbal control before escalation.",
+                                "module": "Use of Force and De-escalation"
+                            },
+                            {
+                                "id": "b",
+                                "text": "Use force immediately without commands.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Force should be lawful, necessary, and proportionate.",
+                                "module": "Use of Force and De-escalation"
+                            },
+                            {
+                                "id": "c",
+                                "text": "Avoid giving any instructions.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Clear commands reduce confusion and risk.",
+                                "module": "Communication and Dispatch"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "q1p2",
+                        "prompt": "What should happen after control is established?",
+                        "manual_reference": {
+                            "page_number": 4,
+                            "excerpt": "Alberta Solicitor General and Ministry of Public Security Alberta Basic Security Training Jan-14 Table of Contents Table of Contents Introduction Learning Outcomes Icons in This Manual Module One: Introduction to the Sec"
+                        },
+                        "choices": [
+                            {
+                                "id": "a",
+                                "text": "Document timeline and evidence handoff details.",
+                                "isCorrect": true,
+                                "simplifiedExplanation": "Correct. Accurate notes support legal and procedural review.",
+                                "module": "Notebook and Evidence"
+                            },
+                            {
+                                "id": "b",
+                                "text": "Skip documentation and rely on memory.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Delayed notes reduce reliability.",
+                                "module": "Notebook and Evidence"
+                            },
+                            {
+                                "id": "c",
+                                "text": "Share details through unofficial channels.",
+                                "isCorrect": false,
+                                "simplifiedExplanation": "Not correct. Incident details must stay in official records.",
+                                "module": "Professional Conduct"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

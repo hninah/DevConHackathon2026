@@ -1,73 +1,59 @@
-import { useEffect, useState } from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import { Shield } from 'lucide-react';
 
-import AskMode from './components/AskMode';
-import LanguagePicker from './components/LanguagePicker';
-import ListenMode from './components/ListenMode';
-import ModeSwitcher from './components/ModeSwitcher';
-import PracticeMode from './components/PracticeMode';
-import { DEFAULT_PROFILE, loadProfile, saveProfile } from './lib/profile';
-import type { LearningStyle, Mode, Profile } from './lib/types';
+import DeepLinkModal from './components/DeepLinkModal';
+import { modalSpecs, navLinks } from './lib/siteContent';
+import AdaptiveDeliveryPage from './pages/AdaptiveDeliveryPage';
+import ExamPracticePage from './pages/ExamPracticePage';
+import OverviewPage from './pages/OverviewPage';
+import RoleplayPage from './pages/RoleplayPage';
+import TextTutorPage from './pages/TextTutorPage';
 
 function App() {
-  const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE);
-  const [mode, setMode] = useState<Mode>('ask');
-
-  useEffect(() => {
-    setProfile(loadProfile());
-  }, []);
-
-  function updateProfile(next: Profile): void {
-    setProfile(next);
-    saveProfile(next);
-  }
-
-  function updateLearningStyle(learning_style: LearningStyle): void {
-    updateProfile({
-      ...profile,
-      learning_style,
-    });
-  }
-
   return (
-    <main className="app-shell">
-      <header className="hero">
-        <div>
-          <p className="eyebrow">SecurePass</p>
-          <h1>Exam coaching for Alberta security guard students</h1>
-          <p className="hero-copy">
-            Ask questions, practice exam scenarios, and listen in the language a
-            student actually studies in. Punjabi is the demo path, but the shell
-            proves 100+ language support.
-          </p>
+    <div className="site-bg">
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+      <header className="top-nav">
+        <div className="brand">
+          <span className="brand-mark" aria-hidden="true">
+            <Shield size={18} />
+          </span>
+          <div>
+            <p className="brand-title">SecurePass</p>
+            <p className="brand-subtitle">Accessibility-first security guard training UI</p>
+          </div>
         </div>
-
-        <section className="profile-card" aria-label="Student profile">
-          <LanguagePicker
-            value={profile.language}
-            onChange={(language) => updateProfile({ ...profile, language })}
-          />
-          <label className="field">
-            Learning style
-            <select
-              value={profile.learning_style}
-              onChange={(event) =>
-                updateLearningStyle(event.target.value as LearningStyle)
-              }
-            >
-              <option value="text">Text</option>
-              <option value="audio">Audio</option>
-              <option value="visual">Visual</option>
-            </select>
-          </label>
-        </section>
+        <nav aria-label="Primary">
+          <ul className="nav-list">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+                  end={link.to === '/'}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </header>
 
-      <ModeSwitcher activeMode={mode} onChange={setMode} />
+      <main id="main-content" className="app-shell">
+        <Routes>
+          <Route path="/" element={<OverviewPage />} />
+          <Route path="/text-tutor" element={<TextTutorPage />} />
+          <Route path="/exam-practice" element={<ExamPracticePage />} />
+          <Route path="/roleplay" element={<RoleplayPage />} />
+          <Route path="/adaptive-delivery" element={<AdaptiveDeliveryPage />} />
+        </Routes>
+      </main>
 
-      {mode === 'ask' && <AskMode profile={profile} />}
-      {mode === 'practice' && <PracticeMode />}
-      {mode === 'listen' && <ListenMode />}
-    </main>
+      <DeepLinkModal specs={modalSpecs} />
+    </div>
   );
 }
 
