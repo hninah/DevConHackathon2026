@@ -8,3 +8,4 @@ __pycache__/
 Thumbs.db
 frontend/node_modules/
 frontend/dist/
+backend/streaming_proof/function.zip
