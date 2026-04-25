@@ -1,7 +1,7 @@
 const MODULES = [
-  { name: 'Use of Force', score: 42 },
+  { name: 'Module 2: Legal Authority', score: 42 },
   { name: 'Patrol', score: 68 },
-  { name: 'Notebooks', score: 81 },
+  { name: 'Notebook and Reporting', score: 81 },
   { name: 'Emergency Response', score: 57 },
 ];
 
@@ -10,6 +10,7 @@ function ModuleHeatmap() {
     <section className="feature-card">
       <p className="feature-id">F2</p>
       <h3>Module Mastery Map</h3>
+      <p className="field-hint">Lower scores become top items in your review to-do list.</p>
       <div className="heatmap">
         {MODULES.map((module) => (
           <div className="heatmap-row" key={module.name}>

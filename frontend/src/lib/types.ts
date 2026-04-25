@@ -21,4 +21,7 @@ export type LanguageOption = {
   nativeName: string;
 };
 
-export type Mode = 'ask' | 'practice' | 'listen';
+export type Mode =
+  | 'text-tutor'
+  | 'practice'
+  | 'roleplay';
