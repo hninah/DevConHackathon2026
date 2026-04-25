@@ -1,0 +1,1457 @@
+[
+  {
+    "term": "10-codes",
+    "definition": "Standardized radio communication codes sometimes printed inside a security guard's notebook and used to quickly relay information over radio.",
+    "page": 111
+  },
+  {
+    "term": "24-hour clock",
+    "definition": "A timekeeping format starting at 0000 (midnight) and ending at 2359 that security guards must use in notebooks and reports to avoid confusion between AM and PM times.",
+    "page": 112
+  },
+  {
+    "term": "24-hour reporting window",
+    "definition": "The legal deadline by which a security guard must submit a written report to the Registrar after being arrested, charged with a criminal offence, or losing their licence.",
+    "page": 124
+  },
+  {
+    "term": "30-day reporting window",
+    "definition": "The legal deadline within which a security guard must notify the Registrar in writing of changes to personal information such as name, contact details, or immigration status.",
+    "page": 125
+  },
+  {
+    "term": "access control",
+    "definition": "A security procedure used to manage and restrict who is permitted to enter a site, venue, or specific area within a facility.",
+    "page": 51
+  },
+  {
+    "term": "active listening",
+    "definition": "A technique where a security professional pays full attention to a speaker, including both their words and non-verbal cues, to show respect and gain cooperation.",
+    "page": 94
+  },
+  {
+    "term": "aggravated assault",
+    "definition": "An indictable offence involving wounding, maiming, disfiguring, or endangering the life of another person.",
+    "page": 169
+  },
+  {
+    "term": "alarm key-holder",
+    "definition": "A designated person, usually an employee of the site where an alarm is located, who is contacted by security to come and reset the alarm system after a response.",
+    "page": 70
+  },
+  {
+    "term": "alarm monitoring system",
+    "definition": "A series of devices installed in a building that detects and warns occupants about abnormal events such as fire, intruders, or environmental changes.",
+    "page": 132
+  },
+  {
+    "term": "alarm responder",
+    "definition": "A class of security licence in Alberta that authorizes a professional to respond to triggered alarm systems at properties.",
+    "page": 14
+  },
+  {
+    "term": "alarm response protocol",
+    "definition": "A set of specific steps a security guard must follow when an alarm is triggered, as outlined in their post orders for a particular site.",
+    "page": 135
+  },
+  {
+    "term": "alarm system",
+    "definition": "A security device made up of a sensor, transmitter, and control panel that detects and signals threats such as intruders, fire, or environmental emergencies.",
+    "page": 147
+  },
+  {
+    "term": "altered mental state",
+    "definition": "A condition in which a person's thinking or behaviour is affected by mental illness, drugs, or alcohol, which a security guard must consider when deciding whether and how to use force.",
+    "page": 83
+  },
+  {
+    "term": "arbitrary detention",
+    "definition": "The unlawful holding of a person without reasonable legal justification, which is prohibited under section 9 of the Canadian Charter of Rights and Freedoms.",
+    "page": 28
+  },
+  {
+    "term": "arrest without warrant",
+    "definition": "The legal power allowing any person, including a security guard, to detain someone without a police warrant when they directly witness that person committing an indictable offence.",
+    "page": 30
+  },
+  {
+    "term": "arson damage to own property",
+    "definition": "A Criminal Code offence under Section 434.1 where a person intentionally or recklessly sets fire to or causes an explosion on their own property when doing so seriously threatens the health, safety, or property of others.",
+    "page": 177
+  },
+  {
+    "term": "arson damage to property of others",
+    "definition": "A Criminal Code offence under Section 434 where a person intentionally or recklessly causes fire or explosion damage to property they do not fully own, carrying up to fourteen years imprisonment.",
+    "page": 176
+  },
+  {
+    "term": "arson disregard for human life",
+    "definition": "A Criminal Code offence under Section 433 where a person intentionally or recklessly causes damage by fire or explosion to an inhabited or occupied property, or causes bodily harm, and is liable to life imprisonment.",
+    "page": 176
+  },
+  {
+    "term": "assault",
+    "definition": "Under Section 265 of the Criminal Code, any intentional application of force to another person without their consent, or a threat that causes someone to believe force will be used against them.",
+    "page": 38
+  },
+  {
+    "term": "assault causing bodily harm",
+    "definition": "A Criminal Code offence where a person commits an assault that results in physical injury to the victim.",
+    "page": 179
+  },
+  {
+    "term": "assault with a weapon",
+    "definition": "A Criminal Code offence where a person commits an assault while carrying, using, or threatening to use a weapon or an imitation of one.",
+    "page": 179
+  },
+  {
+    "term": "assertive communication",
+    "definition": "A style of communication where a security professional makes requests in a confident, straightforward manner without being aggressive or forceful.",
+    "page": 91
+  },
+  {
+    "term": "authorized financial institution",
+    "definition": "A bank, credit union, or similar regulated body through which an employer may legally pay an employee's earnings by direct deposit.",
+    "page": 160
+  },
+  {
+    "term": "authorized representative of the owner",
+    "definition": "A person, such as a security professional, who is formally permitted to act on behalf of a property owner to enforce trespass laws and remove unauthorized individuals from the premises.",
+    "page": 47
+  },
+  {
+    "term": "bias",
+    "definition": "Having an unfair preference for or against a person based on characteristics such as gender, ethnicity, religion, or sexual orientation, which is prohibited in professional security conduct.",
+    "page": 98
+  },
+  {
+    "term": "bomb threat checklist",
+    "definition": "An RCMP-developed form that a security guard fills out during a bomb threat call to record details about the caller and the threat.",
+    "page": 143
+  },
+  {
+    "term": "bomb threat protocol",
+    "definition": "A set of pre-established procedures that a security guard follows when a bomb threat is received at their location.",
+    "page": 141
+  },
+  {
+    "term": "breach of security",
+    "definition": "Any event that violates the safety or access controls of a site, such as an unlocked door, unauthorized entry, or tampering with a security system, which must be recorded in the guard's notebook.",
+    "page": 110
+  },
+  {
+    "term": "break and enter",
+    "definition": "A Criminal Code offence under section 348 where a person breaks into a premises with the intent to commit or while committing an indictable offence, or breaks out after doing so.",
+    "page": 40
+  },
+  {
+    "term": "call trace",
+    "definition": "A telephone procedure used to identify the origin of an incoming call, which a security guard may initiate while still speaking with a bomb threat caller.",
+    "page": 142
+  },
+  {
+    "term": "Canadian Charter of Rights and Freedoms",
+    "definition": "A part of Canada's Constitution that sets out the fundamental rights and freedoms of all Canadians, including protections against unlawful search, arbitrary detention, and the right to legal counsel upon arrest.",
+    "page": 28
+  },
+  {
+    "term": "carrying concealed weapon",
+    "definition": "A Criminal Code offence under Section 90 where a person carries a weapon, prohibited device, or prohibited ammunition hidden on their person without authorization under the Firearms Act.",
+    "page": 178
+  },
+  {
+    "term": "causing a disturbance",
+    "definition": "A summary conviction offence involving conduct such as fighting, shouting, being drunk, or obstructing others in or near a public place.",
+    "page": 172
+  },
+  {
+    "term": "CCTV",
+    "definition": "Closed-circuit television cameras used by security guards to monitor and view areas remotely before physically entering them, improving safety during patrol.",
+    "page": 64
+  },
+  {
+    "term": "CCTV (closed-circuit television)",
+    "definition": "A camera and monitor system used by security professionals to watch over large or multiple areas from a fixed position without being physically present in each location.",
+    "page": 69
+  },
+  {
+    "term": "central dispatch",
+    "definition": "A central office or communications centre that coordinates and monitors security personnel across one or more sites.",
+    "page": 80
+  },
+  {
+    "term": "checking in",
+    "definition": "The practice of a security guard regularly contacting their supervisor or co-workers at set times during a shift to confirm their safety and location.",
+    "page": 150
+  },
+  {
+    "term": "circadian rhythm",
+    "definition": "The body's natural sleep-wake cycle that can be disrupted by shift work, leading to sleep deprivation and other health problems for security guards.",
+    "page": 154
+  },
+  {
+    "term": "circumstantial evidence",
+    "definition": "Information that suggests a person may have been at a scene or involved in a crime, but does not directly prove it on its own.",
+    "page": 126
+  },
+  {
+    "term": "citizen's arrest",
+    "definition": "The legal power given to any private citizen, including a security professional, under the Criminal Code of Canada to arrest a person they have reasonable grounds to believe has committed or is committing a criminal offence.",
+    "page": 26
+  },
+  {
+    "term": "close-ended question",
+    "definition": "A type of interview question designed to get a specific piece of information or a yes or no answer, used when precise details are needed during an investigation.",
+    "page": 104
+  },
+  {
+    "term": "Code of Conduct",
+    "definition": "A set of minimum behavioural standards required by section 20 of the Ministerial Regulation that every licensed security professional must follow while on duty in Alberta.",
+    "page": 22
+  },
+  {
+    "term": "cognitive function",
+    "definition": "A person's mental ability to observe, think clearly, and make decisions, which security guards must maintain through adequate fitness and rest.",
+    "page": 150
+  },
+  {
+    "term": "collective agreement",
+    "definition": "A written contract negotiated between an employer and a union that sets out the terms and conditions of employment, including any agreed wage deductions.",
+    "page": 161
+  },
+  {
+    "term": "colour of right",
+    "definition": "An honest belief that a person has a legal right to take or use property, which can be used as a defence against a theft charge.",
+    "page": 180
+  },
+  {
+    "term": "communication barriers",
+    "definition": "Obstacles that make it difficult for a security guard and another person to understand each other, including language differences, cultural practices, and physical or cognitive disabilities.",
+    "page": 97
+  },
+  {
+    "term": "complacency",
+    "definition": "A dangerous attitude where a security guard makes assumptions that everything is safe based on past experience, instead of actively observing and verifying conditions.",
+    "page": 63
+  },
+  {
+    "term": "complaints process",
+    "definition": "The formal procedure under the Security Services and Investigators Act through which a member of the public can file a complaint against a security guard.",
+    "page": 9
+  },
+  {
+    "term": "compliance",
+    "definition": "The act of an individual cooperating with and following the directions or instructions given by a security professional.",
+    "page": 93
+  },
+  {
+    "term": "compressed work week",
+    "definition": "A scheduled arrangement where an employee works fewer days per week but more hours per day, paid at the regular wage rate, with a maximum of 12 hours in any one workday.",
+    "page": 162
+  },
+  {
+    "term": "contempt of court",
+    "definition": "A legal offence that can be charged against a person who refuses or fails to comply with a court order, such as ignoring a subpoena.",
+    "page": 127
+  },
+  {
+    "term": "continuity of evidence",
+    "definition": "The requirement that a security guard avoids displacing or destroying evidence at a scene so that it remains intact and usable in a police investigation or court proceeding.",
+    "page": 70
+  },
+  {
+    "term": "controlled access",
+    "definition": "A security measure that restricts entry to certain areas or property to only those individuals who have been given permission, often verified by a key, swipe card, ticket, or ID.",
+    "page": 68
+  },
+  {
+    "term": "Controlled Drugs and Substances Act",
+    "definition": "A federal Canadian law that prohibits the consumption or possession of certain drugs and substances, which security professionals are strictly forbidden from violating while on duty.",
+    "page": 22
+  },
+  {
+    "term": "CPIC",
+    "definition": "The Canadian Police Information Centre, a national database searched during a criminal record check to look for an applicant's criminal history across Canada.",
+    "page": 16
+  },
+  {
+    "term": "creating a disturbance",
+    "definition": "Behaviour by an intoxicated or impaired individual that disrupts public order, requiring a security guard to intervene and potentially call police.",
+    "page": 74
+  },
+  {
+    "term": "crime scene preservation",
+    "definition": "The duty of a security guard to protect and secure a location where an incident occurred so that evidence is not disturbed before police or investigators arrive.",
+    "page": 107
+  },
+  {
+    "term": "Criminal Code of Canada",
+    "definition": "The federal law that defines criminal offences and sets out the legal powers of arrest, use of force, and search and seizure that apply to security professionals in Canada.",
+    "page": 26
+  },
+  {
+    "term": "criminal harassment",
+    "definition": "A dual offence involving conduct such as repeatedly following or communicating with a person in a way that causes them to fear for their safety.",
+    "page": 169
+  },
+  {
+    "term": "crowd control",
+    "definition": "The security procedure of managing large groups of people to prevent disorder, injury, or property damage at events or public gatherings.",
+    "page": 71
+  },
+  {
+    "term": "custody transfer",
+    "definition": "The legal obligation of a security guard who has arrested a person to hand that individual over to police or a peace officer as soon as possible.",
+    "page": 85
+  },
+  {
+    "term": "days of rest",
+    "definition": "The minimum number of consecutive days off that an employer must give an employee within a given work week or cycle, as required by the Employment Standards Code.",
+    "page": 162
+  },
+  {
+    "term": "de-escalation",
+    "definition": "A strategy used by security guards to calm down a potentially dangerous crowd or individual situation before it becomes violent or uncontrollable.",
+    "page": 73
+  },
+  {
+    "term": "deductions from earnings",
+    "definition": "Amounts an employer is legally allowed to subtract from an employee's wages, but only when permitted by law, a court order, a collective agreement, or written authorization from the employee.",
+    "page": 161
+  },
+  {
+    "term": "defence of property",
+    "definition": "A legal justification under Section 35 of the Criminal Code allowing a security professional authorized by a property owner to take reasonable action, including arrest, to prevent unlawful entry, theft, or damage to that property.",
+    "page": 37
+  },
+  {
+    "term": "deliver to a peace officer",
+    "definition": "The legal requirement under Section 5(2) of the Trespass to Premises Act that a security professional who apprehends a trespasser must hand that person over to a police officer as soon as practicable.",
+    "page": 47
+  },
+  {
+    "term": "delivery to peace officer",
+    "definition": "The legal obligation requiring anyone who makes an arrest under Section 494 of the Criminal Code to hand the arrested person over to a police officer as soon as possible.",
+    "page": 33
+  },
+  {
+    "term": "denied access",
+    "definition": "A situation where a security guard refuses to allow an individual entry to a premises or area because the person has not met the required conditions, such as producing a valid ticket or identification.",
+    "page": 97
+  },
+  {
+    "term": "deportment",
+    "definition": "The professional conduct, behaviour, and appearance expected of a security professional while carrying out their duties.",
+    "page": 21
+  },
+  {
+    "term": "designated meeting area",
+    "definition": "A pre-determined safe location outside a building where evacuees are directed to gather after an emergency evacuation.",
+    "page": 146
+  },
+  {
+    "term": "direct deposit",
+    "definition": "A method of paying an employee's earnings electronically into the employee's personal account at a financial institution of the employee's choice.",
+    "page": 160
+  },
+  {
+    "term": "direct evidence",
+    "definition": "First-hand testimony given by a witness in court about what they personally saw, heard, or experienced.",
+    "page": 126
+  },
+  {
+    "term": "discrimination",
+    "definition": "Treating a person differently or unfairly because they belong to a particular group such as an ethnic or religious group, which is unacceptable behaviour for a security professional.",
+    "page": 98
+  },
+  {
+    "term": "documentary evidence",
+    "definition": "A category of evidence consisting of written or recorded materials such as emails or letters that can be used in an investigation or court proceeding.",
+    "page": 125
+  },
+  {
+    "term": "documentation",
+    "definition": "The process of accurately recording incidents, observations, and interactions in a notebook or on report forms, which is a legal and professional requirement for security guards.",
+    "page": 107
+  },
+  {
+    "term": "drug paraphernalia",
+    "definition": "Items used to package, manufacture, consume, or conceal illegal drugs, which a security guard may identify as indicators of drug activity on a premises.",
+    "page": 75
+  },
+  {
+    "term": "dual offence",
+    "definition": "A criminal offence in Canada, also called a hybrid offence, that the Crown can choose to prosecute as either a summary conviction or an indictable offence depending on the seriousness of the circumstances.",
+    "page": 169
+  },
+  {
+    "term": "duty belt",
+    "definition": "A belt worn by a security guard that holds required equipment such as a radio, keys, and authorized tools, which must be checked before each shift to ensure all items are present and working.",
+    "page": 62
+  },
+  {
+    "term": "duty status",
+    "definition": "The condition of being actively on duty and responsible for carrying out assigned security functions at a post.",
+    "page": 81
+  },
+  {
+    "term": "duty to protect persons and property",
+    "definition": "The legal and professional responsibility a security guard has to safeguard the people and assets at their assigned site with the same care the owner would.",
+    "page": 53
+  },
+  {
+    "term": "eco-terrorism",
+    "definition": "Politically motivated acts of violence or threats, such as bomb threats or explosions, directed at industries or businesses perceived as harming the environment.",
+    "page": 141
+  },
+  {
+    "term": "emergency equipment",
+    "definition": "Items such as first aid kits and fire suppression tools located on a site that a security guard must know how to find and use during an emergency.",
+    "page": 80
+  },
+  {
+    "term": "emergency exit",
+    "definition": "A designated door or escape route that must remain unblocked and accessible so occupants can safely leave a building during an emergency.",
+    "page": 138
+  },
+  {
+    "term": "emergency response",
+    "definition": "A security professional's trained, calm, and coordinated reaction to a crisis situation, applying all relevant safety and communication skills at once.",
+    "page": 152
+  },
+  {
+    "term": "emergency response procedures",
+    "definition": "The specific set of actions a security professional is trained to follow when responding to emergencies such as bomb threats, fires, or evacuations.",
+    "page": 145
+  },
+  {
+    "term": "emergency scene management",
+    "definition": "The responsibility of a security guard to maintain safety, remain calm, communicate professionally, and protect persons and property when an emergency occurs.",
+    "page": 137
+  },
+  {
+    "term": "emergency shut-down procedure",
+    "definition": "A set of instructions a security guard must follow to safely turn off a building system or alarm in response to an emergency or maintenance request.",
+    "page": 136
+  },
+  {
+    "term": "empathize",
+    "definition": "The step in the LEAPS method where a security professional acknowledges another person's situation from their perspective in order to reduce tension and build cooperation.",
+    "page": 95
+  },
+  {
+    "term": "empathy",
+    "definition": "In security work, the practice of trying to understand why a person is behaving a certain way so that the guard can communicate more effectively with them, without necessarily agreeing with or excusing their behaviour.",
+    "page": 96
+  },
+  {
+    "term": "Employment Standards Code",
+    "definition": "Alberta legislation that sets the minimum standards employers must follow regarding workers' rights, including minimum wage, overtime compensation, and other employment conditions.",
+    "page": 49
+  },
+  {
+    "term": "escalation",
+    "definition": "The process by which an uncooperative or hostile situation becomes increasingly serious, shown by signs such as raised voices, aggressive body language, or threat-making.",
+    "page": 101
+  },
+  {
+    "term": "evacuation",
+    "definition": "The organized process of safely moving all occupants out of a building during an emergency such as a fire or bomb threat.",
+    "page": 139
+  },
+  {
+    "term": "evacuation plan",
+    "definition": "A pre-arranged procedure that describes how people must safely and quickly exit a building during an emergency.",
+    "page": 146
+  },
+  {
+    "term": "evidence",
+    "definition": "Any physical item, information, or record that may be used during an investigation or court proceeding, which security guards have a duty to preserve and protect.",
+    "page": 107
+  },
+  {
+    "term": "excessive force",
+    "definition": "Under section 26 of the Criminal Code, using more force than is reasonably necessary in a situation, which can result in criminal charges, civil liability, or dismissal for the security professional.",
+    "page": 44
+  },
+  {
+    "term": "excited delirium",
+    "definition": "A rare and life-threatening medical emergency in which a person shows extreme agitation, unusual strength, and violent behaviour, sometimes triggered by being restrained, drug use, or certain medical conditions.",
+    "page": 85
+  },
+  {
+    "term": "executive protection",
+    "definition": "A class of security licence in Alberta that authorizes a professional to provide personal security services to individuals who may face elevated personal risk.",
+    "page": 14
+  },
+  {
+    "term": "executive security",
+    "definition": "A licence class for security professionals who guard or provide personal protection to a specific individual, and who may be exempt from wearing a uniform.",
+    "page": 13
+  },
+  {
+    "term": "false alarm",
+    "definition": "An alarm that is triggered but does not indicate an actual emergency, which a security guard must still investigate before concluding it is not genuine.",
+    "page": 136
+  },
+  {
+    "term": "false alarm of fire",
+    "definition": "A Criminal Code offence under Section 437 where a person wilfully and without reasonable cause triggers or spreads a fire alarm by any means, punishable by up to two years imprisonment or by summary conviction.",
+    "page": 184
+  },
+  {
+    "term": "fire extinguisher classification",
+    "definition": "A rating system that identifies which type of fire a portable extinguisher is designed to fight, such as Class A for ordinary combustibles or Class C for electrical fires.",
+    "page": 140
+  },
+  {
+    "term": "first responder",
+    "definition": "The person, which may include a security guard, who is first to arrive at the scene of a crime or emergency and has an initial duty to ensure safety and protect evidence.",
+    "page": 125
+  },
+  {
+    "term": "fit and proper person",
+    "definition": "A legal standard used by the Registrar to judge whether an applicant has the character and background suitable to hold a security licence.",
+    "page": 17
+  },
+  {
+    "term": "foot patrol",
+    "definition": "A security procedure where a guard walks through an assigned area on foot to monitor and protect the premises.",
+    "page": 52
+  },
+  {
+    "term": "forgery",
+    "definition": "A dual offence involving making a false document with the intent that it be used as genuine to defraud or deceive someone.",
+    "page": 170
+  },
+  {
+    "term": "fraud",
+    "definition": "A Criminal Code offence where a person uses deceit, falsehood, or other dishonest means to deprive someone of property, money, or a valuable service.",
+    "page": 182
+  },
+  {
+    "term": "fraud in relation to fares",
+    "definition": "A Criminal Code offence where a person responsible for collecting fares or tolls intentionally fails to collect them, collects less than required, or accepts a bribe to do so.",
+    "page": 173
+  },
+  {
+    "term": "fraud over $5,000",
+    "definition": "A Criminal Code offence under Section 380 where a person uses deceit or other dishonest means to deprive someone of property or money worth more than five thousand dollars, carrying up to fourteen years imprisonment.",
+    "page": 176
+  },
+  {
+    "term": "fraud under $5,000",
+    "definition": "A Criminal Code offence involving fraudulent conduct where the value of the subject matter does not exceed five thousand dollars, prosecutable as either an indictable or summary conviction offence.",
+    "page": 182
+  },
+  {
+    "term": "fresh pursuit",
+    "definition": "The active and immediate chase of a person who has just committed a criminal offence, which can justify an arrest without a warrant by a security professional or any person.",
+    "page": 37
+  },
+  {
+    "term": "Gaming and Liquor Act",
+    "definition": "Alberta legislation that regulates the sale and consumption of alcohol and gaming activities, which security professionals working in licensed establishments must understand and enforce.",
+    "page": 26
+  },
+  {
+    "term": "general holiday pay",
+    "definition": "Wages an eligible employee is entitled to receive for a recognized public holiday in Alberta, whether or not they work on that day.",
+    "page": 159
+  },
+  {
+    "term": "habeas corpus",
+    "definition": "A legal right under the Charter that allows a detained person to challenge the lawfulness of their detention before a court and be released if the detention is found to be unlawful.",
+    "page": 28
+  },
+  {
+    "term": "harassment",
+    "definition": "Treating an individual or group in a negative or bullying manner for reasons unrelated to the situation at hand, which is prohibited conduct for security professionals.",
+    "page": 98
+  },
+  {
+    "term": "hazard assessment",
+    "definition": "An ongoing, systematic process of identifying and re-evaluating site dangers so that a security professional can proactively maintain personal safety.",
+    "page": 154
+  },
+  {
+    "term": "hazard identification",
+    "definition": "The process of finding and documenting all sources of potential harm at a worksite, including things, substances, conditions, and unsafe practices.",
+    "page": 152
+  },
+  {
+    "term": "hearsay evidence",
+    "definition": "Evidence based on something a third party said, rather than what the witness directly observed themselves.",
+    "page": 126
+  },
+  {
+    "term": "high risk location",
+    "definition": "An area within a site, such as a vault or server room, that requires extra security attention because it contains valuable or sensitive assets.",
+    "page": 80
+  },
+  {
+    "term": "hours of work confined",
+    "definition": "An Employment Standards Code rule that limits an employee's working hours to within 12 consecutive hours in any one workday, except in emergencies or with a director's permit.",
+    "page": 161
+  },
+  {
+    "term": "hybrid offence",
+    "definition": "A criminal offence that the Crown can choose to prosecute either as a summary conviction or as an indictable offence, which affects what arrest powers a security guard may apply.",
+    "page": 31
+  },
+  {
+    "term": "incidence of criminal activity",
+    "definition": "The frequency or likelihood of crimes occurring at a particular site, which can determine whether a security guard is assigned a partner.",
+    "page": 81
+  },
+  {
+    "term": "incident report",
+    "definition": "A formal written document completed by a security guard to record the details of a specific event or breach of security for the employer, client, or police.",
+    "page": 111
+  },
+  {
+    "term": "indecent act",
+    "definition": "The offence of wilfully performing an indecent act in a public place or with intent to insult or offend a person, punishable on summary conviction.",
+    "page": 172
+  },
+  {
+    "term": "indictable offence",
+    "definition": "A serious criminal offence under the Criminal Code, such as break and enter or theft over $5,000, which gives a security guard the right to make an arrest if they witness it happening.",
+    "page": 31
+  },
+  {
+    "term": "individual licence",
+    "definition": "A government-issued authorisation that a security guard in Alberta must obtain and keep current under the Security Services and Investigators Act in order to legally work as a security professional.",
+    "page": 185
+  },
+  {
+    "term": "individual licensee",
+    "definition": "A person who holds a valid security licence issued under Alberta's Security Services and Investigators Act and is subject to its reporting requirements and conditions.",
+    "page": 124
+  },
+  {
+    "term": "individual licensee reporting requirements",
+    "definition": "Legal obligations requiring a licensed security professional to notify the Registrar in writing within specified time limits if they are arrested, lose their licence, or have a change in personal information.",
+    "page": 17
+  },
+  {
+    "term": "informal resolution and mediation",
+    "definition": "A step in the complaint process where, with the agreement of both parties, the employer tries to settle a dispute between the security professional and the complainant without a formal investigation.",
+    "page": 19
+  },
+  {
+    "term": "interpretation",
+    "definition": "The process of taking information you have noticed and applying meaning to it in order to decide on an appropriate security response.",
+    "page": 59
+  },
+  {
+    "term": "interview",
+    "definition": "A respectfully conducted exchange of information between a security guard and a witness or involved person, used to gather accurate and unbiased facts about an incident.",
+    "page": 103
+  },
+  {
+    "term": "intoxicated person",
+    "definition": "A person who is under the influence of alcohol or drugs, showing signs such as slurred speech, bloodshot eyes, or loss of balance, and who must be handled calmly and unpredictably by security guards.",
+    "page": 102
+  },
+  {
+    "term": "isolated work site",
+    "definition": "A work location where a security guard is alone or separated from others, which is considered a recognized safety hazard.",
+    "page": 149
+  },
+  {
+    "term": "labour dispute surveillance",
+    "definition": "A security duty involving video recording of a picket line or strike action to gather evidence of vandalism or assault for use in subsequent investigations or court proceedings.",
+    "page": 69
+  },
+  {
+    "term": "leading question",
+    "definition": "An improper interview question that suggests a particular answer to the witness, which security guards must avoid to keep information accurate and unbiased.",
+    "page": 104
+  },
+  {
+    "term": "LEAPS",
+    "definition": "A communication method (Listen, Empathize, Ask, Paraphrase, Summarize) used by security professionals to gain cooperation and compliance from individuals who are challenging authority.",
+    "page": 93
+  },
+  {
+    "term": "licence non-transferability",
+    "definition": "The legal rule under the SSIA that a security licence belongs only to the person it was issued to and cannot be passed on or used by anyone else.",
+    "page": 17
+  },
+  {
+    "term": "licence suspension",
+    "definition": "A temporary removal of a security professional's right to work, which the Registrar can impose if the licensee fails to meet their legal obligations.",
+    "page": 17
+  },
+  {
+    "term": "licensee",
+    "definition": "A person or business that holds a valid security licence issued under the Security Services and Investigators Act and is legally permitted to work as a security professional in Alberta.",
+    "page": 22
+  },
+  {
+    "term": "loitering",
+    "definition": "The act of lingering in a location without a clear purpose, which security guards may encounter when substance abusers wait to buy drugs or gather with other users.",
+    "page": 74
+  },
+  {
+    "term": "loss prevention",
+    "definition": "A class of security licence in Alberta that authorizes a professional to work in a role focused on preventing theft and related crimes, typically in a retail environment.",
+    "page": 14
+  },
+  {
+    "term": "loss prevention worker",
+    "definition": "A licensed security professional who works in plain clothes to prevent or detect loss of or damage to commercial, industrial, or retail property.",
+    "page": 13
+  },
+  {
+    "term": "maintenance report",
+    "definition": "A formal written notice submitted by a security guard to flag damaged equipment or safety hazards, such as a broken fire alarm or missing ashtray, for repair or follow-up.",
+    "page": 138
+  },
+  {
+    "term": "mandatory report to the Registrar",
+    "definition": "A written notice that a licensed security guard is legally required to submit to the Registrar under the Security Services and Investigators Regulation when specific events occur, such as being arrested or losing their licence.",
+    "page": 124
+  },
+  {
+    "term": "manual traffic control",
+    "definition": "The process of directing vehicle and pedestrian traffic by hand signals and whistle, typically required at large venues or busy construction sites on private property.",
+    "page": 76
+  },
+  {
+    "term": "media contact",
+    "definition": "A designated person authorized by an employer to speak on behalf of an organization to the press, to whom a security guard should refer media inquiries.",
+    "page": 76
+  },
+  {
+    "term": "mental preparedness",
+    "definition": "The requirement that a security guard arrive at work focused, free from personal distractions, and with a clear understanding of the tasks to be accomplished during the shift.",
+    "page": 62
+  },
+  {
+    "term": "mischief",
+    "definition": "A Criminal Code offence under section 430 where a person wilfully destroys, damages, or interferes with property or data so it cannot be used or enjoyed as intended.",
+    "page": 41
+  },
+  {
+    "term": "mischief endangering life",
+    "definition": "An indictable offence involving wilfully destroying or damaging property in a way that endangers the life of another person.",
+    "page": 169
+  },
+  {
+    "term": "mischief in relation to data",
+    "definition": "A Criminal Code offence where a person wilfully destroys, alters, or interferes with computer data or denies access to data to a person entitled to it.",
+    "page": 183
+  },
+  {
+    "term": "mischief relating to data",
+    "definition": "A Criminal Code offence where a person wilfully does or fails to do an act that causes danger to life or damage to property or data, punishable by up to five years imprisonment as an indictable offence or by summary conviction.",
+    "page": 184
+  },
+  {
+    "term": "mobility-impaired individual",
+    "definition": "A person who has physical limitations that affect their ability to move, requiring special assistance from security personnel during an evacuation.",
+    "page": 146
+  },
+  {
+    "term": "non-verbal communication",
+    "definition": "The messages sent through body language, facial expressions, posture, eye contact, gestures, and tone of voice rather than through spoken words.",
+    "page": 91
+  },
+  {
+    "term": "non-verbal measures",
+    "definition": "Physical or gestural actions used by a security guard only after all verbal communication options have been exhausted when managing an individual or crowd.",
+    "page": 73
+  },
+  {
+    "term": "notebook",
+    "definition": "A security guard's official written record of events, observations, and incidents that occurs during a shift, which must be accurate, complete, and may be used as evidence in court.",
+    "page": 107
+  },
+  {
+    "term": "notebook entries",
+    "definition": "Written records that a security guard is required to make in their official notebook following any incident, as part of proper documentation procedure.",
+    "page": 73
+  },
+  {
+    "term": "notebook entry",
+    "definition": "A factual, chronological record written in a security guard's official notebook documenting events, times, persons, and actions observed during a shift.",
+    "page": 114
+  },
+  {
+    "term": "notebook integrity",
+    "definition": "The requirement that notebook entries are not altered or left with blank lines, so the record cannot be accused of having information added after the fact.",
+    "page": 113
+  },
+  {
+    "term": "notice not to trespass",
+    "definition": "A warning given to a person—orally, in writing, or through clearly visible signs at entrances—that they are not permitted to enter or remain on certain premises.",
+    "page": 46
+  },
+  {
+    "term": "notice of work times",
+    "definition": "The legal requirement for an employer to inform employees of their shift start and end times, and to give at least 24 hours' written notice before changing an employee from one shift to another.",
+    "page": 161
+  },
+  {
+    "term": "objective reporting",
+    "definition": "Recording only observed facts in a notebook or report without adding personal opinions, assumptions, or conclusions about what took place.",
+    "page": 110
+  },
+  {
+    "term": "observation",
+    "definition": "The security skill of noticing, interpreting, and recalling details about persons and property in order to protect them and respond appropriately.",
+    "page": 53
+  },
+  {
+    "term": "observe and report",
+    "definition": "The primary duty of a security professional, which is to watch for and document incidents rather than to intervene with physical force unless necessary.",
+    "page": 81
+  },
+  {
+    "term": "observe, deter, report",
+    "definition": "The three-part primary role of a security professional: watching for problems, discouraging criminal activity, and documenting and reporting incidents.",
+    "page": 11
+  },
+  {
+    "term": "obtain food or lodging by fraud",
+    "definition": "The summary conviction offence of fraudulently receiving food, beverages, or accommodation from a business without paying for it.",
+    "page": 173
+  },
+  {
+    "term": "off-site alarm response",
+    "definition": "The process where a security guard travels to a location in response to an alarm triggered away from their current post, while still obeying all traffic laws.",
+    "page": 136
+  },
+  {
+    "term": "offence punishable on summary conviction",
+    "definition": "A less serious criminal offence that is tried without a jury and typically carries a lighter penalty than an indictable offence.",
+    "page": 180
+  },
+  {
+    "term": "open-ended question",
+    "definition": "A type of interview question that allows the person being questioned to give a variety of answers in their own words, used at the start of an interview to gather general information.",
+    "page": 104
+  },
+  {
+    "term": "oral notice",
+    "definition": "A verbal warning given by a security professional or property owner telling a person they are not permitted to enter a certain area, which is sufficient to establish a trespass offence if ignored.",
+    "page": 48
+  },
+  {
+    "term": "orderly evacuation",
+    "definition": "The controlled and calm movement of people away from a dangerous area during an emergency such as a fire, which a security guard is responsible for facilitating.",
+    "page": 136
+  },
+  {
+    "term": "overtime pay",
+    "definition": "Extra wages an employer must pay an employee for hours worked beyond the standard hours set out in the Employment Standards Code.",
+    "page": 160
+  },
+  {
+    "term": "panic situation",
+    "definition": "An emergency event where a crowd attempts to escape rapidly, creating an extremely dangerous stampede risk that security guards must manage calmly and assertively.",
+    "page": 74
+  },
+  {
+    "term": "paraphrasing",
+    "definition": "A communication skill where the security guard repeats back what a speaker said using their own words, to confirm understanding and reduce misunderstandings that could lead to conflict.",
+    "page": 97
+  },
+  {
+    "term": "PASS method",
+    "definition": "A four-step technique for using a portable fire extinguisher: Pull the pin, Aim at the base of the fire, Squeeze the handle, and Sweep side to side.",
+    "page": 140
+  },
+  {
+    "term": "patrol",
+    "definition": "An active, systematic survey of an assigned area by a security guard to detect signs of trouble, protect persons and property, and maintain a visible security presence.",
+    "page": 61
+  },
+  {
+    "term": "pay period",
+    "definition": "A set span of time, no longer than one work month, used by an employer to calculate and pay wages and overtime owed to an employee.",
+    "page": 160
+  },
+  {
+    "term": "peaceable possession",
+    "definition": "Lawful and undisputed control over a property that forms the basis for a person or their authorized agent to legally defend that property under Section 35 of the Criminal Code.",
+    "page": 38
+  },
+  {
+    "term": "Personal Information Protection Act",
+    "definition": "Alberta legislation that governs how personal information must be kept confidential, which security professionals must comply with when handling information obtained during their work.",
+    "page": 22
+  },
+  {
+    "term": "personal safety",
+    "definition": "The practice of a security guard maintaining their own physical and mental fitness, wearing proper protective equipment, and following safe work habits to avoid injury on duty.",
+    "page": 150
+  },
+  {
+    "term": "personal triggers",
+    "definition": "Specific attitudes or behaviours, such as disrespect or profanity, that cause a security guard to become frustrated or impatient and that must be controlled to prevent escalation.",
+    "page": 100
+  },
+  {
+    "term": "Petty Trespass Act",
+    "definition": "An Alberta law that addresses minor trespassing situations and provides security professionals with legal grounds to remove or exclude persons from certain properties.",
+    "page": 26
+  },
+  {
+    "term": "phonetic alphabet",
+    "definition": "A standard system of words representing letters (such as Alpha for A, Bravo for B) used by security guards to clearly communicate information like licence plate numbers over radio or telephone.",
+    "page": 117
+  },
+  {
+    "term": "physical evidence",
+    "definition": "A category of evidence consisting of tangible objects found at a scene, such as a weapon, that can be collected and presented during an investigation or in court.",
+    "page": 125
+  },
+  {
+    "term": "physical preparedness",
+    "definition": "The requirement that a security guard be in good health, properly uniformed, and fully equipped before beginning a shift in order to carry out duties effectively.",
+    "page": 62
+  },
+  {
+    "term": "picket line",
+    "definition": "A line of striking workers who gather outside their workplace during a labour dispute, which can become a crowd control situation for security guards.",
+    "page": 72
+  },
+  {
+    "term": "plain language",
+    "definition": "A communication approach where the security guard avoids complicated words or slang to ensure that instructions and information are clearly understood by all individuals.",
+    "page": 99
+  },
+  {
+    "term": "plain-clothes loss prevention worker",
+    "definition": "A security professional who works in a retail environment without wearing a uniform so that shoplifters do not easily identify them as security.",
+    "page": 66
+  },
+  {
+    "term": "pointing a firearm",
+    "definition": "A Criminal Code offence under Section 87 where a person, without lawful excuse, aims a firearm at another person whether it is loaded or not.",
+    "page": 174
+  },
+  {
+    "term": "Police Information and Criminal Record Check",
+    "definition": "A background check required for a security licence application that searches CPIC, the Vulnerable Sector database, and local police databases to identify any criminal history.",
+    "page": 16
+  },
+  {
+    "term": "policy for managing public complaints",
+    "definition": "A required written procedure that licensed security employers must have in place to receive, document, and respond to complaints made by members of the public against their licensed employees.",
+    "page": 185
+  },
+  {
+    "term": "possession of counterfeit money",
+    "definition": "A Criminal Code offence under Section 450 where a person without lawful excuse buys, possesses, or brings into Canada fake currency, carrying up to fourteen years imprisonment.",
+    "page": 177
+  },
+  {
+    "term": "possession of housebreaking instruments",
+    "definition": "An indictable offence involving having tools or devices that are intended to be used to break into a building to commit a crime.",
+    "page": 169
+  },
+  {
+    "term": "possession of prohibited weapon",
+    "definition": "A dual offence involving knowingly having a weapon that is banned or restricted under the Criminal Code without lawful authority.",
+    "page": 169
+  },
+  {
+    "term": "possession of property obtained by crime",
+    "definition": "A Criminal Code offence under Section 354 where a person knowingly possesses property or proceeds that came from an indictable offence committed in Canada or elsewhere.",
+    "page": 175
+  },
+  {
+    "term": "possession of stolen property",
+    "definition": "A Criminal Code offence under section 354 where a person knowingly has in their possession property or proceeds that were obtained through the commission of a crime.",
+    "page": 41
+  },
+  {
+    "term": "post",
+    "definition": "The specific location or assignment where a security guard is stationed and responsible for carrying out their duties.",
+    "page": 79
+  },
+  {
+    "term": "post order",
+    "definition": "A written document provided by your employer that outlines your specific duties, responsibilities, and procedures for your shift at a particular site.",
+    "page": 79
+  },
+  {
+    "term": "post orders",
+    "definition": "Written instructions provided to a security professional that explain their specific duties, responsibilities, and procedures for a particular assignment or shift.",
+    "page": 51
+  },
+  {
+    "term": "posting",
+    "definition": "A security guard's assigned location or site where they are responsible for observing and protecting persons and property.",
+    "page": 57
+  },
+  {
+    "term": "preserve the scene",
+    "definition": "The duty of a security guard who arrives first at a crime scene to protect the area and any evidence from being disturbed or tampered with until police arrive.",
+    "page": 125
+  },
+  {
+    "term": "presumption of innocence",
+    "definition": "The legal principle under the Charter that any person charged with an offence must be treated as innocent until they are proven guilty through a fair and public hearing.",
+    "page": 28
+  },
+  {
+    "term": "private property",
+    "definition": "Land or premises owned or controlled by a person or organization rather than the government, where a security guard has authority to direct or remove members of the public.",
+    "page": 76
+  },
+  {
+    "term": "professional communication",
+    "definition": "The calm, respectful, and assertive manner of speaking that security guards must use when dealing with uncooperative individuals before resorting to physical measures.",
+    "page": 73
+  },
+  {
+    "term": "professional conduct",
+    "definition": "The standard of behaviour expected of a licensed security professional, including acting with accountability, integrity, and professionalism at all times.",
+    "page": 9
+  },
+  {
+    "term": "professional response",
+    "definition": "A reaction by a security professional that is courteous, helpful, and appropriate to their role, even when a situation falls outside their assigned duties.",
+    "page": 93
+  },
+  {
+    "term": "property owner arrest authority",
+    "definition": "The power under Section 494(2) of the Criminal Code allowing a property owner or their authorized agent, such as a security guard, to arrest a person found committing any criminal offence on or related to that property.",
+    "page": 32
+  },
+  {
+    "term": "ProServe",
+    "definition": "A mandatory Alberta Gaming and Liquor Commission training certification required for anyone involved in liquor sales, service, or security in Alberta as of January 1, 2010.",
+    "page": 46
+  },
+  {
+    "term": "ProTect",
+    "definition": "An Alberta Gaming and Liquor Commission training program that helps security staff improve observation and communication skills to prevent, defuse, and manage customer disturbances before violence escalates.",
+    "page": 46
+  },
+  {
+    "term": "protection of information",
+    "definition": "A security professional's responsibility to safeguard confidential data, such as computer records or personal details, from unauthorized access.",
+    "page": 12
+  },
+  {
+    "term": "protection of persons",
+    "definition": "A security professional's responsibility for the safety and well-being of individuals, which can include physically guarding them or watching for hazards.",
+    "page": 11
+  },
+  {
+    "term": "protection of property",
+    "definition": "A security professional's responsibility to guard locations and assets against criminal acts such as vandalism and theft, as well as natural events like fire or flooding.",
+    "page": 11
+  },
+  {
+    "term": "protective equipment",
+    "definition": "Safety gear such as steel-toed boots or reflective vests that a security guard is required to wear to reduce the risk of injury while on duty.",
+    "page": 150
+  },
+  {
+    "term": "public complaint process",
+    "definition": "The formal procedure under the SSIA by which a member of the public can file a written complaint against a licensed security professional, which must be submitted within 90 days of the incident.",
+    "page": 19
+  },
+  {
+    "term": "public mischief",
+    "definition": "A dual offence involving making a false report to cause police to investigate an innocent person or waste law enforcement resources.",
+    "page": 169
+  },
+  {
+    "term": "reasonable bail",
+    "definition": "The Charter right of an accused person not to be denied release from custody without a legally justified reason while awaiting trial.",
+    "page": 28
+  },
+  {
+    "term": "reasonable cause",
+    "definition": "A legal standard requiring that a person have genuine and justifiable grounds for taking an action, such as activating a fire alarm, before doing so.",
+    "page": 184
+  },
+  {
+    "term": "reasonable force",
+    "definition": "The amount of physical force that is appropriate and proportionate to the specific situation, taking into account the physical and mental characteristics of the subject and the circumstances at hand.",
+    "page": 44
+  },
+  {
+    "term": "reasonable grounds",
+    "definition": "A standard meaning the facts and information available in a situation would lead an ordinary person to believe that a criminal act has occurred, justifying an arrest or other action.",
+    "page": 31
+  },
+  {
+    "term": "reasonable inference",
+    "definition": "A logical conclusion that a reasonable person would draw from the available facts and circumstances, used in security and law enforcement to justify suspicion or action such as detaining someone found with break-in tools.",
+    "page": 178
+  },
+  {
+    "term": "reasonable time arrest",
+    "definition": "A 2012 amendment to Section 494(2)(b) of the Criminal Code that allows a property owner or agent to arrest a person within a reasonable period after witnessing an offence, if a police officer cannot make the arrest.",
+    "page": 31
+  },
+  {
+    "term": "recalling",
+    "definition": "The ability of a security guard to accurately remember details that were previously noticed and interpreted, which is essential for reporting and evidence purposes.",
+    "page": 55
+  },
+  {
+    "term": "reflective vest",
+    "definition": "A high-visibility safety garment worn by a security guard during traffic control duties to ensure they can be seen by motorists and pedestrians.",
+    "page": 77
+  },
+  {
+    "term": "refusal of licence application",
+    "definition": "A decision by the Registrar to deny a person's application for a security licence, which can occur if the applicant has a criminal charge, provided false information, or is not considered a fit and proper person.",
+    "page": 17
+  },
+  {
+    "term": "Registrar",
+    "definition": "The government official responsible for issuing, renewing, suspending, or cancelling security professional licences in Alberta.",
+    "page": 17
+  },
+  {
+    "term": "remove the leaders",
+    "definition": "A crowd control tactic where a security guard identifies and separates the individual(s) encouraging disruptive behaviour from the group to reduce the crowd's energy.",
+    "page": 73
+  },
+  {
+    "term": "rest period",
+    "definition": "A mandatory break of at least 30 minutes, paid or unpaid, that an employer must provide to an employee during any shift longer than five consecutive hours.",
+    "page": 162
+  },
+  {
+    "term": "restraint",
+    "definition": "The act of physically holding or restricting a person's movement, which must be done carefully to avoid blocking their airways or putting pressure on their chest.",
+    "page": 85
+  },
+  {
+    "term": "retail theft",
+    "definition": "Shoplifting is generally considered complete only after the suspect has passed the checkout area and left the store, and detaining someone before that point may result in an unlawful arrest.",
+    "page": 40
+  },
+  {
+    "term": "right of way",
+    "definition": "The legal priority given to emergency vehicles to proceed through traffic before all other vehicles and pedestrians during an emergency response.",
+    "page": 78
+  },
+  {
+    "term": "right to an interpreter",
+    "definition": "The right under Section 14 of the Canadian Charter of Rights and Freedoms for any party or witness in legal proceedings who does not understand the language being used to receive interpreter assistance.",
+    "page": 29
+  },
+  {
+    "term": "right to counsel",
+    "definition": "The Charter right of any person who is arrested or detained to be told immediately that they may contact and speak with a lawyer before further questioning.",
+    "page": 28
+  },
+  {
+    "term": "riot",
+    "definition": "An unlawful assembly that has actually begun to disturb the peace in a violent and tumultuous manner.",
+    "page": 171
+  },
+  {
+    "term": "risk assessment",
+    "definition": "A security guard's evaluation of how likely and how serious potential dangers are at a specific worksite, used to determine the level of caution needed.",
+    "page": 151
+  },
+  {
+    "term": "robbery",
+    "definition": "A Criminal Code offence under Section 343 where a person steals and uses or threatens violence, assaults someone with intent to steal, or steals while armed with a weapon.",
+    "page": 175
+  },
+  {
+    "term": "robbery with firearm",
+    "definition": "An indictable offence involving stealing from a person while using or threatening to use a firearm.",
+    "page": 169
+  },
+  {
+    "term": "scope of duties",
+    "definition": "The range of tasks and responsibilities that a security professional is specifically assigned to carry out at their post.",
+    "page": 93
+  },
+  {
+    "term": "search and seizure",
+    "definition": "The legal process of searching a person or property and taking items as evidence, which under the Charter must not be conducted in an unreasonable manner by security professionals.",
+    "page": 26
+  },
+  {
+    "term": "search with consent",
+    "definition": "A search that a security professional may conduct only because the person voluntarily agrees to it, and the person can withdraw that agreement at any time.",
+    "page": 34
+  },
+  {
+    "term": "searched cushion",
+    "definition": "A security search practice where the guard ensures the area between themselves and the nearest exit has already been searched and declared clear before moving further into an unsearched area.",
+    "page": 145
+  },
+  {
+    "term": "Section 25(1) Criminal Code",
+    "definition": "The section of Canada's Criminal Code that authorizes private persons, including security guards, to use as much force as necessary when acting lawfully, provided they act on reasonable grounds.",
+    "page": 82
+  },
+  {
+    "term": "section 494",
+    "definition": "The section of the Criminal Code of Canada that gives any person, including a security professional, the legal authority to arrest someone without a police warrant under defined circumstances.",
+    "page": 37
+  },
+  {
+    "term": "security guard",
+    "definition": "A licensed individual whose job is to protect an organization's property, personnel, and information against fire, theft, vandalism, and illegal entry.",
+    "page": 11
+  },
+  {
+    "term": "security licence",
+    "definition": "A government-issued permit required before any person can legally work, advertise, or offer security services for payment in Alberta.",
+    "page": 13
+  },
+  {
+    "term": "security professional licence",
+    "definition": "An official government-issued permit that an individual must obtain before legally working as a security guard in Alberta.",
+    "page": 14
+  },
+  {
+    "term": "Security Services and Investigators Act",
+    "definition": "The Alberta provincial law (S-4.7, 2008) that governs the licensing and regulation of security guards and investigators in Alberta.",
+    "page": 6
+  },
+  {
+    "term": "Security Services and Investigators Act (SSIA)",
+    "definition": "The Alberta law introduced on June 1, 2010 that sets province-wide standards for licensing, training, and conduct of all security industry workers.",
+    "page": 13
+  },
+  {
+    "term": "Security Services and Investigators Regulation",
+    "definition": "The accompanying document to the SSIA that prescribes how the security services law is to be administered and enforced in Alberta.",
+    "page": 13
+  },
+  {
+    "term": "self-crimination",
+    "definition": "The right of a witness under Section 13 of the Canadian Charter of Rights and Freedoms that protects them from having their own testimony used against them in a separate proceeding.",
+    "page": 29
+  },
+  {
+    "term": "self-defence",
+    "definition": "The legal right to use reasonable force to protect yourself or others from harm or injury, as recognized under the Criminal Code.",
+    "page": 43
+  },
+  {
+    "term": "sexual assault",
+    "definition": "A Criminal Code offence involving any unwanted sexual contact applied to another person without their consent.",
+    "page": 179
+  },
+  {
+    "term": "shift handover",
+    "definition": "The process of transferring information about incidents, site conditions, and responsibilities from the outgoing security guard to the incoming guard at the start of a new shift.",
+    "page": 80
+  },
+  {
+    "term": "shift report",
+    "definition": "A routine written record completed by a security guard at the end of each shift summarizing the events and activities that occurred during that shift.",
+    "page": 119
+  },
+  {
+    "term": "shift transfer",
+    "definition": "The process at the end of a security officer's shift where responsibility for a post is formally handed over to the incoming officer, ensuring continuity of security coverage.",
+    "page": 51
+  },
+  {
+    "term": "shift work",
+    "definition": "A work schedule in which a security guard works rotating or non-standard hours, which can affect health, sleep, fitness, and social life.",
+    "page": 148
+  },
+  {
+    "term": "shoplifting",
+    "definition": "The act of stealing merchandise from a retail store, which under Canadian law is not considered complete until the suspect has passed all cashiers and exited the store.",
+    "page": 66
+  },
+  {
+    "term": "site risk assessment",
+    "definition": "A formal evaluation carried out by an employer to identify potential hazards and dangers present at a security work site.",
+    "page": 149
+  },
+  {
+    "term": "statement",
+    "definition": "A formal written or verbal account of an incident obtained from a witness or involved party by a security guard during an investigation.",
+    "page": 107
+  },
+  {
+    "term": "stationary posting",
+    "definition": "A security assignment where the guard remains at one fixed location rather than moving around the site on patrol.",
+    "page": 150
+  },
+  {
+    "term": "subpoena",
+    "definition": "A legal document that officially requires a witness to appear in court on a specific date to give testimony about an incident.",
+    "page": 127
+  },
+  {
+    "term": "substance abuser",
+    "definition": "A person who is addicted to drugs or alcohol and may be encountered by security guards in situations involving loitering, shoplifting, trespassing, or creating a disturbance.",
+    "page": 74
+  },
+  {
+    "term": "summary conviction offence",
+    "definition": "A less serious category of criminal offence under the Criminal Code, which a security guard should be able to distinguish from hybrid and indictable offences in order to apply arrest powers correctly.",
+    "page": 31
+  },
+  {
+    "term": "surveillance",
+    "definition": "A patrol method where a security guard monitors an area from a fixed position, often using CCTV monitors, rather than moving through the site on foot.",
+    "page": 69
+  },
+  {
+    "term": "suspicious item",
+    "definition": "An unidentified object or package at a scene that a security guard must not touch or move, but must report immediately to a supervisor or police.",
+    "page": 144
+  },
+  {
+    "term": "systematic scan",
+    "definition": "A structured method of visually searching a room by moving from left to right and from floor level up to ceiling level to locate any suspicious or out-of-place objects.",
+    "page": 145
+  },
+  {
+    "term": "testamentary instrument",
+    "definition": "A legal document such as a will that takes effect upon the maker's death, and damaging one constitutes the more serious category of mischief under the Criminal Code.",
+    "page": 183
+  },
+  {
+    "term": "testimony",
+    "definition": "A formal spoken account given under oath by a security guard in court, based on their documented observations and notes from an incident.",
+    "page": 107
+  },
+  {
+    "term": "theft",
+    "definition": "Under Section 322 of the Criminal Code, the act of fraudulently taking or converting someone else's property without legal right and with the intent to deprive the owner of it.",
+    "page": 39
+  },
+  {
+    "term": "theft over $5,000",
+    "definition": "A Criminal Code offence under Section 334(a) where the value of stolen property exceeds five thousand dollars, making it an indictable offence with up to ten years imprisonment.",
+    "page": 174
+  },
+  {
+    "term": "theft under $5,000",
+    "definition": "A Criminal Code offence involving the theft of property valued at five thousand dollars or less, which can be prosecuted as either an indictable offence or a summary conviction offence.",
+    "page": 180
+  },
+  {
+    "term": "trace evidence",
+    "definition": "Evidence such as fingerprints, footprints, or DNA samples that is usually invisible to the naked eye and must be collected by trained experts.",
+    "page": 126
+  },
+  {
+    "term": "traffic collision report",
+    "definition": "A written record a security guard creates when present at a vehicle accident scene, capturing details such as driver information, licence numbers, damage, injuries, and witness contacts for use in later investigations.",
+    "page": 123
+  },
+  {
+    "term": "transition of authority",
+    "definition": "The formal handover of control over a scene from a security guard to police, which must be documented to show the scene was secure at all times.",
+    "page": 125
+  },
+  {
+    "term": "Trespass to Premises Act",
+    "definition": "Alberta legislation that gives security professionals legal authority to deal with individuals who are unlawfully present on private property.",
+    "page": 26
+  },
+  {
+    "term": "trespassing",
+    "definition": "Entering or remaining on a property without the permission of the owner or lawful authority, which a security professional can respond to by requesting the person leave and, if necessary, making an arrest.",
+    "page": 35
+  },
+  {
+    "term": "trespassing at night",
+    "definition": "The summary conviction offence of loitering or prowling at night on another person's property near a dwelling-house without lawful excuse.",
+    "page": 173
+  },
+  {
+    "term": "unauthorized individuals",
+    "definition": "Persons who do not have permission to access a protected area or property that a security professional is tasked with guarding.",
+    "page": 93
+  },
+  {
+    "term": "uncooperative person",
+    "definition": "An individual who refuses to comply with a security guard's lawful directions, requiring the guard to use professional communication strategies to manage the situation.",
+    "page": 100
+  },
+  {
+    "term": "unlawful assembly",
+    "definition": "A gathering of three or more people who assemble in a way that causes nearby persons to reasonably fear they will disturb the peace violently.",
+    "page": 171
+  },
+  {
+    "term": "unreasonable search and seizure",
+    "definition": "A search or taking of a person's property that lacks legal justification, prohibited under Section 8 of the Canadian Charter of Rights and Freedoms.",
+    "page": 29
+  },
+  {
+    "term": "use of force",
+    "definition": "The legal authority for a security professional to apply physical force in the performance of their duties, limited to what is reasonably necessary, and subject to criminal liability if excessive force is used.",
+    "page": 26
+  },
+  {
+    "term": "use of force response",
+    "definition": "A security professional's decision to apply a level of physical force that is appropriate and proportional to the threat or situation encountered while on duty.",
+    "page": 51
+  },
+  {
+    "term": "use of force to prevent commission of offence",
+    "definition": "Under Section 27 of the Criminal Code, a person is allowed to use as much force as is reasonably necessary to stop a crime that could cause immediate and serious injury to a person or property.",
+    "page": 45
+  },
+  {
+    "term": "use of force training",
+    "definition": "Specialized certification training that a security guard must complete and have employer approval for before being permitted to carry and use equipment such as a baton.",
+    "page": 82
+  },
+  {
+    "term": "uttering a forged document",
+    "definition": "A dual offence involving knowingly using, dealing with, or presenting a forged document as if it were genuine.",
+    "page": 170
+  },
+  {
+    "term": "vandalism",
+    "definition": "The deliberate destruction or damage of property belonging to another person, which is a criminal offence that a security professional may arrest someone for under Section 494.",
+    "page": 35
+  },
+  {
+    "term": "vehicle patrol",
+    "definition": "A security patrol method where a guard uses a car, SUV, or bicycle to cover large sites more quickly than is possible on foot.",
+    "page": 67
+  },
+  {
+    "term": "verbal and non-verbal communication strategies",
+    "definition": "Techniques using spoken words and body language that security professionals use to gain cooperation from the public and resolve most situations without resorting to physical force.",
+    "page": 82
+  },
+  {
+    "term": "Verbal Judo",
+    "definition": "A communication style that teaches security professionals to use words and tone strategically to resolve conflict and gain compliance without physical force.",
+    "page": 93
+  },
+  {
+    "term": "weapon at a public meeting",
+    "definition": "The offence of carrying a weapon, prohibited device, or ammunition to a public meeting without a lawful excuse, which is punishable on summary conviction.",
+    "page": 171
+  },
+  {
+    "term": "whistle signals",
+    "definition": "Standardized patterns of whistle blasts used by a security guard during traffic control to communicate stop, proceed, or emergency instructions to drivers and pedestrians.",
+    "page": 78
+  },
+  {
+    "term": "withdrawal",
+    "definition": "The physical symptoms a person experiences when they stop using a substance they are addicted to, which security guards should recognize as a possible medical emergency.",
+    "page": 74
+  },
+  {
+    "term": "workplace hazard",
+    "definition": "Any source of potential damage, harm, or negative health effects on a person under certain conditions at work, as defined by the Canadian Centre for Occupational Health and Safety.",
+    "page": 152
+  }
+]

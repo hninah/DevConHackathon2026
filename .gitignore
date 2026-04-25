@@ -6,3 +6,5 @@ Prompt.md
 __pycache__/
 .DS_Store
 Thumbs.db
+frontend/node_modules/
+frontend/dist/
