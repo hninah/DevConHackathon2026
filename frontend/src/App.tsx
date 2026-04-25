@@ -5,6 +5,8 @@ import DeepLinkModal from './components/DeepLinkModal';
 import { modalSpecs, navLinks } from './lib/siteContent';
 import AdaptiveDeliveryPage from './pages/AdaptiveDeliveryPage';
 import ExamPracticePage from './pages/ExamPracticePage';
+import MockExamResultPage from './pages/MockExamResultPage';
+import MockExamSessionPage from './pages/MockExamSessionPage';
 import OverviewPage from './pages/OverviewPage';
 import RoleplayPage from './pages/RoleplayPage';
 import TextTutorPage from './pages/TextTutorPage';
@@ -22,7 +24,7 @@ function App() {
           </span>
           <div>
             <p className="brand-title">SecurePass</p>
-            <p className="brand-subtitle">Accessibility-first security guard training UI</p>
+            <p className="brand-subtitle">Security guard training UI</p>
           </div>
         </div>
         <nav aria-label="Primary">
@@ -47,6 +49,8 @@ function App() {
           <Route path="/" element={<OverviewPage />} />
           <Route path="/text-tutor" element={<TextTutorPage />} />
           <Route path="/exam-practice" element={<ExamPracticePage />} />
+          <Route path="/exam-practice/mock/:examId" element={<MockExamSessionPage />} />
+          <Route path="/exam-practice/results/:resultId" element={<MockExamResultPage />} />
           <Route path="/roleplay" element={<RoleplayPage />} />
           <Route path="/adaptive-delivery" element={<AdaptiveDeliveryPage />} />
         </Routes>

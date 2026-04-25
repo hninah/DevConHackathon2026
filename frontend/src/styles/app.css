@@ -412,6 +412,141 @@ textarea {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.mock-exam-library {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mock-exam-card {
+  min-height: 220px;
+}
+
+.mock-exam-note {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mock-exam-add-card {
+  align-items: center;
+  background: transparent;
+  border: 2px dashed var(--line);
+  border-radius: 18px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  min-height: 220px;
+  padding: 1rem;
+}
+
+.mock-exam-add-card:hover {
+  border-color: var(--navy-700);
+  color: var(--navy-900);
+}
+
+.result-question-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.result-question-pill {
+  align-items: center;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 36px;
+  text-decoration: none;
+}
+
+.result-question-pill.correct {
+  background: #1f6c4c;
+}
+
+.result-question-pill.incorrect {
+  background: #ab2c30;
+}
+
+.result-question-pill:hover {
+  filter: brightness(1.05);
+}
+
+.result-review-list {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.result-review-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.85rem;
+  scroll-margin-top: 100px;
+}
+
+.result-review-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.result-review-index {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.result-review-status {
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.28rem 0.6rem;
+}
+
+.result-review-status.correct {
+  background: #1f6c4c;
+}
+
+.result-review-status.incorrect {
+  background: #ab2c30;
+}
+
+.jump-controls {
+  bottom: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  left: 1rem;
+  position: fixed;
+  z-index: 300;
+}
+
+.jump-control-button {
+  align-items: center;
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 900;
+  height: 44px;
+  justify-content: center;
+  text-decoration: none;
+  width: 44px;
+}
+
+.jump-control-button:hover {
+  background: var(--navy-800);
+}
+
 .icon-wrap {
   align-items: center;
   background: #e8eefb;
@@ -1378,7 +1513,7 @@ audio {
 .stats-grid {
   display: grid;
   gap: 0.8rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .stat-value {
@@ -1693,8 +1828,13 @@ audio {
   }
 
   .mode-switcher__tabs,
-  .feature-grid {
+  .feature-grid,
+  .mock-exam-library {
     grid-template-columns: 1fr;
+  }
+
+  .result-question-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .roleplay-grid,
@@ -1842,7 +1982,10 @@ audio {
 
 .ui-dialog__overlay {
   backdrop-filter: blur(8px);
-  background: rgb(18 25 42 / 55%);
+  background: rgb(18 25 42 / 72%);
+  inset: 0;
+  position: fixed;
+  z-index: 2000;
 }
 
 .ui-dialog__content {
@@ -1852,6 +1995,7 @@ audio {
   box-shadow: 0 24px 50px rgb(8 18 37 / 35%);
   max-width: 560px;
   padding: 1.15rem;
+  z-index: 2001;
 }
 
 .ui-dialog__close {
