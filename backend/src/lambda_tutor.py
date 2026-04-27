@@ -37,6 +37,7 @@ from typing import Any
 from botocore.exceptions import ClientError
 
 from rag_query import TOP_K, answer_question_blocking
+from roleplay_engine import generate_next_manual_scenario, process_roleplay_answer
 
 
 def _response(status_code: int, payload: dict[str, Any]) -> dict[str, Any]:
@@ -91,10 +92,49 @@ def _method(event: dict[str, Any]) -> str:
     ).upper()
 
 
+def _path(event: dict[str, Any]) -> str:
+    """Return request path for API Gateway v1/v2 events."""
+    request_context = event.get("requestContext", {})
+    http_context = request_context.get("http", {})
+    raw_path = (
+        http_context.get("path")
+        or event.get("rawPath")
+        or event.get("path")
+        or "/tutor"
+    )
+    return str(raw_path)
+
+
 def handler(event: dict[str, Any], context: object) -> dict[str, Any]:
-    """Handle POST /tutor requests."""
+    """Handle POST /tutor and POST /roleplay/answer requests."""
     if _method(event) == "OPTIONS":
         return _response(204, {})
+
+    path = _path(event)
+
+    if path == "/roleplay/answer":
+        try:
+            body = _parse_body(event)
+            result = process_roleplay_answer(body)
+            return _response(200, result)
+        except json.JSONDecodeError:
+            return _response(400, {"error": "Request body must be valid JSON."})
+        except ValueError as error:
+            return _response(400, {"error": str(error)})
+        except (FileNotFoundError, RuntimeError) as error:
+            return _response(500, {"error": str(error)})
+
+    if path == "/roleplay/next-scenario":
+        try:
+            body = _parse_body(event)
+            result = generate_next_manual_scenario(body)
+            return _response(200, result)
+        except json.JSONDecodeError:
+            return _response(400, {"error": "Request body must be valid JSON."})
+        except ValueError as error:
+            return _response(400, {"error": str(error)})
+        except (FileNotFoundError, RuntimeError) as error:
+            return _response(500, {"error": str(error)})
 
     try:
         body = _parse_body(event)

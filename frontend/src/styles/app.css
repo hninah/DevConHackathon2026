@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --navy-950: #0f1a33;
   --navy-900: #1b2950;
@@ -901,6 +903,7 @@ meter {
 }
 
 .roleplay-grid {
+  align-items: start;
   display: grid;
   gap: 16px;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -908,8 +911,15 @@ meter {
 
 .scene-column,
 .question-column {
+  align-content: start;
+  align-items: start;
   display: grid;
   gap: 12px;
+}
+
+.scene-column>*,
+.question-column>* {
+  width: 100%;
 }
 
 .image-frame {
@@ -1021,6 +1031,76 @@ meter {
   border: 1px solid #b5e4c5;
 }
 
+.feedback-actions {
+  margin-top: 12px;
+}
+
+.manual-check {
+  background: #f6f2ea;
+  border-left: 4px solid #3b6ee8;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 14px 16px;
+}
+
+.manual-check[open] {
+  padding-bottom: 10px;
+}
+
+.manual-check--review {
+  margin-top: 12px;
+}
+
+.manual-check__label {
+  align-items: center;
+  color: #243867;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.98rem;
+  font-weight: 800;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.manual-check__label::-webkit-details-marker {
+  display: none;
+}
+
+.manual-check__label::before {
+  color: #243867;
+  content: '▸';
+  font-size: 0.95rem;
+  transform: translateY(-1px);
+}
+
+.manual-check[open] .manual-check__label::before {
+  content: '▾';
+}
+
+.manual-check__bullets {
+  list-style: disc;
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.manual-check__bullets li {
+  color: #243867;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.choice-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.choice-btn--correct:disabled,
+.choice-btn--wrong:disabled {
+  opacity: 1;
+}
+
 .actions-row {
   align-items: center;
   display: flex;
@@ -1042,6 +1122,10 @@ meter {
   padding: 14px;
 }
 
+.summary-panel--full {
+  grid-column: 1 / -1;
+}
+
 .summary-panel h4 {
   margin-bottom: 8px;
 }
@@ -1054,6 +1138,68 @@ meter {
 
 .summary-panel li {
   margin-bottom: 6px;
+}
+
+.answer-review-list {
+  display: grid;
+  gap: 12px;
+}
+
+.answer-review-card {
+  background: #ffffff;
+  border: 1px solid #d8deef;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(32, 54, 110, 0.08);
+  padding: 18px 20px;
+}
+
+.answer-review-card h5 {
+  color: #172033;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  margin: 12px 0 10px;
+}
+
+.answer-review-card__header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.answer-review-card__prompt {
+  font-weight: 800;
+}
+
+.answer-review-card__line {
+  color: #172033;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+.answer-explanation {
+  background: #eef2ff;
+  border: 1px solid #d5defc;
+  border-radius: 22px;
+  margin-top: 14px;
+  padding: 18px 18px 16px;
+}
+
+.answer-explanation__eyebrow {
+  color: #3f5bff;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.answer-explanation__text {
+  color: #172033;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 audio {
@@ -1404,6 +1550,357 @@ audio {
   .feature-grid {
     grid-template-columns: 1fr;
   }
+
+  .roleplay-grid,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Unified style overrides after merge ===== */
+.app-shell {
+  padding: 1.3rem 20px 56px;
+}
+
+.ui-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 6px 22px rgb(14 23 44 / 7%);
+}
+
+.ui-card__header {
+  border-bottom: 0;
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem 1rem 0.6rem;
+}
+
+.ui-card__content {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0 1rem 1rem;
+}
+
+.ui-card__footer {
+  border-top: 0;
+  padding: 0 1rem 1rem;
+}
+
+.ui-card__title {
+  font-size: 1.05rem;
+}
+
+.ui-card__description {
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ui-button {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 650;
+  gap: 0.4rem;
+  justify-content: center;
+  text-decoration: none;
+  transform: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.ui-button:hover {
+  transform: none;
+}
+
+.ui-button--md {
+  min-height: 42px;
+  padding: 0.62rem 0.95rem;
+}
+
+.ui-button--sm {
+  min-height: 36px;
+  padding: 0.45rem 0.8rem;
+}
+
+.ui-button--primary {
+  background: var(--navy-900);
+  color: #fff;
+}
+
+.ui-button--primary:hover {
+  background: var(--navy-800);
+}
+
+.ui-button--secondary {
+  background: var(--beige-100);
+  border-color: var(--line);
+  color: var(--text-primary);
+}
+
+.ui-button--secondary:hover {
+  background: var(--beige-200);
+}
+
+.ui-button--ghost {
+  background: transparent;
+  color: var(--navy-900);
+}
+
+.ui-button--ghost:hover {
+  border-color: var(--line);
+}
+
+.ui-button--danger {
+  background: #ab2c30;
+  color: #fff;
+}
+
+.ui-badge {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.35rem 0.68rem;
+  text-transform: none;
+}
+
+.ui-badge--primary {
+  background: var(--navy-900);
+  border: 0;
+  color: #fff;
+}
+
+.ui-badge--neutral {
+  background: #e8edf8;
+  border: 0;
+  color: var(--navy-900);
+}
+
+.ui-badge--success {
+  background: #def2e9;
+  border: 0;
+  color: var(--success);
+}
+
+.ui-badge--warning {
+  background: #f9eed8;
+  border: 0;
+  color: var(--warning);
+}
+
+.ui-dialog__overlay {
+  backdrop-filter: blur(8px);
+  background: rgb(18 25 42 / 55%);
+}
+
+.ui-dialog__content {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 24px 50px rgb(8 18 37 / 35%);
+  max-width: 560px;
+  padding: 1.15rem;
+}
+
+.ui-dialog__close {
+  align-items: center;
+  background: #eff2f8;
+  border: 1px solid #d3dced;
+  border-radius: 10px;
+  color: var(--navy-900);
+  display: inline-flex;
+  justify-content: center;
+  min-height: 34px;
+  min-width: 34px;
+}
+
+.name-form input {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text-primary);
+  min-height: 42px;
+  padding: 0.55rem 0.7rem;
+}
+
+.ui-progress {
+  background: #ece5d8;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.ui-progress__bar {
+  background: var(--navy-700);
+  border-radius: inherit;
+  height: 100%;
+}
+
+.roleplay-shell {
+  border: 1px solid var(--line);
+}
+
+.roleplay-topline {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: space-between;
+}
+
+.role-choice-compact {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.roleplay-help {
+  margin: 0;
+}
+
+.roleplay-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+}
+
+.scene-column,
+.question-column {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.image-frame {
+  background: var(--navy-900);
+  border-radius: 14px;
+  color: #f7f9fd;
+  min-height: 220px;
+  padding: 0.9rem;
+}
+
+.image-overlay p {
+  margin: 0;
+}
+
+.panel-title {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.chat-panel {
+  background: #f7f4ee;
+  border: 1px solid #e8dfd0;
+  border-radius: 14px;
+  padding: 0.85rem;
+}
+
+.chat-panel ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.choices-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.choice-btn {
+  align-items: start;
+  background: #fff;
+  border: 1px solid #d5dde8;
+  border-radius: 12px;
+  color: #1f2a3f;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 24px 1fr;
+  padding: 0.7rem;
+  text-align: left;
+}
+
+.choice-btn--correct {
+  background: #ecfff4;
+  border-color: #8fd1a9;
+}
+
+.choice-btn--wrong {
+  background: #fff0ef;
+  border-color: #f0b0ad;
+}
+
+.choice-id {
+  background: #f1f5fb;
+  border-radius: 7px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.feedback {
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+
+.feedback--wrong {
+  background: #fff1f0;
+  border: 1px solid #f1beb8;
+}
+
+.feedback--correct {
+  background: #edfff3;
+  border: 1px solid #b5e4c5;
+}
+
+.citation-note {
+  align-items: center;
+  color: #5f6d7d;
+  display: inline-flex;
+  font-size: 0.85rem;
+  gap: 0.35rem;
+}
+
+.actions-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+.summary-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.summary-panel {
+  background: #f7f6f3;
+  border: 1px solid #e9e4db;
+  border-radius: 12px;
+  padding: 0.8rem;
+}
+
+.summary-panel h4 {
+  margin: 0 0 0.45rem;
+}
+
+.summary-panel ol,
+.summary-panel ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+@media (max-width: 900px) {
 
   .roleplay-grid,
   .summary-grid {

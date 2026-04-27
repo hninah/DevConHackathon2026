@@ -32,6 +32,8 @@ export type ScenarioScript = {
     roleMode: RoleMode;
     aiPoliceChat: string[];
     imagePrompt: string;
+    sourceModule?: string;
+    scenarioDescription?: string;
     questions: ScenarioQuestion[];
 };
 
